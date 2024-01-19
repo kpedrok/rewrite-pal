@@ -4,6 +4,6 @@
 
 @layer base {
   h1 {
-    @apply text-5xl font-bold;
+    @apply text-3xl lg:text-5xl font-bold;
   }
 }

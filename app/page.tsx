@@ -11,7 +11,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-center p-24 gap-5'>
+    <main className='flex min-h-screen flex-col items-center justify-center gap-5'>
       <div className='text-center'>
         <h1 className=' text-gray-600 mb-2 duration-1200 ease-in-out animate-in fade-in slide-in-from-top-4'>
           Write your text and let me check your grammar
@@ -26,9 +26,9 @@ export default function Home() {
         ref={inputRef}
         tabIndex={0}
         rows={1}
-        placeholder='Send a message.'
+        placeholder='Type or paste your text here.'
         spellCheck={false}
-        className='textarea textarea-bordered min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm font-mono transition-all duration-300'
+        className='textarea  textarea-bordered min-h-[60px] w-full max-w-2xl resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm font-mono transition-all duration-300'
       />
     </main>
   )

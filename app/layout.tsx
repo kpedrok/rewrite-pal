@@ -7,8 +7,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'AI Grammar Checker',
-  description: 'Write your text and let me check your grammar',
+  title: 'Grammar Buddy',
+  description: 'Your Free AI Writing Assistance',
 }
 
 export default function RootLayout({
@@ -19,9 +19,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <div className='max-w-screen-xl m-auto'>
+        <div className='max-w-screen-lg m-auto'>
           <Header />
-          {children}
+          <div className=''>{children}</div>
         </div>
         <Analytics />
       </body>

@@ -2,7 +2,7 @@ import { UserCircle } from '@phosphor-icons/react/dist/ssr'
 
 export function Header() {
   return (
-    <header className='fixed w-full p-5'>
+    <header className='fixed w-full p-5 max-w-screen-lg'>
       <div className='navbar backdrop-blur-2xl bg-slate-100 rounded-xl'>
         <div className='flex-1'>
           <a className='btn btn-ghost text-xl text-neutral'>Grammar Buddy</a>
