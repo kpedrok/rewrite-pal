@@ -2,8 +2,11 @@
   "name": "grammar-buddy",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "pnpm": ">=6"
+  },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
