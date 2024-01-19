@@ -28,7 +28,7 @@ export default function Home() {
         rows={1}
         placeholder='Type or paste your text here.'
         spellCheck={false}
-        className='textarea  textarea-bordered min-h-[60px] w-full max-w-2xl resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm font-mono transition-all duration-300'
+        className='textarea textarea-bordered text-base min-h-[60px] w-full max-w-2xl resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none  font-mono transition-all duration-300'
       />
     </main>
   )

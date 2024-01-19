@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className='max-w-screen-lg m-auto'>
           <Header />
-          <div className=''>{children}</div>
+          <div className='p-5'>{children}</div>
         </div>
         <Analytics />
         <SpeedInsights />
