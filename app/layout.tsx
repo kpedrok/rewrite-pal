@@ -10,7 +10,20 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Grammar Buddy',
-  description: 'Your Free AI Writing Assistance',
+  description: 'Your Free AI Writing Assistant',
+  keywords: [
+    'grammar checker',
+    'AI writing assistant',
+    'proofreading tool',
+    'writing tool',
+    'grammar tool',
+    'free writing assistant',
+    'language improvement',
+    'online editor',
+    'spelling check',
+    'punctuation checker',
+  ],
+  robots: 'index, follow',
 }
 
 export default function RootLayout({
