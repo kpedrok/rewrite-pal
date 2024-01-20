@@ -1,4 +1,4 @@
-import { OpenAIStream, OpenAIStreamPayload } from '../OpenAIStream'
+import { OpenAIStream, OpenAIStreamPayload } from './OpenAIStream'
 
 export const runtime = 'edge'
 

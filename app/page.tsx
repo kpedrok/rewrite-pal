@@ -165,7 +165,7 @@ export default function Home() {
           {generatedBios && (
             <>
               <div>
-                <h2 className='sm:text-xl text-3xl font-bold text-slate-900 mx-auto' ref={bioRef}>
+                <h2 className='sm:text-xl text-3xl font-bold text-slate-900 mx-auto mb-2' ref={bioRef}>
                   Rewritten Phrase
                 </h2>
               </div>
@@ -176,7 +176,7 @@ export default function Home() {
                       className='bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border'
                       onClick={() => {
                         navigator.clipboard.writeText(generatedBio)
-                        toast('Bio copied to clipboard', {
+                        toast('Copied to clipboard', {
                           icon: '✂️',
                         })
                       }}
