@@ -1,25 +1,29 @@
-import { OpenAIStream, OpenAIStreamPayload } from './OpenAIStream'
+import { OpenAIStream, OpenAIStreamPayload } from '../OpenAIStream'
 
-if (!process.env.OPENAI_API_KEY) {
+export const runtime = 'edge'
+
+if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
   throw new Error('Missing env var from OpenAI')
 }
 
-export const config = {
-  runtime: 'edge',
-}
-
-const handler = async (req: Request): Promise<Response> => {
-  const { prompt } = (await req.json()) as {
-    prompt?: string
+export async function POST(req: Request) {
+  const { bio } = (await req.json()) as {
+    bio?: string
   }
 
-  if (!prompt) {
+  if (!bio) {
     return new Response('No prompt in the request', { status: 400 })
   }
 
   const payload: OpenAIStreamPayload = {
     model: 'gpt-3.5-turbo',
-    messages: [{ role: 'user', content: prompt }],
+    messages: [
+      {
+        role: 'system',
+        content: 'You will be provided with statements, and your task is to convert them to standard English.',
+      },
+      { role: 'user', content: bio },
+    ],
     temperature: 0.7,
     top_p: 1,
     frequency_penalty: 0,
@@ -42,5 +46,3 @@ const handler = async (req: Request): Promise<Response> => {
     }),
   })
 }
-
-export default handler
