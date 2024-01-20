@@ -9,7 +9,7 @@ export const runtime = 'edge'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Grammar Buddy',
+  title: 'RewriteAI',
   description: 'Your Free AI Writing Assistant',
   keywords: [
     'grammar checker',
