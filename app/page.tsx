@@ -2,7 +2,7 @@
 import DropDown, { VibeType } from '@/components/DropDown'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import Image from 'next/image'
+import { NumberOne, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import React, { useState } from 'react'
 
 export default function Home() {
@@ -32,9 +32,16 @@ export default function Home() {
 
         <div className='max-w-xl w-full'>
           <div className='flex mt-10 items-center space-x-3'>
-            <Image src='/1-black.png' width={30} height={30} alt='1 icon' className='mb-5 sm:mb-0' />
+            <NumberOne
+              weight='light'
+              size={30}
+              color='#ffffff'
+              alt='1 icon'
+              className='mb-5 sm:mb-0 bg-black rounded-full p-1'
+            />
+
             <p className='text-left font-medium'>
-              Copy your text here.
+              Paste your text here
               <span className='text-slate-500'> (⌘+V)</span>.
             </p>
           </div>
@@ -47,7 +54,13 @@ export default function Home() {
             placeholder={'Type or paste your text here.'}
           />
           <div className='flex mb-5 items-center space-x-3'>
-            <Image src='/2-black.png' width={30} height={30} alt='1 icon' />
+            <NumberTwo
+              weight='light'
+              size={30}
+              color='#ffffff'
+              alt='2 icon'
+              className='mb-5 sm:mb-0 bg-black rounded-full p-1'
+            />{' '}
             <p className='text-left font-medium'>Select your tone.</p>
           </div>
           <div className='block'>{<DropDown vibe={vibe} setVibe={(newVibe) => setVibe(newVibe)} />}</div>
