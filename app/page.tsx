@@ -2,7 +2,6 @@
 import DropDown, { VibeType } from '@/components/DropDown'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import Toggle from '@/components/Toggle'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
@@ -20,13 +19,13 @@ export default function Home() {
     <div className='flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
       <Header />
       <main className='flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20'>
+        <h1 className='sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900 mb-5'>
+          Write your text and let me check your grammar
+        </h1>
         <p className='border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out'>
           <b>112</b> phrases improved so far
         </p>
-        <h1 className='sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900'>
-          Write your text and let me check your grammar
-        </h1>
-        <div className='mt-7'>{<Toggle isGPT={isGPT} setIsGPT={setIsGPT} />}</div>
+        {/* <div className='mt-7'>{<Toggle isGPT={isGPT} setIsGPT={setIsGPT} />}</div> */}
 
         <div className='max-w-xl w-full'>
           <div className='flex mt-10 items-center space-x-3'>
