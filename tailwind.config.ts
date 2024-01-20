@@ -9,6 +9,6 @@ const config: Config = {
   theme: {
     extend: {},
   },
-  plugins: [require('tailwindcss-animate'), require('daisyui')],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/forms'), require('@headlessui/tailwindcss')],
 }
 export default config
