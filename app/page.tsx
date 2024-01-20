@@ -97,14 +97,7 @@ export default function Home() {
 
         <div className='max-w-xl w-full'>
           <div className='flex mt-10 items-center space-x-3'>
-            <NumberOne
-              weight='light'
-              size={30}
-              color='#ffffff'
-              alt='1 icon'
-              className='mb-5 sm:mb-0 bg-black rounded-full p-1'
-            />
-
+            <NumberOne weight='light' size={30} color='#ffffff' alt='1 icon' className=' bg-black rounded-full p-1' />
             <p className='text-left font-medium'>
               Paste your text here
               <span className='text-slate-500'> (⌘+V)</span>.
@@ -119,13 +112,7 @@ export default function Home() {
             placeholder={'Type or paste your text here.'}
           />
           <div className='flex mb-5 items-center space-x-3'>
-            <NumberTwo
-              weight='light'
-              size={30}
-              color='#ffffff'
-              alt='2 icon'
-              className='mb-5 sm:mb-0 bg-black rounded-full p-1'
-            />{' '}
+            <NumberTwo weight='light' size={30} color='#ffffff' alt='2 icon' className=' bg-black rounded-full p-1' />{' '}
             <p className='text-left font-medium'>Select your tone.</p>
           </div>
           <div className='block'>{<DropDown vibe={vibe} setVibe={(newVibe) => setVibe(newVibe)} />}</div>
