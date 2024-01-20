@@ -20,7 +20,11 @@ export async function POST(req: Request) {
     messages: [
       {
         role: 'system',
-        content: 'You will be provided with statements, and your task is to convert them to standard English.',
+        content: `
+        Your job involves rephrasing statements into standard English with a casual and confident tone. 
+        Focus on enhancing clarity and simplicity. Your suggestions cover everything from grammar and spelling to style and tone, 
+        ensuring effective communication. Generate clear, compelling writing instantly. Shorten if needed.
+        `,
       },
       { role: 'user', content: bio },
     ],
