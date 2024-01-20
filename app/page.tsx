@@ -19,9 +19,12 @@ export default function Home() {
     <div className='flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen '>
       <Header />
       <main className='flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20 animate-in fade-in duration-1000'>
-        <h1 className='sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900 hover:scale-105 transition duration-300 ease-in-out'>
-          Write your text and let me check your grammar
+        <h1 className='sm:text-6xl text-4xl max-w-3xl font-bold text-slate-900 hover:scale-105 transition duration-300 ease-in-out mb-4'>
+          Ensure your writing is mistake-free and polished
         </h1>
+        <h3 className='sm:text-lg text-md max-w-lg font-light text-slate-900 hover:scale-105 transition duration-300 ease-in-out'>
+          Instantly generate clear, compelling writing while maintaining your unique voice.
+        </h3>
         <p className='border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out  mt-7 '>
           <b>112</b> phrases improved so far
         </p>
