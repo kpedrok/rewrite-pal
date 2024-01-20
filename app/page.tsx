@@ -98,6 +98,22 @@ export default function Home() {
           )} */}
         </div>
 
+        {/* <RadioComponent selectLimit={3} />
+          <div>
+            <Tab.Group>
+              <Tab.List>
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+                <Tab>Tab 3</Tab>
+              </Tab.List>
+              <Tab.Panels>
+                <Tab.Panel>Content 1</Tab.Panel>
+                <Tab.Panel>Content 2</Tab.Panel>
+                <Tab.Panel>Content 3</Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
+          </div> */}
+
         {/* <div className='text-center'>
         <h1 className=' text-gray-600 mb-2 duration-1200 ease-in-out animate-in fade-in slide-in-from-top-4'>
           Write your text and let me check your grammar
