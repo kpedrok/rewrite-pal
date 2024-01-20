@@ -41,6 +41,7 @@ export default function Home() {
           <textarea
             // value={bio}
             // onChange={(e) => setBio(e.target.value)}
+            ref={inputRef}
             rows={4}
             className='w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5'
             placeholder={'Type or paste your text here.'}
