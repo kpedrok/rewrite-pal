@@ -13,5 +13,9 @@
 - Authentication and Access: Gmail Login
 - Features and Functionality: Blog
 - Features and Functionality: Onboarding / Marketing Tool - "Finding Your Voice"
+- Features and Functionality: Easter egg: funny voices - chuck norris, yoda, Gollum, Darth <exhales> Vader, Groot, Forrest Gump, Poirot, Samuel L jackson, Morgan freeman, Dwight from the office, Michel Scott, Captain Jack Sparrow, Gandalf
+
 - Technical Improvements: Monorepo
 - Platform Expansion: Desktop App
+- Platform Expansion: Internationalization
+- Gamification: Grammar Influence points
