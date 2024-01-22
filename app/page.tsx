@@ -7,31 +7,22 @@ import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser
 import { useEffect, useRef, useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
 
+const DEFAULT_VIEWS = '#'
+
 export default function Home() {
   const inputRef = useRef<HTMLTextAreaElement>(null)
+  const [selectedVibe, setSelectedVibe] = useState<VibeType>('Professional')
+  const [isGPT, setIsGPT] = useState(true)
+  const [views, setViews] = useState(DEFAULT_VIEWS)
+  const [loading, setLoading] = useState(false)
+  const [bio, setBio] = useState('')
+  const [generatedBios, setGeneratedBios] = useState<String>('')
+  const bioRef = useRef<null | HTMLDivElement>(null)
+
   useEffect(() => {
     fetchViews()
     focusInput()
   }, [])
-  const [vibe, setVibe] = useState<VibeType>('Professional')
-  const [isGPT, setIsGPT] = useState(true)
-  const [views, setViews] = useState('#')
-
-  const [loading, setLoading] = useState(false)
-  const [bio, setBio] = useState('')
-  const [generatedBios, setGeneratedBios] = useState<String>('')
-
-  const bioRef = useRef<null | HTMLDivElement>(null)
-
-  const scrollToBios = () => {
-    if (bioRef.current !== null) {
-      bioRef.current.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
-  const focusInput = () => {
-    inputRef.current?.focus()
-  }
 
   const fetchViews = async () => {
     const response = await fetch('/api/views', {
@@ -44,18 +35,31 @@ export default function Home() {
     setViews(data)
   }
 
+  const focusInput = () => {
+    inputRef.current?.focus()
+  }
+
   const generateBio = async (e: any) => {
     e.preventDefault()
     setGeneratedBios('')
     setLoading(true)
+    await postToApiViews()
+    setViews(views + 1)
+    await postToApiOpenai(bio)
+    scrollToBios()
+    setLoading(false)
+  }
+
+  const postToApiViews = async () => {
     await fetch('/api/views', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
     })
-    setViews(views + 1)
+  }
 
+  const postToApiOpenai = async (bio: string) => {
     const response = await fetch('/api/openai', {
       method: 'POST',
       headers: {
@@ -70,7 +74,6 @@ export default function Home() {
       throw new Error(response.statusText)
     }
 
-    // This data is a ReadableStream
     const data = response.body
     if (!data) {
       return
@@ -88,7 +91,6 @@ export default function Home() {
       }
     }
 
-    // https://web.dev/streams/#the-getreader-and-read-methods
     const reader = data.getReader()
     const decoder = new TextDecoder()
     const parser = createParser(onParseGPT)
@@ -99,8 +101,12 @@ export default function Home() {
       const chunkValue = decoder.decode(value)
       parser.feed(chunkValue)
     }
-    scrollToBios()
-    setLoading(false)
+  }
+
+  const scrollToBios = () => {
+    if (bioRef.current !== null) {
+      bioRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   return (
@@ -138,7 +144,9 @@ export default function Home() {
             <NumberTwo weight='light' size={30} color='#ffffff' alt='2 icon' className=' bg-black rounded-full p-1' />{' '}
             <p className='text-left font-medium'>Select your tone.</p>
           </div>
-          <div className='block'>{<DropDown vibe={vibe} setVibe={(newVibe) => setVibe(newVibe)} />}</div>
+          <div className='block'>
+            {<DropDown vibe={selectedVibe} setVibe={(newVibe) => setSelectedVibe(newVibe)} />}
+          </div>
 
           {!loading && (
             <button
