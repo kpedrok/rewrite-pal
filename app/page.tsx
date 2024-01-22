@@ -7,7 +7,7 @@ import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser
 import { useEffect, useRef, useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
 
-const DEFAULT_VIEWS = '##'
+const DEFAULT_VIEWS = '--'
 
 export default function Home() {
   const inputRef = useRef<HTMLTextAreaElement>(null)
