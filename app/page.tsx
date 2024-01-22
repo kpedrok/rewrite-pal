@@ -4,18 +4,30 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { NumberOne, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
-import React, { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
 
 export default function Home() {
-  const inputRef = React.useRef<HTMLTextAreaElement>(null)
-  React.useEffect(() => {
+  const inputRef = useRef<HTMLTextAreaElement>(null)
+  useEffect(() => {
+    fetch('/api/views', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setViews(data)
+      })
+
     if (inputRef.current) {
       inputRef.current.focus()
     }
   }, [])
   const [vibe, setVibe] = useState<VibeType>('Professional')
   const [isGPT, setIsGPT] = useState(true)
+  const [views, setViews] = useState(0)
 
   const [loading, setLoading] = useState(false)
   const [bio, setBio] = useState('')
@@ -33,6 +45,14 @@ export default function Home() {
     e.preventDefault()
     setGeneratedBios('')
     setLoading(true)
+    await fetch('/api/views', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    setViews(views + 1)
+
     const response = await fetch('/api/openai', {
       method: 'POST',
       headers: {
@@ -91,7 +111,7 @@ export default function Home() {
           Instantly generate clear, compelling writing while maintaining your unique voice.
         </h3>
         <p className='border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out  mt-7 '>
-          <b>112</b> phrases improved so far
+          <b>{Intl.NumberFormat('en-us').format(views)}</b> phrases improved so far
         </p>
         {/* <div className='mt-7'>{<Toggle isGPT={isGPT} setIsGPT={setIsGPT} />}</div> */}
 

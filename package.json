@@ -18,6 +18,7 @@
     "@phosphor-icons/react": "^2.0.15",
     "@tailwindcss/forms": "^0.5.7",
     "@vercel/analytics": "^1.1.2",
+    "@vercel/kv": "^1.0.1",
     "@vercel/speed-insights": "^1.0.5",
     "eventsource-parser": "^1.1.1",
     "next": "14.1.0",
