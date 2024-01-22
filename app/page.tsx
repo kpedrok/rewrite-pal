@@ -43,11 +43,11 @@ export default function Home() {
     e.preventDefault()
     setGeneratedBios('')
     setLoading(true)
-    await postToApiViews()
     setViews(views + 1)
     await postToApiOpenai(bio)
     scrollToBios()
     setLoading(false)
+    await postToApiViews()
   }
 
   const postToApiViews = async () => {
