@@ -1,32 +1,17 @@
 # Project Roadmap
 
-## Block 1: Authentication and Access
+1. Voice Tone Enhancements: Voice Tone 1.5
+2. Community Engagement: Beta Testers Link and Group
+3. Community Engagement: Roadmap Page
+4. Authentication and Access: API Rate Limiting
+5. Technical Improvements: SSR Counter
+6. Set up domain and SEO
 
-- [ ] API Rate Limiting
-- [ ] Mail Login
-- [ ] Gmail Login
-
-## Block 2: Voice Tone Enhancements
-
-- [ ] Voice Tone 1.5
-- [ ] Voice Tone 2.0
-- [ ] Voice Tone 3.0
-
-## Block 3: Features and Functionality
-
-- [ ] Blog
-- [ ] Onboarding / Marketing Tool - "Finding Your Voice"
-
-## Block 4: Platform Expansion
-
-- [ ] Desktop App
-
-## Block 5: Technical Improvements
-
-- [ ] Monorepo
-- [ ] SSR Counter
-
-## Block 6: Community Engagement
-
-- [ ] Beta Testers Link and Group
-- [ ] Roadmap Page
+- Voice Tone Enhancements: Voice Tone 2.0
+- Voice Tone Enhancements: Voice Tone 3.0
+- Authentication and Access: Mail Login
+- Authentication and Access: Gmail Login
+- Features and Functionality: Blog
+- Features and Functionality: Onboarding / Marketing Tool - "Finding Your Voice"
+- Technical Improvements: Monorepo
+- Platform Expansion: Desktop App
