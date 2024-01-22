@@ -10,20 +10,8 @@ import { Toaster, toast } from 'react-hot-toast'
 export default function Home() {
   const inputRef = useRef<HTMLTextAreaElement>(null)
   useEffect(() => {
-    fetch('/api/views', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setViews(data)
-      })
-
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
+    fetchViews()
+    focusInput()
   }, [])
   const [vibe, setVibe] = useState<VibeType>('Professional')
   const [isGPT, setIsGPT] = useState(true)
@@ -39,6 +27,21 @@ export default function Home() {
     if (bioRef.current !== null) {
       bioRef.current.scrollIntoView({ behavior: 'smooth' })
     }
+  }
+
+  const focusInput = () => {
+    inputRef.current?.focus()
+  }
+
+  const fetchViews = async () => {
+    const response = await fetch('/api/views', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const data = await response.json()
+    setViews(data)
   }
 
   const generateBio = async (e: any) => {
