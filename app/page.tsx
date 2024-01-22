@@ -67,6 +67,7 @@ export default function Home() {
       },
       body: JSON.stringify({
         bio,
+        vibe: selectedVibe,
       }),
     })
 

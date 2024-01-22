@@ -7,8 +7,9 @@ if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
 }
 
 export async function POST(req: Request) {
-  const { bio } = (await req.json()) as {
+  const { bio, vibe } = (await req.json()) as {
     bio?: string
+    vibe?: string
   }
 
   if (!bio) {
@@ -21,7 +22,7 @@ export async function POST(req: Request) {
       {
         role: 'system',
         content: `
-        Your job involves rephrasing statements into standard English with a casual and confident tone. 
+        Your job involves rephrasing statements into standard English with a ${vibe} and confident tone. 
         Focus on enhancing clarity and simplicity. Your suggestions cover everything from grammar and spelling to style and tone, 
         ensuring effective communication. Generate clear, compelling writing instantly. Shorten if needed.
         `,
