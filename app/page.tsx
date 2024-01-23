@@ -10,6 +10,7 @@ import { Toaster, toast } from 'react-hot-toast'
 const DEFAULT_VIEWS = '--'
 
 export default function Home() {
+  const buttonRef = useRef<HTMLButtonElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const [selectedVibe, setSelectedVibe] = useState<VibeType>('Professional')
   const [isGPT, setIsGPT] = useState(true)
@@ -37,6 +38,13 @@ export default function Home() {
 
   const focusInput = () => {
     inputRef.current?.focus()
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      e.preventDefault()
+      buttonRef.current?.click()
+    }
   }
 
   const generateBio = async (e: any) => {
@@ -136,6 +144,7 @@ export default function Home() {
           <textarea
             value={bio}
             onChange={(e) => setBio(e.target.value)}
+            onKeyDown={handleKeyDown}
             ref={inputRef}
             rows={4}
             className='w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5'
@@ -151,6 +160,7 @@ export default function Home() {
 
           {!loading && (
             <button
+              ref={buttonRef}
               className='bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full'
               onClick={(e) => generateBio(e)}>
               Rewrite &rarr;
