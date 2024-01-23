@@ -136,7 +136,7 @@ export default function Home() {
         <div className='max-w-xl w-full'>
           <div className='flex mt-10 items-center space-x-3'>
             <NumberOne weight='regular' size={30} color='#ffffff' alt='1 icon' className=' bg-black rounded-full p-1' />
-            <p className='text-left font-medium'>
+            <p className='text-left font-medium font-mono'>
               Paste your text here
               <span className='text-slate-500'> (⌘+V)</span>.
             </p>
@@ -147,7 +147,7 @@ export default function Home() {
             onKeyDown={handleKeyDown}
             ref={inputRef}
             rows={4}
-            className='w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5'
+            className='text-base font-mono w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5'
             placeholder={'Type or paste your text here.'}
           />
           <div className='flex mb-5 items-center space-x-3'>
@@ -184,23 +184,19 @@ export default function Home() {
                   Rewritten Phrase
                 </h2>
               </div>
-              <div className='space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto'>
-                {generatedBios.split(/2\.|3\./).map((generatedBio) => {
-                  return (
-                    <div
-                      className='bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border'
-                      onClick={() => {
-                        navigator.clipboard.writeText(generatedBio)
-                        toast('Copied to clipboard', {
-                          icon: '✂️',
-                        })
-                      }}
-                      key={generatedBio}>
-                      <p className='mb-2'>{generatedBio}</p>
-                      <span className='text-slate-500'> (click here to copy)</span>
-                    </div>
-                  )
-                })}
+              <div className='space-y-8 pb-4 flex flex-col items-center justify-center max-w-xl mx-auto'>
+                <div
+                  className='bg-white rounded-xl shadow-2xl p-4 hover:bg-gray-100 transition cursor-copy border shadow-slate-300'
+                  onClick={() => {
+                    navigator.clipboard.writeText(generatedBios.toString())
+                    toast('Copied to clipboard', {
+                      icon: '✂️',
+                    })
+                  }}
+                  key={generatedBios.toString()}>
+                  <p className='mb-2'>{generatedBios.toString()}</p>
+                  <span className='text-gray-400'> (click here to copy)</span>
+                </div>
               </div>
             </>
           )}
