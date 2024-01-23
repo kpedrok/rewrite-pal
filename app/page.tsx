@@ -181,7 +181,7 @@ export default function Home() {
             <>
               <div>
                 <h2 className='sm:text-xl text-3xl font-bold text-slate-900 mx-auto mb-4' ref={bioRef}>
-                  Rewritten Phrase
+                  Rewritten phrase
                 </h2>
               </div>
               <div className='space-y-8 pb-4 flex flex-col items-center justify-center max-w-xl mx-auto'>
