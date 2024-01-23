@@ -52,10 +52,19 @@ export default function Home() {
     setGeneratedBios('')
     setLoading(true)
     setViews(views + 1)
-    await postToApiOpenai(bio)
-    scrollToBios()
-    setLoading(false)
-    await postToApiViews()
+
+    try {
+      await postToApiOpenai(bio)
+      scrollToBios()
+      await postToApiViews()
+    } catch (error) {
+      console.error(error)
+      toast('An error occurred while generating the bio', {
+        icon: '❌',
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   const postToApiViews = async () => {
