@@ -136,7 +136,7 @@ export default function Home() {
         <div className='max-w-xl w-full'>
           <div className='flex mt-10 items-center space-x-3'>
             <NumberOne weight='regular' size={30} color='#ffffff' alt='1 icon' className=' bg-black rounded-full p-1' />
-            <p className='text-left font-medium font-mono'>
+            <p className='text-left font-medium'>
               Paste your text here
               <span className='text-slate-500'> (⌘+V)</span>.
             </p>
