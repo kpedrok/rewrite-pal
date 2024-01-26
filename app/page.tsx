@@ -1,7 +1,7 @@
 'use client'
-import DropDown, { VibeType } from '@/components/DropDown'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { NumberOne, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import { useEffect, useRef, useState } from 'react'
@@ -12,13 +12,45 @@ const DEFAULT_VIEWS = '--'
 export default function Home() {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
-  const [selectedVibe, setSelectedVibe] = useState<VibeType>('Professional')
   const [isGPT, setIsGPT] = useState(true)
   const [views, setViews] = useState(DEFAULT_VIEWS)
   const [loading, setLoading] = useState(false)
   const [bio, setBio] = useState('')
   const [generatedBios, setGeneratedBios] = useState<String>('')
   const bioRef = useRef<null | HTMLDivElement>(null)
+
+  const [selectedVibes, setSelectedVibes] = useState<string[] | undefined>(undefined)
+
+  useEffect(() => {
+    const storedVibes = localStorage.getItem('selectedVibes')
+    if (storedVibes && storedVibes !== 'undefined' && storedVibes.length > 0) {
+      setSelectedVibes(JSON.parse(storedVibes))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('selectedVibes', JSON.stringify(selectedVibes))
+  }, [selectedVibes])
+
+  const vibes: string[] = [
+    '😊 Casual',
+    '🕴️ Formal',
+    '📣 Direct',
+    '🌟 Inspirational',
+    '👫 Friendly',
+    '🤝 Empathetic',
+    '🕊️ Diplomatic',
+    '🛠️ Constructive',
+    '💪 Confident',
+    '🗣️ Assertive',
+    '🌐 Persuasive',
+    '🔍 Simplify it',
+    '📝 Make it more descriptive',
+    '📑 Make it more detailed',
+    '🎓 Sound professional',
+    '📏 Shorten it',
+    '🎯 Instructive',
+  ]
 
   useEffect(() => {
     fetchViews()
@@ -84,7 +116,7 @@ export default function Home() {
       },
       body: JSON.stringify({
         bio,
-        vibe: selectedVibe,
+        vibe: selectedVibes,
       }),
     })
 
@@ -128,13 +160,13 @@ export default function Home() {
   }
 
   return (
-    <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen '>
+    <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
       <Header />
       <main className='flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-4 animate-in fade-in duration-1000'>
-        <h1 className='sm:text-6xl text-4xl max-w-4xl font-bold text-slate-900 hover:scale-105 transition duration-300 ease-in-out mb-4'>
+        <h1 className='sm:text-6xl text-4xl max-w-5xl font-bold text-slate-900 hover:scale-105 transition duration-300 ease-in-out mb-4'>
           Ensure your writing is mistake-free and polished
         </h1>
-        <h3 className='sm:text-lg text-md max-w-lg font-light text-slate-900 hover:scale-105 transition duration-300 ease-in-out'>
+        <h3 className='sm:text-lg text-md max-w-xl font-light text-slate-900 hover:scale-105 transition duration-300 ease-in-out'>
           Instantly generate clear, compelling writing while maintaining your unique voice.
         </h3>
         <p className='border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out  mt-7 '>
@@ -142,7 +174,7 @@ export default function Home() {
         </p>
         {/* <div className='mt-7'>{<Toggle isGPT={isGPT} setIsGPT={setIsGPT} />}</div> */}
 
-        <div className='max-w-xl w-full'>
+        <div className='max-w-4xl w-full'>
           <div className='flex mt-10 items-center space-x-3'>
             <NumberOne weight='regular' size={30} color='#ffffff' alt='1 icon' className=' bg-black rounded-full p-1' />
             <p className='text-left font-medium'>
@@ -163,10 +195,22 @@ export default function Home() {
             <NumberTwo weight='regular' size={30} color='#ffffff' alt='2 icon' className=' bg-black rounded-full p-1' />{' '}
             <p className='text-left font-medium'>Select your tone.</p>
           </div>
-          <div className='block'>
-            {<DropDown vibe={selectedVibe} setVibe={(newVibe) => setSelectedVibe(newVibe)} />}
-          </div>
 
+          <ToggleGroup
+            variant='outline'
+            size={'lg'}
+            type='multiple'
+            className='flex flex-wrap'
+            value={selectedVibes}
+            onValueChange={(value) => {
+              if (value) setSelectedVibes(value)
+            }}>
+            {vibes.map((vibe) => (
+              <ToggleGroupItem key={vibe} value={vibe} aria-label={`Toggle ${vibe}`}>
+                <div className=''>{vibe}</div>
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
           {!loading && (
             <button
               ref={buttonRef}

@@ -22,15 +22,10 @@ export async function POST(req: Request) {
       {
         role: 'system',
         content: `
-        Your job involves rephrasing statements into standard English with a ${vibe} tone. 
+        Your job involves rephrasing statements into standard English. 
         Your suggestions cover everything from grammar and spelling to style and tone, 
-        ensuring effective communication.
+        ensuring effective communication. The tone of the message should follow this attribute: ${vibe}.
         `,
-        // content: `
-        // Your job involves rephrasing statements into standard English with a ${vibe} and confident tone.
-        // Focus on enhancing clarity and simplicity. Your suggestions cover everything from grammar and spelling to style and tone,
-        // ensuring effective communication. Generate clear, compelling writing instantly. Shorten if needed.
-        // `,
       },
       { role: 'user', content: bio },
     ],
