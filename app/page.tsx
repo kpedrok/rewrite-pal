@@ -94,7 +94,7 @@ export default function Home() {
       await postToApiViews()
     } catch (error) {
       console.error(error)
-      toast('An error occurred while generating the bio', {
+      toast('An error occurred while editing your phrase', {
         icon: '❌',
       })
     } finally {
