@@ -34,22 +34,25 @@ export default function Home() {
 
   const vibes: string[] = [
     '😊 Casual',
-    '🕴️ Formal',
+    '🎓 Professional',
     '📣 Direct',
-    '🌟 Inspirational',
+
     '👫 Friendly',
     '🤝 Empathetic',
     '🕊️ Diplomatic',
     '🛠️ Constructive',
+
     '💪 Confident',
     '🗣️ Assertive',
     '🌐 Persuasive',
-    '🔍 Simplify it',
-    '📝 Make it more descriptive',
-    '📑 Make it more detailed',
-    '🎓 Sound professional',
-    '📏 Shorten it',
+    '🌟 Inspirational',
+
+    '📝 Descriptive',
+    '📑 Detailed',
     '🎯 Instructive',
+
+    '🔍 Simplify it',
+    '📏 Shorten it',
   ]
 
   useEffect(() => {
@@ -207,14 +210,14 @@ export default function Home() {
             }}>
             {vibes.map((vibe) => (
               <ToggleGroupItem key={vibe} value={vibe} aria-label={`Toggle ${vibe}`}>
-                <div className=''>{vibe}</div>
+                <div className='w-[120px]'>{vibe}</div>
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
           {!loading && (
             <button
               ref={buttonRef}
-              className='bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full'
+              className='bg-black rounded-xl text-white font-medium px-6 py-4 sm:mt-10 mt-8 hover:bg-black/80 w-1/2'
               onClick={(e) => generateBio(e)}>
               Rewrite &rarr;
             </button>
@@ -254,41 +257,6 @@ export default function Home() {
             </>
           )}
         </div>
-
-        {/* <RadioComponent selectLimit={3} />
-          <div>
-            <Tab.Group>
-              <Tab.List>
-                <Tab>Tab 1</Tab>
-                <Tab>Tab 2</Tab>
-                <Tab>Tab 3</Tab>
-              </Tab.List>
-              <Tab.Panels>
-                <Tab.Panel>Content 1</Tab.Panel>
-                <Tab.Panel>Content 2</Tab.Panel>
-                <Tab.Panel>Content 3</Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-          </div> */}
-
-        {/* <div className='text-center'>
-        <h1 className=' text-gray-600 mb-2 duration-1200 ease-in-out animate-in fade-in slide-in-from-top-4'>
-          Write your text and let me check your grammar
-        </h1>
-        <p className='text-slate-400'>1,836,519 phrases improved!</p>
-      </div>
-
-      <Textarea
-        // value={input}
-        // onChange={e => setInput(e.target.value)}
-        // onKeyDown={onKeyDown}
-        ref={inputRef}
-        tabIndex={0}
-        rows={1}
-        placeholder='Type or paste your text here.'
-        spellCheck={false}
-        className='textarea textarea-bordered text-base min-h-[60px] w-full max-w-2xl resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none  font-mono transition-all duration-300'
-      /> */}
       </main>
       <Footer />
     </div>
