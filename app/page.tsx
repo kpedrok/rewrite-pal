@@ -224,7 +224,7 @@ export default function Home() {
           )}
           {loading && (
             <button
-              className='bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full'
+              className='bg-black rounded-xl text-white font-medium px-6 py-4 sm:mt-10 mt-8 hover:bg-black/80 w-1/2'
               disabled>
               Loading...
             </button>
