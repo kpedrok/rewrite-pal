@@ -34,7 +34,7 @@ export default function Home() {
 
   const vibes: string[] = [
     '😊 Casual',
-    '🎓 Professional',
+    '💼 Professional',
     '📣 Direct',
 
     '👫 Friendly',
