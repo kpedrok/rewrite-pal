@@ -8,7 +8,7 @@
 
   - Styling with [Tailwind CSS](https://tailwindcss.com)
   - Icons from [Phosphor Icons](https://phosphoricons.com)
-  - [shadcn/ui] (https://ui.shadcn.com/) for component library
+  - [shadcn/ui](https://ui.shadcn.com/) for component library
 
       <!-- - Chat History, rate limiting, and session storage with [Vercel KV](https://vercel.com/storage/kv) -->
       <!-- - [NextAuth.js](https://github.com/nextauthjs/next-auth) for authentication -->
