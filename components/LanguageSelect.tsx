@@ -9,6 +9,9 @@ type Language = {
 const topLanguages: Language[] = [
   { name: 'Chinese', emoji: '🇨🇳' },
   { name: 'English', emoji: '🇺🇸' },
+  { name: 'French', emoji: '🇫🇷' },
+  { name: 'German', emoji: '🇩🇪' },
+  { name: 'Gujarati', emoji: '🇮🇳' },
   { name: 'Hindi', emoji: '🇮🇳' },
   { name: 'Italian', emoji: '🇮🇹' },
   { name: 'Japanese', emoji: '🇯🇵' },
