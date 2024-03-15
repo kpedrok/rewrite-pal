@@ -7,9 +7,14 @@ if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
 }
 
 export async function POST(req: Request) {
-  const { bio, vibe } = (await req.json()) as {
+  const {
+    bio,
+    vibe,
+    language = 'English',
+  } = (await req.json()) as {
     bio?: string
     vibe?: string
+    language?: 'string'
   }
 
   if (!bio) {
@@ -23,8 +28,9 @@ export async function POST(req: Request) {
         role: 'system',
         content: `
         Your job involves rephrasing statements into standard English. 
-        Your suggestions cover everything from grammar and spelling to style and tone, 
-        ensuring effective communication. The tone of the message should follow this attribute: ${vibe}.
+        Your suggestion cover everything from grammar and spelling to style and tone, 
+        ensuring effective communication. The tone and style of the message should follow this attribute: ${vibe}.
+        The return message should be a rephrased version of the input message in the following language ${language}.
         `,
       },
       { role: 'user', content: bio },

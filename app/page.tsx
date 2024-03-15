@@ -1,8 +1,9 @@
 'use client'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+import LanguageSelect from '@/components/LanguageSelect'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { NumberOne, NumberTwo } from '@phosphor-icons/react/dist/ssr'
+import { NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import { useEffect, useRef, useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
@@ -43,13 +44,12 @@ export default function Home() {
     '🛠️ Constructive',
 
     '💪 Confident',
-    '🗣️ Assertive',
-    '🌐 Persuasive',
+    '🎯 Assertive',
+    '🗣️ Persuasive',
     '🌟 Inspirational',
 
-    '📝 Descriptive',
-    '📑 Detailed',
-    '🎯 Instructive',
+    '📝 Detailed',
+    '🎓 Instructive',
 
     '🔍 Simplify it',
     '📏 Shorten it',
@@ -120,6 +120,7 @@ export default function Home() {
       body: JSON.stringify({
         bio,
         vibe: selectedVibes,
+        language: localStorage.getItem('selectedLanguage'),
       }),
     })
 
@@ -176,7 +177,6 @@ export default function Home() {
           <b>{views}</b> phrases improved so far
         </p>
         {/* <div className='mt-7'>{<Toggle isGPT={isGPT} setIsGPT={setIsGPT} />}</div> */}
-
         <div className='max-w-4xl w-full'>
           <div className='flex mt-10 items-center space-x-3'>
             <NumberOne weight='regular' size={30} color='#ffffff' alt='1 icon' className=' bg-black rounded-full p-1' />
@@ -214,6 +214,18 @@ export default function Home() {
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
+
+          <div className='flex mb-5 mt-5 items-center space-x-3'>
+            <NumberThree
+              weight='regular'
+              size={30}
+              color='#ffffff'
+              alt='2 icon'
+              className=' bg-black rounded-full p-1'
+            />{' '}
+            <p className='text-left font-medium'>Language: </p>
+            <LanguageSelect />
+          </div>
           {!loading && (
             <button
               ref={buttonRef}
