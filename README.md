@@ -38,5 +38,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Inspired by:
 
+- https://vercel.com/templates/next.js/twitter-bio
 - https://vercel.com/templates/next.js/nextjs-ai-chatbot
-- https://vercel.com/templates/next.js/ai-emoji-generator
