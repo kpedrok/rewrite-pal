@@ -22,3 +22,5 @@
 - Platform Expansion: Desktop App
 - Platform Expansion: Internationalization
 - Gamification: Grammar Influence points
+
+Next: become a beta tester link
