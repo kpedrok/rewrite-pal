@@ -7,16 +7,15 @@ type Language = {
 }
 
 const topLanguages: Language[] = [
+  { name: 'Bengali', emoji: '🇧🇩' },
   { name: 'Chinese', emoji: '🇨🇳' },
   { name: 'English', emoji: '🇺🇸' },
   { name: 'French', emoji: '🇫🇷' },
   { name: 'German', emoji: '🇩🇪' },
-  { name: 'Gujarati', emoji: '🇮🇳' },
   { name: 'Hindi', emoji: '🇮🇳' },
   { name: 'Italian', emoji: '🇮🇹' },
   { name: 'Japanese', emoji: '🇯🇵' },
   { name: 'Korean', emoji: '🇰🇷' },
-  { name: 'Oriya (Odia)', emoji: '🇮🇳' },
   { name: 'Polish', emoji: '🇵🇱' },
   { name: 'Portuguese', emoji: '🇧🇷' },
   { name: 'Russian', emoji: '🇷🇺' },
