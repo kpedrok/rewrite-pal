@@ -27,10 +27,9 @@ export async function POST(req: Request) {
       {
         role: 'system',
         content: `
-        Your job involves rephrasing statements into standard English. 
-        Your suggestion cover everything from grammar and spelling to style and tone, 
-        ensuring effective communication. The tone and style of the message should follow this attribute: ${vibe}.
-        The return message should be a rephrased version of the input message in the following language ${language}.
+        Your job involves rephrasing statements into ${language}. 
+        Your answer cover everything from grammar and spelling to style and tone, 
+        ensuring effective communication. The tone and style of the message should follow this list of attributes: ${vibe}.
         `,
       },
       { role: 'user', content: bio },
