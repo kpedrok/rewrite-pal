@@ -1,8 +1,8 @@
 import Script from 'next/script'
 
-function HotjarAnalytics() {
+export default function HotjarAnalytics() {
   return (
-    <div className='container'>
+    <>
       <Script id='hotjar'>
         {`
            (function(h,o,t,j,a,r){
@@ -15,8 +15,6 @@ function HotjarAnalytics() {
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
         `}
       </Script>
-    </div>
+    </>
   )
 }
-
-export default HotjarAnalytics
