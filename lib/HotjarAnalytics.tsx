@@ -3,7 +3,7 @@ import Script from 'next/script'
 export default function HotjarAnalytics() {
   return (
     <>
-      <Script id='hotjar'>
+      <Script id='hotjar' strategy='lazyOnload'>
         {`
            (function(h,o,t,j,a,r){
             h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
