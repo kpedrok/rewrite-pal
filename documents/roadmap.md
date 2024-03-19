@@ -24,3 +24,5 @@
 - Gamification: Grammar Influence points
 
 Next: become a beta tester link
+Next: add pricing page to check if people find value
+Next: add amplitude tracking and try to understand what is the type of text people input

@@ -36,9 +36,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
+        {children}
         <HotjarAnalytics />
         <GoogleAnalytics />
-        {children}
         <Analytics />
         <SpeedInsights />
       </body>
