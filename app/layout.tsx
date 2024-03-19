@@ -1,3 +1,4 @@
+import HotjarAnalytics from '@/lib/HotjarAnalytics'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
+        <HotjarAnalytics />
         {children}
         <Analytics />
         <SpeedInsights />
