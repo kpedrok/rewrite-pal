@@ -3,6 +3,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import LanguageSelect from '@/components/LanguageSelect'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { sendGAEvent } from '@next/third-parties/google'
 import { NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import { useEffect, useRef, useState } from 'react'
@@ -82,7 +83,7 @@ export default function Home() {
     }
   }
 
-  const generateBio = async (e: any) => {
+  const rewrite = async (e: any) => {
     e.preventDefault()
     setGeneratedBios('')
     setLoading(true)
@@ -100,6 +101,7 @@ export default function Home() {
     } finally {
       setLoading(false)
     }
+    sendGAEvent({ event: 'spend_virtual_currency', value: '1', virtual_currency_name: 'token', item_name: 'rewrite' })
   }
 
   const postToApiViews = async () => {
@@ -230,7 +232,7 @@ export default function Home() {
             <button
               ref={buttonRef}
               className='bg-black rounded-xl text-white font-medium px-6 py-4 sm:mt-10 mt-8 hover:bg-black/80 w-1/2'
-              onClick={(e) => generateBio(e)}>
+              onClick={(e) => rewrite(e)}>
               Rewrite &rarr;
             </button>
           )}

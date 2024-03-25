@@ -1,5 +1,5 @@
-import GoogleAnalytics from '@/lib/GoogleAnalytics'
 import HotjarAnalytics from '@/lib/HotjarAnalytics'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
@@ -38,7 +38,8 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <HotjarAnalytics />
-        <GoogleAnalytics />
+        <GoogleAnalytics gaId='G-0M61BY9GR2' />
+
         <Analytics />
         <SpeedInsights />
       </body>
