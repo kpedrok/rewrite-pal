@@ -20,7 +20,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [bio, setBio] = useState('')
   const [generatedBios, setGeneratedBios] = useState<String>('')
-  const bioRef = useRef<null | HTMLDivElement>(null)
+  const resultRef = useRef<null | HTMLDivElement>(null)
 
   const [selectedVibes, setSelectedVibes] = useState<string[] | undefined>(undefined)
 
@@ -92,8 +92,8 @@ export default function Home() {
 
     try {
       await postToApiOpenai(bio)
-      scrollToBios()
       await postToApiViews()
+      scrollToResult()
     } catch (error) {
       console.error(error)
       toast('An error occurred while editing your phrase', {
@@ -161,9 +161,9 @@ export default function Home() {
     }
   }
 
-  const scrollToBios = () => {
-    if (bioRef.current !== null) {
-      bioRef.current.scrollIntoView({ behavior: 'smooth' })
+  const scrollToResult = () => {
+    if (resultRef.current !== null) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
@@ -265,10 +265,10 @@ export default function Home() {
                     })
                   }}
                   key={generatedBios.toString()}>
-                  <p className='mb-2' ref={bioRef}>
-                    {generatedBios.toString()}
-                  </p>
-                  <span className='text-gray-400'> (click here to copy)</span>
+                  <p className='mb-2'>{generatedBios.toString()}</p>
+                  <span ref={resultRef} className='text-gray-400'>
+                    (click here to copy)
+                  </span>
                 </div>
               </div>
             </>
