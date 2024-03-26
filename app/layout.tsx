@@ -48,8 +48,8 @@ export default function RootLayout({
         </body>
       </PHProvider>
       <GoogleAnalytics gaId='G-0M61BY9GR2' />
-      <HotjarAnalytics />
       <Analytics />
+      <HotjarAnalytics />
     </html>
   )
 }
