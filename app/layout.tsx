@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { CSPostHogProvider } from './posthog'
 
 // export const runtime = 'edge'
 
@@ -35,14 +36,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
-        {children}
-        <HotjarAnalytics />
-        <GoogleAnalytics gaId='G-0M61BY9GR2' />
-
-        <Analytics />
-        <SpeedInsights />
-      </body>
+      <CSPostHogProvider>
+        <body className={inter.className}>
+          {children}
+          <SpeedInsights />
+        </body>
+      </CSPostHogProvider>
+      <GoogleAnalytics gaId='G-0M61BY9GR2' />
+      <HotjarAnalytics />
+      <Analytics />
     </html>
   )
 }

@@ -6,6 +6,7 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { sendGAEvent } from '@next/third-parties/google'
 import { NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
+import posthog from 'posthog-js'
 import { useEffect, useRef, useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
 
@@ -101,7 +102,8 @@ export default function Home() {
     } finally {
       setLoading(false)
     }
-    sendGAEvent({ event: 'spend_virtual_currency', value: '1', virtual_currency_name: 'token', item_name: 'rewrite' })
+    posthog.capture('rewrite', { property: 'test' })
+    sendGAEvent({ event: 'purchase', value: 'test' })
   }
 
   const postToApiViews = async () => {
@@ -251,9 +253,7 @@ export default function Home() {
           {generatedBios && (
             <>
               <div>
-                <h2 className='sm:text-xl text-3xl font-bold text-slate-900 mx-auto mb-4' ref={bioRef}>
-                  Rewritten phrase
-                </h2>
+                <h2 className='sm:text-xl text-3xl font-bold text-slate-900 mx-auto mb-4'>Rewritten phrase</h2>
               </div>
               <div className='space-y-8 pb-4 flex flex-col items-center justify-center max-w-xl mx-auto'>
                 <div
@@ -265,7 +265,9 @@ export default function Home() {
                     })
                   }}
                   key={generatedBios.toString()}>
-                  <p className='mb-2'>{generatedBios.toString()}</p>
+                  <p className='mb-2' ref={bioRef}>
+                    {generatedBios.toString()}
+                  </p>
                   <span className='text-gray-400'> (click here to copy)</span>
                 </div>
               </div>
