@@ -115,14 +115,14 @@ export default function Home() {
     })
   }
 
-  const postToApiOpenai = async (bio: string) => {
+  const postToApiOpenai = async (sentence: string) => {
     const response = await fetch('/api/openai', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        bio,
+        sentence,
         vibe: selectedVibes,
         language: localStorage.getItem('selectedLanguage'),
       }),
