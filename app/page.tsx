@@ -1,6 +1,5 @@
 'use client'
 import Footer from '@/components/footer'
-import Header from '@/components/header'
 import LanguageSelect from '@/components/language-select'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { sendGAEvent } from '@next/third-parties/google'
@@ -169,7 +168,7 @@ export default function Home() {
 
   return (
     <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
-      <Header />
+      {/* <Header /> */}
       <main className='flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-4 animate-in fade-in duration-1000'>
         <h1 className='sm:text-6xl text-4xl max-w-5xl font-bold text-slate-900 hover:scale-105 transition duration-300 ease-in-out mb-4'>
           Ensure your writing is mistake-free and polished
