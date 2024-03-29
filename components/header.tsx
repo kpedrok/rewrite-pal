@@ -1,6 +1,6 @@
 import { Keyboard } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
-import Github from './tgithub'
+import Github from './github'
 
 export default function Header() {
   return (
