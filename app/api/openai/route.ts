@@ -28,8 +28,8 @@ export async function POST(req: Request) {
         role: 'system',
         content: `
         Your job involves rephrasing statements into ${language}. 
-        Your answer cover everything from grammar and spelling to style and tone, 
-        ensuring effective communication. The tone and style of the message should follow this list of attributes: ${vibe}.
+        The rephrase must cover everything from grammar and spelling to style and tone, 
+        ensuring effective communication. The tone and style of the rephrase should follow this list of attributes: ${vibe}.
         `,
       },
       { role: 'user', content: bio },
