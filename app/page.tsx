@@ -1,5 +1,4 @@
 'use client'
-import Footer from '@/components/footer'
 import Header from '@/components/header'
 import LanguageSelect from '@/components/language-select'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
@@ -275,7 +274,6 @@ export default function Home() {
           )}
         </div>
       </main>
-      <Footer />
     </div>
   )
 }
