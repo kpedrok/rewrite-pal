@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   robots: 'index, follow',
 }
 
-const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
+const PostHogPageView = dynamic(() => import('../lib/PostHogPageView'), {
   ssr: false,
 })
 
