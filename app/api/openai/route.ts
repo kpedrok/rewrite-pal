@@ -27,8 +27,9 @@ export async function POST(req: Request) {
       {
         role: 'system',
         content: `
-        Your job involves rephrasing statements into ${language}. 
-        The rephrase must cover everything from grammar and spelling to style and tone, 
+        You will be provided with statements, and your task is to convert 
+        them to standard ${language}.
+        You must cover everything from grammar and spelling to style and tone, 
         ensuring effective communication. The tone and style of the rephrase should follow this list of attributes: ${vibe}.
         `,
       },
