@@ -167,6 +167,14 @@ export default function Home() {
     }
   }
 
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText(generatedBios.toString())
+    toast('Copied to clipboard', {
+      icon: '✂️',
+    })
+    posthog.capture('Rewrite Copied')
+  }
+
   return (
     <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
       <Header />
@@ -258,12 +266,7 @@ export default function Home() {
               <div className='space-y-8 pb-4 flex flex-col items-center justify-center max-w-xl mx-auto'>
                 <div
                   className='bg-white rounded-xl shadow-2xl p-4 hover:bg-gray-100 transition cursor-copy border shadow-slate-300'
-                  onClick={() => {
-                    navigator.clipboard.writeText(generatedBios.toString())
-                    toast('Copied to clipboard', {
-                      icon: '✂️',
-                    })
-                  }}
+                  onClick={handleCopyClick}
                   key={generatedBios.toString()}>
                   <p className='mb-2'>{generatedBios.toString()}</p>
                   <span ref={resultRef} className='text-gray-400'>
