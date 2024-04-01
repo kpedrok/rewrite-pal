@@ -11,9 +11,14 @@ import { PHProvider } from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'RewriteAI',
-  description: 'Your Free AI Writing Assistant',
+  title: {
+    default: 'RewriteAI | Write Better',
+    template: '%s | RewriteAI',
+  },
+  description: `Your Free AI Writing Tool. Paraphrasing tool, improve any paragraph's readability and rewrite it to make it sound more human-like with this powerful free tool.`,
   keywords: [
+    'paraphrasing',
+    'rewrite',
     'grammar checker',
     'AI writing assistant',
     'proofreading tool',
