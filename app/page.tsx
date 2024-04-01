@@ -3,6 +3,7 @@ import Footer from '@/components/footer'
 import Header from '@/components/header'
 import LanguageSelect from '@/components/language-select'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { scrollToBottom } from '@/lib/utils'
 import { sendGAEvent } from '@next/third-parties/google'
 import { NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
@@ -91,9 +92,9 @@ export default function Home() {
     setViews(views + 1)
 
     try {
+      scrollToBottom()
       await postToApiOpenai(bio)
       await postToApiViews()
-      scrollToResult()
     } catch (error) {
       console.error(error)
       toast('An error occurred while editing your phrase', {
@@ -127,7 +128,6 @@ export default function Home() {
         language: localStorage.getItem('selectedLanguage'),
       }),
     })
-
     if (!response.ok) {
       throw new Error(response.statusText)
     }
@@ -143,6 +143,7 @@ export default function Home() {
         try {
           const text = JSON.parse(data).text ?? ''
           setGeneratedBios((prev) => prev + text)
+          scrollToResult()
         } catch (e) {
           console.error(e)
         }
@@ -257,7 +258,7 @@ export default function Home() {
         </div>
         <Toaster position='top-center' reverseOrder={false} toastOptions={{ duration: 2000 }} />
         <hr className='h-px bg-gray-700 border-1 dark:bg-gray-700' />
-        <div className='space-mt-10 mt-10'>
+        <div className='space-mt-10 mt-5'>
           {generatedBios && (
             <>
               <div>

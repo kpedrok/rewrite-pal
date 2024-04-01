@@ -5,8 +5,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: 'https://www.rewriteai.xyz/',
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 1,
+    },
+    {
+      url: 'https://www.rewriteai.xyz/blog',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: 'https://www.rewriteai.xyz/blog/boost-your-writing-with-ai',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
     },
   ]
 }
