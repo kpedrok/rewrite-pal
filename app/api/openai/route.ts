@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   content = content.trim()
 
   const payload: OpenAIStreamPayload = {
-    model: 'gpt-4',
+    model: 'gpt-4-turbo-preview',
     messages: [
       {
         role: 'system',
