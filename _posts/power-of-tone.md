@@ -1,5 +1,5 @@
 ---
-title: 'The Power of Tone: How to Tailor Your Writing for Different Audiences'
+title: 'The Power of Tone: You Must Tailor Your Writing for Different Audiences'
 excerpt: 'In the realm of writing, tone plays a pivotal role in communicating effectively with diverse audiences. The tone you employ can greatly influence how your message is perceived and received by readers. This blog post delves into the nuances of tone and provides insights on crafting tailored writing for various audience segments.'
 coverImage: '/assets/blog/power-of-tone/cover.jpg'
 date: '2024-04-02T12:10:00.000Z'
