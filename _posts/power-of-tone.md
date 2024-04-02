@@ -28,7 +28,7 @@ Knowing how to change up your tone depending on who you're writing for is a must
 
 ## **Practical Tips**
 
-To get better at adjusting your tone, try doing some writing exercises for different types of audiences. It can also help to get feedback from others to see how well your tone is working. By actively playing around with tone in your writing, you can improve your communication skills and make a real connection with your readers.
+To get better at adjusting your tone, try doing some writing exercises for different types of audiences. It can also help to get feedback from others to see how well your tone is working. By actively playing around with tone in your writing, you can improve your communication skills and make a real connection with your readers. [Try different tones with RewriteAI](https://www.rewriteai.xyz/).
 
 ## **Conclusion**
 
