@@ -209,7 +209,9 @@ export default function Home() {
           />
           <div className='flex mb-5 items-center space-x-3'>
             <NumberTwo weight='regular' size={30} color='#ffffff' alt='2 icon' className=' bg-black rounded-full p-1' />{' '}
-            <p className='text-left font-medium'>Select your tone.</p>
+            <p className='text-left font-medium'>
+              Select your tone <span className='text-slate-500'> (optional)</span>.
+            </p>
           </div>
 
           <ToggleGroup

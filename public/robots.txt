@@ -6,4 +6,4 @@ Disallow: /accounts
 User-agent: *
 Allow: /
 
-Sitemap: https://www.rewriteai.xyz/sitemap.xml
+Sitemap: https://www.rewritepal.com/sitemap.xml

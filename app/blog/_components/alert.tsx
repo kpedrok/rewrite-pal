@@ -26,7 +26,7 @@ const Alert = ({ preview }: Props) => {
             <>
               Ensure your writing is mistake-free and polished with{' '}
               <a href='/' className='underline hover:text-blue-600 duration-200 transition-colors'>
-                Rewrite AI
+                Rewrite Pal
               </a>
               .
             </>

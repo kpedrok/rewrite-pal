@@ -4,7 +4,6 @@ import Header from '@/app/blog/_components/header'
 import { PostBody } from '@/app/blog/_components/post-body'
 import { PostHeader } from '@/app/blog/_components/post-header'
 import { getAllPosts, getPostBySlug } from '@/app/blog/lib/api'
-import { CMS_NAME } from '@/app/blog/lib/constants'
 import markdownToHtml from '@/app/blog/lib/markdownToHtml'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -45,7 +44,7 @@ export function generateMetadata({ params }: Params): Metadata {
     return notFound()
   }
 
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`
+  const title = `${post.title} | RewritePal Blog`
 
   return {
     title,

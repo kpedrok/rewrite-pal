@@ -1,6 +1,5 @@
 import HotjarAnalytics from '@/lib/HotjarAnalytics'
 import { GoogleAnalytics } from '@next/third-parties/google'
-import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
@@ -12,8 +11,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'RewriteAI | Write Better',
-    template: '%s | RewriteAI',
+    default: 'RewritePal | Write Better',
+    template: '%s | RewritePal',
   },
   description: `Your Free AI Writing Tool. Paraphrasing tool, improve any paragraph's readability and rewrite it to make it sound more human-like with this powerful free tool.`,
   keywords: [
@@ -53,7 +52,6 @@ export default function RootLayout({
         </body>
       </PHProvider>
       <GoogleAnalytics gaId='G-0M61BY9GR2' />
-      <Analytics />
       <HotjarAnalytics />
     </html>
   )

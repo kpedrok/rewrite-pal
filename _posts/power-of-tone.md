@@ -4,7 +4,7 @@ excerpt: 'In the realm of writing, tone plays a pivotal role in communicating ef
 coverImage: '/assets/blog/power-of-tone/cover.jpg'
 date: '2024-04-02T12:10:00.000Z'
 author:
-  name: RewriteAI
+  name: RewritePal
   picture: '/assets/blog/authors/rewrite-ai.png'
 ogImage:
   url: '/assets/blog/power-of-tone/cover.jpg'
@@ -28,7 +28,7 @@ Knowing how to change up your tone depending on who you're writing for is a must
 
 ## **Practical Tips**
 
-To get better at adjusting your tone, try doing some writing exercises for different types of audiences. It can also help to get feedback from others to see how well your tone is working. By actively playing around with tone in your writing, you can improve your communication skills and make a real connection with your readers. [Try different tones with RewriteAI](https://www.rewriteai.xyz/).
+To get better at adjusting your tone, try doing some writing exercises for different types of audiences. It can also help to get feedback from others to see how well your tone is working. By actively playing around with tone in your writing, you can improve your communication skills and make a real connection with your readers. [Try different tones with RewritePal](https://www.rewritepal.com).
 
 ## **Conclusion**
 

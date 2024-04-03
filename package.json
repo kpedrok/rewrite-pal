@@ -20,7 +20,6 @@
     "@radix-ui/react-toggle": "^1.0.3",
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@tailwindcss/forms": "^0.5.7",
-    "@vercel/analytics": "^1.1.2",
     "@vercel/kv": "^1.0.1",
     "@vercel/speed-insights": "^1.0.5",
     "class-variance-authority": "^0.7.0",
