@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'RewritePal | Write Better',
+    default: 'RewritePal | Write Better, Communicate Better, Deliver More',
     template: '%s | RewritePal',
   },
   description: `Your Free AI Writing Tool. Paraphrasing tool, improve any paragraph's readability and rewrite it to make it sound more human-like with this powerful free tool.`,
