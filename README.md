@@ -40,3 +40,6 @@ Inspired by:
 
 - https://vercel.com/templates/next.js/twitter-bio
 - https://vercel.com/templates/next.js/nextjs-ai-chatbot
+
+To update dependencies to their latest versions using pnpm, you can use the following command:
+pnpm update
