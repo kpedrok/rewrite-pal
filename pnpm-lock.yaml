@@ -21,7 +21,7 @@ importers:
         specifier: latest
         version: 1.13.2
 
-  apps/rewrite:
+  apps/rewriter:
     dependencies:
       '@headlessui/react':
         specifier: ^1.7.19
