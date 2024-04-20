@@ -22,7 +22,6 @@ export default function Home() {
   const [bio, setBio] = useState('')
   const [generatedBios, setGeneratedBios] = useState<String>('')
   const resultRef = useRef<null | HTMLDivElement>(null)
-
   const [selectedVibes, setSelectedVibes] = useState<string[] | undefined>(undefined)
 
   useEffect(() => {
