@@ -1,11 +1,9 @@
-import type { Config } from "tailwindcss";
+import sharedConfig from '@repo/tailwind-config'
+import type { Config } from 'tailwindcss'
 
-export default {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+const config: Config = {
+  presets: [sharedConfig],
+  content: ['./app/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },
@@ -13,4 +11,5 @@ export default {
     hoverOnlyWhenSupported: true,
   },
   plugins: [],
-} satisfies Config;
+}
+export default config
