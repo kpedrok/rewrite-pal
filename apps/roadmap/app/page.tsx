@@ -1,12 +1,31 @@
 import { RewritePalLogo } from '@repo/ui/logo'
 import { kv } from '@vercel/kv'
+import { Metadata } from 'next'
 import { saveEmail } from './actions'
 import FeatureForm from './form'
 import { Feature } from './types'
 
-export let metadata = {
-  title: 'Next.js and Redis Example',
-  description: 'Feature roadmap example with Next.js with Redis.',
+export let metadata: Metadata = {
+  title: {
+    default: 'RewritePal | Write Better, Communicate Better, Deliver More',
+    template: '%s | RewritePal',
+  },
+  description: `Your Free AI Writing Tool. Paraphrasing tool, improve any paragraph's readability and rewrite it to make it sound more human-like with this powerful free tool.`,
+  keywords: [
+    'paraphrasing',
+    'rewrite',
+    'grammar checker',
+    'AI writing assistant',
+    'proofreading tool',
+    'writing tool',
+    'grammar tool',
+    'free writing assistant',
+    'language improvement',
+    'online editor',
+    'spelling check',
+    'punctuation checker',
+  ],
+  robots: 'index, follow',
 }
 
 async function getFeatures() {
