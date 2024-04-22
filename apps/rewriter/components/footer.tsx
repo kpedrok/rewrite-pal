@@ -1,4 +1,4 @@
-import { Envelope, GithubLogo } from '@phosphor-icons/react/dist/ssr'
+import { Envelope, GithubLogo, TwitterLogo } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
 
 export default function Footer() {
@@ -7,10 +7,10 @@ export default function Footer() {
       <div>
         Share your feedback with me at{' '}
         <a
-          href='mailto:hi@rewriteai.xyz'
+          href='mailto:hello@rewritepal.com'
           target='_blank'
           className='font-bold hover:underline transition underline-offset-2'>
-          hi@rewriteai.xyz{' '}
+          hello@rewritepal.com{' '}
         </a>
         {/* and{' '}
         <a
@@ -24,11 +24,18 @@ export default function Footer() {
         <Link href='https://github.com/kpedrok' className='group' target='_blank' aria-label='Rewrite Pal on GitHub'>
           <GithubLogo weight='bold' aria-hidden='true' className='h-6 w-6 fill-slate-500 group-hover:fill-slate-700' />
         </Link>
-        <Link href='mailto:hi@rewriteai.xyz' target='_blank' className='group' aria-label='Rewrite Pal Email'>
+        <Link href='mailto:hello@rewritepal.com' target='_blank' className='group' aria-label='Rewrite Pal Email'>
           <Envelope weight='bold' aria-hidden='true' className='h-6 w-6 fill-slate-500 group-hover:fill-slate-700' />
         </Link>
-        {/* <Link href='mailto:hi@rewriteai.xyz' target='_blank' className='group' aria-label='Rewrite AI Email'>
-          hi@rewriteai.xyz
+        <Link
+          href='https://twitter.com/pedro_wxyz'
+          className='group'
+          target='_blank'
+          aria-label='Rewrite Pal on Twitter'>
+          <TwitterLogo weight='bold' aria-hidden='true' className='h-6 w-6 fill-slate-500 group-hover:fill-slate-700' />
+        </Link>
+        {/* <Link href='mailto:hello@rewritepal.com' target='_blank' className='group' aria-label='Rewrite AI Email'>
+          hello@rewritepal.com
         </Link> */}
       </div>
     </footer>
