@@ -6,6 +6,7 @@ const rolesList: { role: string; emoji: string }[] = [
   { role: 'Academic', emoji: '🎓' },
   { role: 'Blogger', emoji: '✍️' },
   { role: 'Business Professional', emoji: '💼' },
+  { role: 'Comedian', emoji: '🤣' },
   { role: 'Content Creator', emoji: '🖋️' },
   { role: 'Copywriter', emoji: '📝' },
   { role: 'Creative Professional', emoji: '🎨' },
