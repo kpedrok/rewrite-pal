@@ -7,7 +7,8 @@
   "exports": {
     "./styles.css": "./dist/index.css",
     "./card": "./src/card.tsx",
-    "./logo": "./src/logo.tsx"
+    "./logo": "./src/logo.tsx",
+    "./github": "./src/github.tsx"
   },
   "license": "MIT",
   "scripts": {

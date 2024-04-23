@@ -1,15 +1,14 @@
 'use client'
-import Footer from '@/components/footer'
-import Header from '@/components/header'
-import LanguageSelect from '@/components/language-select'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { scrollToBottom } from '@/lib/utils'
 import { sendGAEvent } from '@next/third-parties/google'
 import { NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import posthog from 'posthog-js'
-import { useEffect, useRef, useState } from 'react'
+import { SetStateAction, useEffect, useRef, useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
+import Footer from '../components/footer'
+import Header from '../components/header'
+import LanguageSelect from '../components/language-select'
+import { ToggleGroup, ToggleGroupItem } from '../components/ui/toggle-group'
 
 const DEFAULT_VIEWS = '--'
 
@@ -93,7 +92,7 @@ export default function Home() {
     setViews(views + 1)
 
     try {
-      scrollToBottom()
+      scrollToResult()
       await postToApiOpenai(bio)
       await postToApiViews()
     } catch (error) {
@@ -221,7 +220,7 @@ export default function Home() {
             type='multiple'
             className='flex flex-wrap'
             value={selectedVibes}
-            onValueChange={(value) => {
+            onValueChange={(value: SetStateAction<string[] | undefined>) => {
               if (value) setSelectedVibes(value)
             }}>
             {vibes.map((vibe) => (

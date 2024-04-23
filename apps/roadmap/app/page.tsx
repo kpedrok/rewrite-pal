@@ -66,7 +66,7 @@ export default async function Page() {
         <div className='flex justify-center items-center bg-black rounded-full w-16 sm:w-24 h-16 sm:h-24 my-8'>
           <RewritePalLogo className='h-10 sm:h-16 invert ' />
         </div>
-        <h1 className='text-lg sm:text-2xl font-bold mb-2'>Help us prioritize our roadmap</h1>
+        <h1 className='text-lg sm:text-2xl font-bold mb-2'>Help me build it for you</h1>
         <h2 className='text-md sm:text-xl mx-4'>Create or vote up features you want to see in our product.</h2>
         <div className='flex flex-wrap items-center justify-around max-w-4xl my-8 sm:w-full bg-white rounded-md shadow-xl h-full border border-gray-100'>
           <FeatureForm features={features} />

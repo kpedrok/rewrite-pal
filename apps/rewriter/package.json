@@ -13,6 +13,7 @@
     "env": "npx vercel env pull"
   },
   "dependencies": {
+    "@repo/ui": "workspace:*",
     "@headlessui/react": "^1.7.19",
     "@headlessui/tailwindcss": "^0.2.0",
     "@next/third-parties": "^14.2.1",
