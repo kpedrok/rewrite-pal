@@ -1,4 +1,10 @@
-Create 10 website names, the website is a directory that lists  best AI tools to help you with your writing and aslo compare all of them to make users find the best tool for them
+Select only "direct" or only "confident"
+
+v1: Create 10 website names, the website is a directory that lists  best AI tools to help you with your writing and aslo compare all of them to make users find the best tool for them
+
+
+v2: 
+Create 3 website names for a website that is a directory that lists  best AI tools to help you with your writing and aslo compare all of them to make users find the best tool for them
 
 
 1. AIWritersHub.com: Your Premier Destination for Discovering and Comparing Top AI Writing Tools.
