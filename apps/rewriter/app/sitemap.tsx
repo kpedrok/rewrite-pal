@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: 'https://www.rewritepal.com/blog/boost-your-writing-game-with-ai',
+      url: 'https://www.rewritepal.com/blog/boost-your-writing-with-ai',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,

@@ -1,6 +1,6 @@
 ---
 title: 'Boost Your Writing with AI: Awesome Solutions for Great Communication'
-excerpt: 'Dive into the world of Artificial Intelligence (AI) and discover how this cutting-edge technology is revolutionizing the way we write. From grammar and style checks to content generation and SEO optimization, AI offers an array of tools to enhance your writing skills and produce top-quality content. Explore the AI-powered features that can level up your writing game and empower you to create impactful and engaging pieces across various domains'
+excerpt: 'Dive into the world of Artificial Intelligence (AI) and discover how this cutting-edge technology is revolutionizing the way we write. From grammar and style checks to content generation and SEO optimization, AI offers an array of tools to enhance your writing skills and produce top-quality content. Explore the AI-powered features that can level up your writing and empower you to create impactful and engaging pieces across various domains'
 coverImage: '/assets/blog/boost-your-writing-with-ai/cover.jpg'
 date: '2024-04-01T12:10:00.000Z'
 author:
