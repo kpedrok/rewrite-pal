@@ -1,6 +1,6 @@
 'use client'
 import { sendGAEvent } from '@next/third-parties/google'
-import { NumberFour, NumberOne, NumberTwo } from '@phosphor-icons/react/dist/ssr'
+import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import posthog from 'posthog-js'
 import { SetStateAction, useEffect, useRef, useState } from 'react'
@@ -240,6 +240,13 @@ export default function Home() {
           </ToggleGroup>
 
           <div className='flex mb-5 mt-6 items-center space-x-3'>
+            <NumberThree
+              weight='regular'
+              size={30}
+              color='#ffffff'
+              alt='3 icon'
+              className=' bg-black rounded-full p-1'
+            />{' '}
             <p className='text-left font-medium'>
               Role <span className='text-slate-500'> (beta)</span>:
             </p>
