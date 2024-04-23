@@ -1,6 +1,5 @@
 export function RewritePalLogo(props: React.SVGProps<SVGSVGElement>) {
   return (
-    // <svg aria-label='Vercel Logo' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 19' >
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' aria-label='RewritePal Logo' {...props}>
       <rect width='256' height='256' fill='none' />
       <rect
