@@ -26,3 +26,29 @@
 Next: become a beta tester link
 Next: add pricing page to check if people find value
 Next: add amplitude tracking and try to understand what is the type of text people input
+
+https://chat.openai.com/c/95282c42-2d98-4542-8b00-84b86070a4f3
+Personas: Marketing, Copywriting, Social Media, Software Developer, Student / Academic, Creative Writing, Business
+Role: Software Developer, Student, Social Media
+Skin: Marketer, Developer, Academic, Writer, Social Media, Creative, Journalist, Technical, Blogger, Copywriter
+
+Marketer
+Developer
+Academic
+Writer
+Social Media Manager
+Creative Professional
+Journalist
+Technical Writer
+Blogger
+Copywriter
+Business Professional
+Content Creator
+SEO Specialist
+Graphic Designer
+UX/UI Designer
+Sales Representative
+Project Manager
+Data Analyst
+Educator
+Entrepreneur

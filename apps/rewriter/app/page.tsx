@@ -1,6 +1,6 @@
 'use client'
 import { sendGAEvent } from '@next/third-parties/google'
-import { NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
+import { NumberFour, NumberOne, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import posthog from 'posthog-js'
 import { SetStateAction, useEffect, useRef, useState } from 'react'
@@ -8,6 +8,7 @@ import { Toaster, toast } from 'react-hot-toast'
 import Footer from '../components/footer'
 import Header from '../components/header'
 import LanguageSelect from '../components/language-select'
+import RoleSelect from '../components/role-select'
 import { ToggleGroup, ToggleGroupItem } from '../components/ui/toggle-group'
 import { scrollToBottom } from '../lib/utils'
 
@@ -29,7 +30,9 @@ export default function Home() {
   useEffect(() => {
     const storedVibes = localStorage.getItem('selectedVibes')
     if (storedVibes && storedVibes !== 'undefined' && storedVibes.length > 0) {
-      setSelectedVibes(JSON.parse(storedVibes))
+      const parsedVibes = JSON.parse(storedVibes)
+      const sortedVibes = parsedVibes.sort()
+      setSelectedVibes(sortedVibes)
     }
   }, [])
 
@@ -103,7 +106,11 @@ export default function Home() {
       })
     } finally {
       setLoading(false)
-      posthog.capture('Rewrite', { tone: selectedVibes, language: localStorage.getItem('selectedLanguage') })
+      posthog.capture('Rewrite', {
+        tone: selectedVibes,
+        language: localStorage.getItem('selectedLanguage'),
+        role: localStorage.getItem('selectedRole'),
+      })
       sendGAEvent({ event: 'purchase' })
     }
   }
@@ -127,6 +134,7 @@ export default function Home() {
         sentence,
         vibe: selectedVibes,
         language: localStorage.getItem('selectedLanguage'),
+        role: localStorage.getItem('selectedRole'),
       }),
     })
     if (!response.ok) {
@@ -232,7 +240,14 @@ export default function Home() {
           </ToggleGroup>
 
           <div className='flex mb-5 mt-6 items-center space-x-3'>
-            <NumberThree
+            <p className='text-left font-medium'>
+              Role <span className='text-slate-500'> (beta)</span>:
+            </p>
+            <RoleSelect />
+          </div>
+
+          <div className='flex mb-5 mt-6 items-center space-x-3'>
+            <NumberFour
               weight='regular'
               size={30}
               color='#ffffff'
@@ -242,6 +257,7 @@ export default function Home() {
             <p className='text-left font-medium'>Language: </p>
             <LanguageSelect />
           </div>
+
           {!loading && (
             <button
               ref={buttonRef}
