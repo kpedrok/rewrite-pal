@@ -1,6 +1,7 @@
 import { RewritePalLogo } from '@repo/ui/logo'
 import { kv } from '@vercel/kv'
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { saveEmail } from './actions'
 import FeatureForm from './form'
 import { Feature } from './types'
@@ -64,7 +65,9 @@ export default async function Page() {
     <div className='flex flex-col items-center justify-center min-h-screen py-2'>
       <main className='flex flex-col items-center justify-center flex-1 px-4 sm:px-20 text-center'>
         <div className='flex justify-center items-center bg-black rounded-full w-16 sm:w-24 h-16 sm:h-24 my-8'>
-          <RewritePalLogo className='h-10 sm:h-16 invert ' />
+          <Link href='https://www.rewritepal.com'>
+            <RewritePalLogo className='h-10 sm:h-16 invert ' />
+          </Link>
         </div>
         <h1 className='text-lg sm:text-2xl font-bold mb-2'>Help me build it for you</h1>
         <h2 className='text-md sm:text-xl mx-4'>Create or vote up features you want to see in this product.</h2>
