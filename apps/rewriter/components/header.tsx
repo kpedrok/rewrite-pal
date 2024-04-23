@@ -1,5 +1,6 @@
 import { Keyboard } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
+import posthog from 'posthog-js'
 
 export default function Header() {
   return (
@@ -10,14 +11,22 @@ export default function Header() {
           RewritePal.
         </h1>
       </Link>
-      <a
-        className='flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-600 shadow-md transition-colors hover:bg-gray-100'
-        href='https://roadmap.rewritepal.com'
-        target='_blank'
-        rel='noopener noreferrer'>
-        <span className='text-lg'>💡</span>
-        <p>Roadmap</p>
-      </a>
+      <div className='flex gap-3'>
+        <Link
+          className='max-w-fit items-center justify-center space-x-2  px-4 py-2 text-sm text-gray-600  transition-colors hover:bg-gray-100 hidden md:flex '
+          href='/blog'>
+          <p>Blog</p>
+        </Link>
+        <Link
+          onClick={() => posthog.capture('Roadmap Opened')}
+          className='flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-600 shadow-md transition-colors hover:bg-gray-100'
+          href='https://roadmap.rewritepal.com'
+          target='_blank'
+          rel='noopener noreferrer'>
+          <span className='text-lg'>💡</span>
+          <p>Roadmap</p>
+        </Link>
+      </div>
     </header>
   )
 }

@@ -9,6 +9,7 @@ import Footer from '../components/footer'
 import Header from '../components/header'
 import LanguageSelect from '../components/language-select'
 import { ToggleGroup, ToggleGroupItem } from '../components/ui/toggle-group'
+import { scrollToBottom } from '../lib/utils'
 
 const DEFAULT_VIEWS = '--'
 
@@ -92,7 +93,7 @@ export default function Home() {
     setViews(views + 1)
 
     try {
-      scrollToResult()
+      scrollToBottom()
       await postToApiOpenai(bio)
       await postToApiViews()
     } catch (error) {
@@ -102,9 +103,9 @@ export default function Home() {
       })
     } finally {
       setLoading(false)
+      posthog.capture('Rewrite', { tone: selectedVibes, language: localStorage.getItem('selectedLanguage') })
+      sendGAEvent({ event: 'purchase' })
     }
-    posthog.capture('rewrite', { property: 'test' })
-    sendGAEvent({ event: 'purchase', value: 'test' })
   }
 
   const postToApiViews = async () => {
