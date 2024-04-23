@@ -248,7 +248,7 @@ export default function Home() {
               className=' bg-black rounded-full p-1'
             />{' '}
             <p className='text-left font-medium'>
-              Role <span className='text-slate-500 font-normal'> (optional) (beta feature)</span>:
+              Role <span className='text-slate-500 font-normal hidden md:contents'> (optional) (beta feature)</span>:
             </p>
             <RoleSelect />
           </div>
