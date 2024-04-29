@@ -7,9 +7,7 @@ export default function Header() {
     <header className='flex justify-between items-center w-full mt-5 border-b-2 pb-7 sm:px-4 px-2'>
       <Link href='/' className='flex space-x-3 items-center'>
         <Keyboard size={42} />
-        <h1 className='sm:text-3xl hover:underline text-2xl font-bold ml-2 tracking-tight leading-tight'>
-          RewritePal.
-        </h1>
+        <h1 className='sm:text-3xl hover:underline text-2xl font-bold ml-2 tracking-tight leading-tight'>RewritePal</h1>
       </Link>
       <div className='flex gap-3'>
         <Link
