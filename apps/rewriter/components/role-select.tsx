@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Input } from './ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 
 const rolesList: { role: string; emoji: string }[] = [
@@ -26,13 +27,23 @@ const rolesList: { role: string; emoji: string }[] = [
   { role: 'Writer', emoji: '✍️' },
   { role: 'Other', emoji: '' },
 ]
+
 export default function RoleSelect() {
   const [role, setRole] = useState<string | undefined>(undefined)
+  const [customRole, setCustomRole] = useState<string>('')
+  const [showCustomRoleInput, setShowCustomRoleInput] = useState<boolean>(false)
 
   useEffect(() => {
     const savedRole = localStorage.getItem('selectedRole')
     if (savedRole) {
-      setRole(savedRole)
+      const roleExists = rolesList.some((roleItem) => roleItem.role === savedRole)
+      if (roleExists) {
+        setRole(savedRole)
+      } else {
+        setRole('Other')
+        setCustomRole(savedRole)
+        setShowCustomRoleInput(true)
+      }
     } else {
       setRole('Standard')
     }
@@ -41,20 +52,52 @@ export default function RoleSelect() {
   useEffect(() => {
     if (role === undefined) return
     localStorage.setItem('selectedRole', role)
+    if (role === 'Other') {
+      setShowCustomRoleInput(true)
+    } else {
+      setShowCustomRoleInput(false)
+    }
   }, [role])
 
+  const handleRoleChange = (newRole: string) => {
+    setRole(newRole)
+    if (newRole === 'Other') {
+      setShowCustomRoleInput(true)
+    } else {
+      setShowCustomRoleInput(false)
+    }
+  }
+
+  const handleCustomRoleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value.slice(0, 20)
+    setCustomRole(inputValue)
+    localStorage.setItem('selectedRole', inputValue)
+  }
+
   return (
-    <Select onValueChange={setRole} value={role}>
-      <SelectTrigger className='w-[200px]'>
-        <SelectValue placeholder='Role' />
-      </SelectTrigger>
-      <SelectContent>
-        {rolesList.map((role) => (
-          <SelectItem key={role.role} value={role.role}>
-            {role.emoji} {role.role}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <div className='flex'>
+      <Select onValueChange={handleRoleChange} value={role}>
+        <SelectTrigger className='w-[200px]'>
+          <SelectValue placeholder='Role' />
+        </SelectTrigger>
+        <SelectContent>
+          {rolesList.map((role) => (
+            <SelectItem key={role.role} value={role.role}>
+              {role.emoji} {role.role}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      {showCustomRoleInput && (
+        <Input
+          type='text'
+          value={customRole}
+          onChange={handleCustomRoleInput}
+          placeholder='Enter custom role'
+          maxLength={20}
+          className='ml-4'
+        />
+      )}
+    </div>
   )
 }
