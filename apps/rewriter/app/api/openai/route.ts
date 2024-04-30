@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       },
       { role: 'user', content: sentence },
     ],
-    temperature: 0.7,
+    temperature: 0.6,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,

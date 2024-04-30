@@ -1,54 +1,33 @@
 # Project Roadmap
 
-1. Voice Tone Enhancements: Voice Tone 1.5 - Duo date: 26/01 DONE
-   **Launch Version 0.5**
-2. Technical Improvements: SSR Counter - Duo date: 02/02
-3. Community Engagement: Roadmap Page - Duo date: 09/02 DONE
-4. Community Engagement: Beta Testers Link and Group - Duo date: 16/02
-   **Launch Version 0.8**
-5. Authentication and Access: API Rate Limiting - Duo date: 23/02
-6. Set up domain and SEO - Duo date: 01/03 DONE
-   **Launch Version 1.0**
-
-- Community Engagement: Discord support group
-- Voice Tone Enhancements: Voice Tone 2.0 DONE
-- Voice Tone Enhancements: Voice Tone 3.0
-- Authentication and Access: Mail Login
-- Authentication and Access: Gmail Login
-- Features and Functionality: Blog
 - Features and Functionality: Onboarding / Marketing Tool - "Finding Your Voice"
-- Features and Functionality: Easter egg: funny voices - chuck norris, yoda, Gollum, Darth <exhales> Vader, Groot, Forrest Gump, Poirot, Samuel L jackson, Morgan freeman, Dwight from the office, Michel Scott, Captain Jack Sparrow, Gandalf
-- Technical Improvements: Monorepo
-- Platform Expansion: Desktop App
-- Platform Expansion: Internationalization
-- Gamification: Grammar Influence points
+- Funny Mode - chuck norris, yoda, Gollum, Darth <exhales> Vader, Groot, Forrest Gump, Poirot, Samuel L jackson, Morgan freeman, Dwight from the office, Michel Scott, Captain Jack Sparrow, Gandalf
 
-Next: become a beta tester link
-Next: add pricing page to check if people find value
-Next: add amplitude tracking and try to understand what is the type of text people input
+Sprint 1:
 
-https://chat.openai.com/c/95282c42-2d98-4542-8b00-84b86070a4f3
-Personas: Marketing, Copywriting, Social Media, Software Developer, Student / Academic, Creative Writing, Business
-Role: Software Developer, Student, Social Media
-Skin: Marketer, Developer, Academic, Writer, Social Media, Creative, Journalist, Technical, Blogger, Copywriter
+- Fix other input size for mobile
+- Header
+- Tones component
+- Dynamic tones
+- Desktop app waiting list
 
-Marketer
-Developer
-Academic
-Writer
-Social Media Manager
-Creative Professional
-Journalist
-Technical Writer
-Blogger
-Copywriter
-Business Professional
-Content Creator
-SEO Specialist
-Graphic Designer
-UX/UI Designer
-Sales Representative
-Project Manager
-Data Analyst
-Educator
-Entrepreneur
+Sprint 2:
+
+- Auth
+- API Rate Limiting
+
+Sprint 3:
+
+- The Editor
+
+Sprint 4:
+
+- Blog Process
+- Twitter process
+
+Sprint 5+:
+
+- Launch Planning: X, ph, appsumo, hackernews, hackernoon, reddit, instagram
+- Desktop App
+- Move shadcn to ui packages
+- Directory for Ai writing tools
