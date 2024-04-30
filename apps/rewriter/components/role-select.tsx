@@ -79,7 +79,7 @@ export default function RoleSelect() {
   return (
     <div className='flex flex-col md:flex-row'>
       <Select onValueChange={handleRoleChange} value={role}>
-        <SelectTrigger className='w-[200px]'>
+        <SelectTrigger className='w-[240]'>
           <SelectValue placeholder='Role' />
         </SelectTrigger>
         <SelectContent>
@@ -97,7 +97,7 @@ export default function RoleSelect() {
           onChange={handleCustomRoleInput}
           placeholder='Enter custom role'
           maxLength={20}
-          className='md:ml-4 mt-2 md:mt-0'
+          className='md:ml-4 mt-2 md:mt-0 w-[240]'
         />
       )}
     </div>
