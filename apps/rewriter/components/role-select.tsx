@@ -13,7 +13,7 @@ const rolesList: { role: string; emoji: string }[] = [
   { role: 'Creative Professional', emoji: '🎨' },
   { role: 'Data Analyst', emoji: '📊' },
   { role: 'Designer', emoji: '🎨' },
-  { role: 'Developer', emoji: '💻' },
+  { role: 'Software Developer', emoji: '💻' },
   { role: 'Educator', emoji: '📚' },
   { role: 'Entrepreneur', emoji: '💡' },
   { role: 'Graphic Designer', emoji: '🎨' },

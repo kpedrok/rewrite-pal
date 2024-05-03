@@ -3,6 +3,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
+import Footer from '../components/footer'
+import Header from '../components/header'
 import HotjarAnalytics from '../lib/HotjarAnalytics'
 import './globals.css'
 import { PHProvider } from './providers'
@@ -46,8 +48,11 @@ export default function RootLayout({
       <PHProvider>
         <body className={inter.className}>
           <PostHogPageView />
-
-          {children}
+          <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
+            <Header />
+            <main className='flex flex-col flex-1 '>{children}</main>
+            <Footer />
+          </div>
           <SpeedInsights />
         </body>
       </PHProvider>

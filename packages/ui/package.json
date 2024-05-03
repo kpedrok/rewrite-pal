@@ -8,7 +8,8 @@
     "./styles.css": "./dist/index.css",
     "./card": "./src/card.tsx",
     "./logo": "./src/logo.tsx",
-    "./github": "./src/github.tsx"
+    "./github": "./src/github.tsx",
+    "./navbar-button": "./src/navbar-button.tsx"
   },
   "license": "MIT",
   "scripts": {
