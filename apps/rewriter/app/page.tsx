@@ -99,7 +99,7 @@ export default function Home() {
       await postToApiViews()
     } catch (error) {
       console.error(error)
-      toast('An error occurred while editing your phrase', {
+      toast(`${error}`, {
         icon: '❌',
       })
     } finally {
@@ -136,7 +136,9 @@ export default function Home() {
       }),
     })
     if (!response.ok) {
-      throw new Error(response.statusText)
+      const errorData = await response.text()
+      const errorMessage = errorData || response.statusText
+      throw new Error(errorMessage)
     }
 
     const data = response.body
