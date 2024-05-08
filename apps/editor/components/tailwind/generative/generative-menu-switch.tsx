@@ -15,7 +15,7 @@ const GenerativeMenuSwitch = ({ children, open, onOpenChange }: GenerativeMenuSw
   const { editor } = useEditor()
 
   useEffect(() => {
-    if (!open) removeAIHighlight(editor)
+    if (editor && !open) removeAIHighlight(editor)
   }, [open])
   return (
     <EditorBubble
@@ -23,7 +23,7 @@ const GenerativeMenuSwitch = ({ children, open, onOpenChange }: GenerativeMenuSw
         placement: open ? 'bottom-start' : 'top',
         onHidden: () => {
           onOpenChange(false)
-          editor.chain().unsetHighlight().run()
+          editor!.chain().unsetHighlight().run()
         },
       }}
       className='flex w-fit max-w-[90vw] overflow-hidden rounded-md border border-muted bg-background shadow-xl'>

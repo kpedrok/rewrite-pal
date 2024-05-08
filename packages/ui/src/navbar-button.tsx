@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 export function NavbarButton({ children }: { children: ReactNode }, className?: string) {
   return (

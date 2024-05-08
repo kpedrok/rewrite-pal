@@ -77,7 +77,9 @@ export const LinkSelector = ({ open, onOpenChange }: LinkSelectorProps) => {
               className='flex h-8 items-center rounded-sm p-1 text-red-600 transition-all hover:bg-red-100 dark:hover:bg-red-800'
               onClick={() => {
                 editor.chain().focus().unsetLink().run()
-                inputRef.current.value = ''
+                if (inputRef.current) {
+                  inputRef.current.value = ''
+                }
               }}>
               <Trash className='h-4 w-4' />
             </Button>

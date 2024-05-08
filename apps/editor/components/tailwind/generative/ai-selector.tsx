@@ -71,23 +71,25 @@ export function AISelector({ onOpenChange }: AISelectorProps) {
               onValueChange={setInputValue}
               autoFocus
               placeholder={hasCompletion ? 'Tell AI what to do next' : 'Ask AI to edit or generate...'}
-              onFocus={() => addAIHighlight(editor)}
+              onFocus={() => (editor ? addAIHighlight(editor) : undefined)}
             />
             <Button
               size='icon'
               className='absolute right-2 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full bg-purple-500 hover:bg-purple-900'
               onClick={() => {
-                if (completion)
-                  return complete(completion, {
+                if (editor) {
+                  if (completion)
+                    return complete(completion, {
+                      body: { option: 'zap', command: inputValue },
+                    }).then(() => setInputValue(''))
+
+                  const slice = editor.state.selection.content()
+                  const text = editor.storage.markdown.serializer.serialize(slice.content)
+
+                  complete(text, {
                     body: { option: 'zap', command: inputValue },
                   }).then(() => setInputValue(''))
-
-                const slice = editor.state.selection.content()
-                const text = editor.storage.markdown.serializer.serialize(slice.content)
-
-                complete(text, {
-                  body: { option: 'zap', command: inputValue },
-                }).then(() => setInputValue(''))
+                }
               }}>
               <ArrowUp className='h-4 w-4' />
             </Button>
@@ -95,8 +97,10 @@ export function AISelector({ onOpenChange }: AISelectorProps) {
           {hasCompletion ? (
             <AICompletionCommands
               onDiscard={() => {
-                editor.chain().unsetHighlight().focus().run()
-                onOpenChange(false)
+                if (editor) {
+                  editor.chain().unsetHighlight().focus().run()
+                  onOpenChange(false)
+                }
               }}
               completion={completion}
             />
