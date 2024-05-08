@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/roadmap",
+      "destination": "https://roadmap.rewritepal.com/"
+    }
+  ]
+}
