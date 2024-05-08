@@ -1,6 +1,8 @@
 import '@/styles/globals.css'
 import '@/styles/prosemirror.css'
 
+import PostHogPageView from '@/lib/PostHogPageView'
+import { PHProvider } from '@/lib/providers'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
@@ -57,9 +59,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
-      </body>
+      <PHProvider>
+        <body className={inter.className}>
+          <PostHogPageView />
+
+          <Providers>{children}</Providers>
+        </body>
+      </PHProvider>
     </html>
   )
 }
