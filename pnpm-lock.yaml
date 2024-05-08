@@ -41,6 +41,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.0.2
         version: 1.0.2(@types/react@18.2.79)(react@18.2.0)
+      '@repo/headless':
+        specifier: workspace:^
+        version: link:../../packages/headless
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -92,9 +95,6 @@ importers:
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)
-      novel:
-        specifier: workspace:^
-        version: link:../../packages/headless
       openai:
         specifier: ^4.27.0
         version: 4.42.0
@@ -132,6 +132,9 @@ importers:
       '@biomejs/biome':
         specifier: ^1.7.2
         version: 1.7.3
+      '@repo/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
       '@types/node':
         specifier: 18.15.3
         version: 18.15.3
@@ -144,9 +147,6 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.3
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../packages/tsconfig
 
   apps/rewriter:
     dependencies:
@@ -456,9 +456,9 @@ importers:
       '@biomejs/biome':
         specifier: ^1.7.2
         version: 1.7.3
-      '@repo/typescript-config':
+      '@repo/tsconfig':
         specifier: workspace:*
-        version: link:../typescript-config
+        version: link:../tsconfig
       '@types/react':
         specifier: ^18.2.55
         version: 18.2.79

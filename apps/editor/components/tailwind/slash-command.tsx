@@ -1,3 +1,4 @@
+import { Command, createSuggestionItems, renderItems } from '@repo/headless/extensions'
 import {
   CheckSquare,
   Code,
@@ -10,7 +11,6 @@ import {
   Text,
   TextQuote,
 } from 'lucide-react'
-import { Command, createSuggestionItems, renderItems } from 'novel/extensions'
 import { uploadFn } from './image-upload'
 
 export const suggestionItems = createSuggestionItems([

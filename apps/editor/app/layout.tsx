@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import '@/styles/prosemirror.css'
 
 import type { Metadata, Viewport } from 'next'
+import { Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
 import Providers from './providers'
 
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   ],
   robots: 'index, follow',
 }
+const inter = Inter({ subsets: ['latin'] })
 
 // const title = 'Novel - Notion-style WYSIWYG editor with AI-powered autocompletions'
 // const description =
@@ -55,7 +57,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body>
+      <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>
     </html>
