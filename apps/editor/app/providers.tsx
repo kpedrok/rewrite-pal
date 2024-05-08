@@ -15,7 +15,7 @@ const ToasterProvider = () => {
 
 export default function Providers({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider attribute='class' disableTransitionOnChange defaultTheme='system'>
+    <ThemeProvider attribute='class' disableTransitionOnChange defaultTheme='light'>
       <ToasterProvider />
       <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
         <Header />
