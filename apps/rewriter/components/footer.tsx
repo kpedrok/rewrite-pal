@@ -32,7 +32,7 @@ export default function Footer() {
           <Envelope weight='bold' aria-hidden='true' className='h-6 w-6 fill-slate-500 group-hover:fill-slate-700' />
         </Link>
         <Link
-          href='https://twitter.com/CreatedByPe'
+          href='https://twitter.com/CreatedByPed'
           className='group'
           target='_blank'
           aria-label='Rewrite Pal on Twitter'>
