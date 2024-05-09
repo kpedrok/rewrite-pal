@@ -11,6 +11,12 @@ export default function Header() {
         <h1 className='sm:text-3xl hover:underline text-2xl font-bold ml-2 tracking-tight leading-tight'>RewritePal</h1>
       </Link>
       <div className='flex gap-3'>
+        <Link href='https://www.rewritepal.com/' className='hidden md:flex'>
+          <NavbarButton>Rewriter</NavbarButton>
+        </Link>
+        <Link href='https://editor.rewritepal.com/' className='hidden md:flex'>
+          <NavbarButton>Editor</NavbarButton>
+        </Link>
         <Link href='/blog' className='hidden md:flex'>
           <NavbarButton>Blog</NavbarButton>
         </Link>

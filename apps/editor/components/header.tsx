@@ -14,7 +14,7 @@ export default function Header() {
         <Link href='https://www.rewritepal.com/' className='hidden md:flex'>
           <NavbarButton>Rewriter</NavbarButton>
         </Link>
-        <Link href='https://www.rewritepal.com/editor' className='hidden md:flex'>
+        <Link href='https://editor.rewritepal.com/' className='hidden md:flex'>
           <NavbarButton>Editor</NavbarButton>
         </Link>
         <Link href='https://www.rewritepal.com/blog' className='hidden md:flex'>
