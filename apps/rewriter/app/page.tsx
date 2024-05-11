@@ -240,7 +240,7 @@ export default function Home() {
         <div className='flex mb-5 mt-6 items-center space-x-3'>
           <NumberThree weight='regular' size={30} color='#ffffff' alt='3 icon' className=' bg-black rounded-full p-1' />{' '}
           <p className='text-left font-medium'>
-            Role<span className='text-slate-500 font-normal hidden md:contents'> (optional) (beta)</span>:
+            Role<span className='text-slate-500 font-normal hidden md:contents'> (optional)</span>:
           </p>
           <RoleSelect />
         </div>
