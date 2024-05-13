@@ -7,6 +7,7 @@ import { Toaster, toast } from 'react-hot-toast'
 import LanguageSelect from '../components/language-select'
 import RoleSelect from '../components/role-select'
 import { ToggleGroup, ToggleGroupItem } from '../components/ui/toggle-group'
+import { StorageKey } from '../lib/storage'
 import { scrollToBottom } from '../lib/utils'
 
 const DEFAULT_VIEWS = '--'
@@ -25,7 +26,7 @@ export default function Home() {
   const [selectedVibes, setSelectedVibes] = useState<string[] | undefined>(undefined)
 
   useEffect(() => {
-    const storedVibes = localStorage.getItem('selectedVibes')
+    const storedVibes = localStorage.getItem(StorageKey.SELECTED_VIBES)
     if (storedVibes && storedVibes !== 'undefined' && storedVibes.length > 0) {
       const parsedVibes = JSON.parse(storedVibes)
       const sortedVibes = parsedVibes.sort()
@@ -34,29 +35,29 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('selectedVibes', JSON.stringify(selectedVibes))
+    localStorage.setItem(StorageKey.SELECTED_VIBES, JSON.stringify(selectedVibes))
   }, [selectedVibes])
 
-  const vibes: string[] = [
-    '😊 Casual',
-    '💼 Professional',
-    '📣 Direct',
+  const tones: { value: string; emoji: string }[] = [
+    { value: 'Casual', emoji: '😊' },
+    { value: 'Professional', emoji: '💼' },
+    { value: 'Direct', emoji: '📣' },
 
-    '👫 Friendly',
-    '🤝 Empathetic',
-    '🕊️ Diplomatic',
-    '🛠️ Constructive',
+    { value: 'Friendly', emoji: '👫' },
+    { value: 'Empathetic', emoji: '🤝' },
+    { value: 'Diplomatic', emoji: '🕊️' },
+    { value: 'Constructive', emoji: '🛠️' },
 
-    '💪 Confident',
-    '🎯 Assertive',
-    '🗣️ Persuasive',
-    '🌟 Inspirational',
+    { value: 'Confident', emoji: '💪' },
+    { value: 'Assertive', emoji: '🎯' },
+    { value: 'Persuasive', emoji: '🗣️' },
+    { value: 'Inspirational', emoji: '🌟' },
 
-    '📝 Detailed',
-    '🎓 Instructive',
+    { value: 'Detailed', emoji: '📝' },
+    { value: 'Instructive', emoji: '🎓' },
 
-    '🔍 Simplify it',
-    '📏 Shorten it',
+    { value: 'Simplify it', emoji: '🔍' },
+    { value: 'Shorten it', emoji: '📏' },
   ]
 
   useEffect(() => {
@@ -105,8 +106,8 @@ export default function Home() {
       setLoading(false)
       posthog.capture('Rewrite', {
         tone: selectedVibes,
-        language: localStorage.getItem('selectedLanguage'),
-        role: localStorage.getItem('selectedRole'),
+        language: localStorage.getItem(StorageKey.SELECTED_LANGUAGE),
+        role: localStorage.getItem(StorageKey.SELECTED_ROLE),
       })
     }
   }
@@ -129,8 +130,8 @@ export default function Home() {
       body: JSON.stringify({
         sentence,
         vibe: selectedVibes,
-        language: localStorage.getItem('selectedLanguage'),
-        role: localStorage.getItem('selectedRole'),
+        language: localStorage.getItem(StorageKey.SELECTED_LANGUAGE),
+        role: localStorage.getItem(StorageKey.SELECTED_ROLE),
       }),
     })
     if (!response.ok) {
@@ -230,9 +231,11 @@ export default function Home() {
           onValueChange={(value: SetStateAction<string[] | undefined>) => {
             if (value) setSelectedVibes(value)
           }}>
-          {vibes.map((vibe) => (
-            <ToggleGroupItem key={vibe} value={vibe} aria-label={`Toggle ${vibe}`}>
-              <div className='w-[120px]'>{vibe}</div>
+          {tones.map((tone) => (
+            <ToggleGroupItem key={tone.value} value={tone.value} aria-label={`Toggle ${tone.value}`}>
+              <div className='w-[120px]'>
+                {tone.emoji} {tone.value}
+              </div>
             </ToggleGroupItem>
           ))}
         </ToggleGroup>

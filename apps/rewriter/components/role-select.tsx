@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { StorageKey } from '../lib/storage'
 import { Input } from './ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 
@@ -36,7 +37,7 @@ export default function RoleSelect() {
   const [showCustomRoleInput, setShowCustomRoleInput] = useState<boolean>(false)
 
   useEffect(() => {
-    const savedRole = localStorage.getItem('selectedRole')
+    const savedRole = localStorage.getItem(StorageKey.SELECTED_ROLE)
     if (savedRole) {
       const roleExists = rolesList.some((roleItem) => roleItem.role === savedRole)
       if (roleExists) {
@@ -53,7 +54,7 @@ export default function RoleSelect() {
 
   useEffect(() => {
     if (role === undefined) return
-    localStorage.setItem('selectedRole', role)
+    localStorage.setItem(StorageKey.SELECTED_ROLE, role)
     if (role === 'Custom') {
       setShowCustomRoleInput(true)
     } else {
@@ -73,7 +74,7 @@ export default function RoleSelect() {
   const handleCustomRoleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.slice(0, 20)
     setCustomRole(inputValue)
-    localStorage.setItem('selectedRole', inputValue)
+    localStorage.setItem(StorageKey.SELECTED_ROLE, inputValue)
   }
 
   return (

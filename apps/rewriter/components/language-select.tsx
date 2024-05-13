@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { StorageKey } from '../lib/storage'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 
 type Language = {
@@ -32,7 +33,7 @@ export default function LanguageSelect() {
   const [language, setLanguage] = useState<string | undefined>(undefined)
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('selectedLanguage')
+    const savedLanguage = localStorage.getItem(StorageKey.SELECTED_LANGUAGE)
     if (savedLanguage) {
       setLanguage(savedLanguage)
     } else {
@@ -42,7 +43,7 @@ export default function LanguageSelect() {
 
   useEffect(() => {
     if (language === undefined) return
-    localStorage.setItem('selectedLanguage', language)
+    localStorage.setItem(StorageKey.SELECTED_LANGUAGE, language)
   }, [language])
 
   return (
