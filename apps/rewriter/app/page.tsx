@@ -1,5 +1,4 @@
 'use client'
-import { sendGAEvent } from '@next/third-parties/google'
 import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import posthog from 'posthog-js'
@@ -109,7 +108,6 @@ export default function Home() {
         language: localStorage.getItem('selectedLanguage'),
         role: localStorage.getItem('selectedRole'),
       })
-      sendGAEvent({ event: 'purchase' })
     }
   }
 
