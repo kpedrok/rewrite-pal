@@ -52,7 +52,7 @@ export default function LanguageSelect() {
       </SelectTrigger>
       <SelectContent>
         {topLanguages.map((language) => (
-          <SelectItem key={language.name} value={language.name}>
+          <SelectItem key={language.name} value={language.name} id={language.name} aria-label={language.name}>
             {language.emoji} {language.name}
           </SelectItem>
         ))}

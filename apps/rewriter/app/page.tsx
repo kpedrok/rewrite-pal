@@ -19,8 +19,8 @@ export default function Home() {
   const [isGPT, setIsGPT] = useState(true)
   const [views, setViews] = useState(DEFAULT_VIEWS)
   const [loading, setLoading] = useState(false)
-  const [bio, setBio] = useState('')
-  const [generatedBios, setGeneratedBios] = useState<String>('')
+  const [text, setText] = useState('')
+  const [generatedText, setGeneratedText] = useState<String>('')
   const resultRef = useRef<null | HTMLDivElement>(null)
 
   const [selectedVibes, setSelectedVibes] = useState<string[] | undefined>(undefined)
@@ -89,13 +89,13 @@ export default function Home() {
 
   const rewrite = async (e: any) => {
     e.preventDefault()
-    setGeneratedBios('')
+    setGeneratedText('')
     setLoading(true)
     setViews(views + 1)
 
     try {
       scrollToBottom()
-      await postToApiOpenai(bio)
+      await postToApiOpenai(text)
       await postToApiViews()
     } catch (error) {
       console.error(error)
@@ -151,7 +151,7 @@ export default function Home() {
         const data = event.data
         try {
           const text = JSON.parse(data).text ?? ''
-          setGeneratedBios((prev) => prev + text)
+          setGeneratedText((prev) => prev + text)
           scrollToResult()
         } catch (e) {
           console.error(e)
@@ -178,7 +178,7 @@ export default function Home() {
   }
 
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(generatedBios.toString())
+    navigator.clipboard.writeText(generatedText.toString())
     toast('Copied to clipboard', {
       icon: '✂️',
     })
@@ -206,8 +206,10 @@ export default function Home() {
           </p>
         </div>
         <textarea
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
+          id='textInput'
+          name='text'
+          value={text}
+          onChange={(e) => setText(e.target.value)}
           onKeyDown={handleKeyDown}
           ref={inputRef}
           rows={4}
@@ -254,6 +256,7 @@ export default function Home() {
         {!loading && (
           <button
             ref={buttonRef}
+            aria-label='Rewrite text'
             className='bg-black rounded-xl text-white font-medium px-6 py-4 sm:mt-10 mt-8 hover:bg-black/80 w-1/2'
             onClick={(e) => rewrite(e)}>
             Rewrite &rarr;
@@ -271,7 +274,7 @@ export default function Home() {
       <Toaster position='top-center' reverseOrder={false} toastOptions={{ duration: 2000 }} />
       <hr className='h-px bg-gray-700 border-1 dark:bg-gray-700' />
       <div className='space-mt-10 mt-5'>
-        {generatedBios && (
+        {generatedText && (
           <>
             <div>
               <h2 className='sm:text-xl text-3xl font-bold text-slate-900 mx-auto mb-4'>Rewritten phrase</h2>
@@ -280,8 +283,8 @@ export default function Home() {
               <div
                 className='bg-white rounded-xl shadow-2xl p-4 hover:bg-gray-100 transition cursor-copy border shadow-slate-300'
                 onClick={handleCopyClick}
-                key={generatedBios.toString()}>
-                <p className='mb-2'>{generatedBios.toString()}</p>
+                key={generatedText.toString()}>
+                <p className='mb-2'>{generatedText.toString()}</p>
                 <span ref={resultRef} className='text-gray-400'>
                   (click here to copy)
                 </span>

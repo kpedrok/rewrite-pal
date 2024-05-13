@@ -84,7 +84,7 @@ export default function RoleSelect() {
         </SelectTrigger>
         <SelectContent>
           {rolesList.map((role) => (
-            <SelectItem key={role.role} value={role.role}>
+            <SelectItem key={role.role} value={role.role} id={role.role} aria-label={role.role}>
               {role.emoji} {role.role}
             </SelectItem>
           ))}
