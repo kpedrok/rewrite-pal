@@ -27,7 +27,7 @@ const rolesList: { role: string; emoji: string }[] = [
   { role: 'Social Media Manager', emoji: '📱' },
   { role: 'Technical Writer', emoji: '📝' },
   { role: 'Writer', emoji: '✍️' },
-  { role: 'Other', emoji: '' },
+  { role: 'Custom', emoji: '' },
 ]
 
 export default function RoleSelect() {
@@ -42,7 +42,7 @@ export default function RoleSelect() {
       if (roleExists) {
         setRole(savedRole)
       } else {
-        setRole('Other')
+        setRole('Custom')
         setCustomRole(savedRole)
         setShowCustomRoleInput(true)
       }
@@ -54,7 +54,7 @@ export default function RoleSelect() {
   useEffect(() => {
     if (role === undefined) return
     localStorage.setItem('selectedRole', role)
-    if (role === 'Other') {
+    if (role === 'Custom') {
       setShowCustomRoleInput(true)
     } else {
       setShowCustomRoleInput(false)
@@ -63,7 +63,7 @@ export default function RoleSelect() {
 
   const handleRoleChange = (newRole: string) => {
     setRole(newRole)
-    if (newRole === 'Other') {
+    if (newRole === 'Custom') {
       setShowCustomRoleInput(true)
     } else {
       setShowCustomRoleInput(false)
