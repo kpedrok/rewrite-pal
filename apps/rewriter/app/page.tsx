@@ -207,6 +207,7 @@ export default function Home() {
         <textarea
           id='textInput'
           name='text'
+          spellCheck='true'
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={handleKeyDown}
