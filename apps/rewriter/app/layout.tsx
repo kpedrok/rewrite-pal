@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import Footer from '../components/footer'
 import Header from '../components/header'
-import HotjarAnalytics from '../lib/HotjarAnalytics'
 import './globals.css'
 import { PHProvider } from './providers'
 
@@ -57,7 +56,6 @@ export default function RootLayout({
         </body>
       </PHProvider>
       <GoogleAnalytics gaId='G-0M61BY9GR2' />
-      <HotjarAnalytics />
     </html>
   )
 }
