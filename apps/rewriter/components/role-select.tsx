@@ -52,18 +52,9 @@ export default function RoleSelect() {
     }
   }, [])
 
-  useEffect(() => {
-    if (role === undefined) return
-    localStorage.setItem(StorageKey.SELECTED_ROLE, role)
-    if (role === 'Custom') {
-      setShowCustomRoleInput(true)
-    } else {
-      setShowCustomRoleInput(false)
-    }
-  }, [role])
-
   const handleRoleChange = (newRole: string) => {
     setRole(newRole)
+    localStorage.setItem(StorageKey.SELECTED_ROLE, newRole)
     if (newRole === 'Custom') {
       setShowCustomRoleInput(true)
     } else {

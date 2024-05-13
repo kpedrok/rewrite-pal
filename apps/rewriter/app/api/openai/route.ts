@@ -16,8 +16,8 @@ export async function POST(req: Request) {
   } = (await req.json()) as {
     sentence?: string
     vibe?: string
-    language?: 'string'
-    role?: 'string'
+    language?: string
+    role?: string
   }
 
   if (!sentence) {
