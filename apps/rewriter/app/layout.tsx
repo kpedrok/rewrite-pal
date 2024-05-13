@@ -1,10 +1,11 @@
-import { GoogleAnalytics } from '@next/third-parties/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
+import { Head } from 'next/document'
 import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import Footer from '../components/footer'
 import Header from '../components/header'
+import GoogleAnalyticsDeprecated from '../lib/GoogleAnalytics'
 import './globals.css'
 import { PHProvider } from './providers'
 
@@ -44,6 +45,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <Head>
+        <link rel='preconnect' href='https://www.google-analytics.com' />
+      </Head>
+
       <PHProvider>
         <body className={inter.className}>
           <PostHogPageView />
@@ -55,7 +60,7 @@ export default function RootLayout({
           <SpeedInsights />
         </body>
       </PHProvider>
-      <GoogleAnalytics gaId='G-0M61BY9GR2' />
+      <GoogleAnalyticsDeprecated />
     </html>
   )
 }
