@@ -7,7 +7,8 @@ import { Toaster, toast } from 'react-hot-toast'
 import LanguageSelect from '../components/language-select'
 import RoleSelect from '../components/role-select'
 import { ToggleGroup, ToggleGroupItem } from '../components/ui/toggle-group'
-import { StorageKey } from '../lib/storage'
+import { StorageKey } from '../lib/StorageKey'
+import { TrackingEvents } from '../lib/TrackingEvents'
 import { scrollToBottom } from '../lib/utils'
 
 const DEFAULT_VIEWS = '--'
@@ -98,16 +99,22 @@ export default function Home() {
       await postToApiOpenai(text)
       await postToApiViews()
     } catch (error) {
+      console.log('🚀 ~ rewrite ~ error:', error)
       console.error(error)
       toast(`${error}`, {
         icon: '❌',
       })
+      posthog.capture(TrackingEvents.ERROR, {
+        message: `${error}`,
+      })
     } finally {
       setLoading(false)
-      posthog.capture('Rewrite', {
+      posthog.capture(TrackingEvents.REWRITE, {
         tone: selectedVibes,
         language: localStorage.getItem(StorageKey.SELECTED_LANGUAGE),
         role: localStorage.getItem(StorageKey.SELECTED_ROLE),
+        words: text?.split(' ')?.length,
+        $set: { role: localStorage.getItem(StorageKey.SELECTED_ROLE) },
       })
     }
   }
@@ -181,7 +188,7 @@ export default function Home() {
     toast('Copied to clipboard', {
       icon: '✂️',
     })
-    posthog.capture('Rewrite Copied')
+    posthog.capture(TrackingEvents.REWRITE_COPIED)
   }
 
   return (

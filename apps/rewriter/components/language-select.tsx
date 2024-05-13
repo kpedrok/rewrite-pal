@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { StorageKey } from '../lib/storage'
+import { StorageKey } from '../lib/StorageKey'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 
 type Language = {
