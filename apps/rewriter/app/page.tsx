@@ -1,9 +1,11 @@
 'use client'
 import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
+import Link from 'next/link'
 import posthog from 'posthog-js'
 import { SetStateAction, useEffect, useRef, useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
+import CoolButton from '../components/cool-button'
 import LanguageSelect from '../components/language-select'
 import RoleSelect from '../components/role-select'
 import { ToggleGroup, ToggleGroupItem } from '../components/ui/toggle-group'
@@ -302,6 +304,10 @@ export default function Home() {
           </>
         )}
       </div>
+      <div className=' mt-32'></div>
+      <Link href='https://editor.rewritepal.com/' target='_blank' className='mt-5 mb-2'>
+        <CoolButton>Check out our new AI Text Editor (beta)</CoolButton>
+      </Link>
     </div>
   )
 }
