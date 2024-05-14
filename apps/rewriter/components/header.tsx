@@ -11,16 +11,26 @@ export default function Header() {
         <h1 className='sm:text-3xl hover:underline text-2xl font-bold ml-2 tracking-tight leading-tight'>RewritePal</h1>
       </Link>
       <div className='flex gap-3'>
-        <NavItem href='/'>Rewriter</NavItem>
+        <NavItem href='/'>Paraphraser</NavItem>
+        <NavItem target='_blank' href='https://editor.rewritepal.com'>
+          Text Editor
+        </NavItem>
+      </div>
+      <div className='flex gap-3'>
         <NavItem href='/blog'>Blog</NavItem>
-        <Link
+
+        <NavItem target='_blank' href='https://roadmap.rewritepal.com'>
+          Roadmap
+        </NavItem>
+
+        {/* <Link
           className='flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-600 shadow-md transition-colors hover:bg-gray-100'
           href='https://roadmap.rewritepal.com'
           target='_blank'
           rel='noopener noreferrer'>
           <span className='text-lg'>💡</span>
           <p>Roadmap</p>
-        </Link>
+        </Link> */}
       </div>
     </header>
   )

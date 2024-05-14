@@ -1,4 +1,4 @@
-import { Envelope, GithubLogo, TwitterLogo } from '@phosphor-icons/react/dist/ssr'
+import { Envelope, TwitterLogo } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
 
 export default function Footer() {
@@ -21,13 +21,13 @@ export default function Footer() {
         </a> */}
       </div>
       <div className='flex space-x-4 pb-4 sm:pb-0'>
-        <Link
+        {/* <Link
           href='https://github.com/kpedrok/rewrite-pal'
           className='group'
           target='_blank'
           aria-label='Rewrite Pal on GitHub'>
           <GithubLogo weight='bold' aria-hidden='true' className='h-6 w-6 fill-slate-500 group-hover:fill-slate-700' />
-        </Link>
+        </Link> */}
         <Link href='mailto:hello@rewritepal.com' target='_blank' className='group' aria-label='Rewrite Pal Email'>
           <Envelope weight='bold' aria-hidden='true' className='h-6 w-6 fill-slate-500 group-hover:fill-slate-700' />
         </Link>
