@@ -1,3 +1,4 @@
+'use client'
 import { RewritePalLogo } from '@repo/ui/logo'
 
 import { List } from '@phosphor-icons/react/dist/ssr'
