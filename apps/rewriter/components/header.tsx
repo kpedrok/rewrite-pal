@@ -1,7 +1,7 @@
 'use client'
-import { RewritePalLogo } from '@repo/ui/logo'
 
 import { List } from '@phosphor-icons/react/dist/ssr'
+import { RewritePalLogo } from '@repo/ui/logo'
 import Link from 'next/link'
 import { NavItem } from './nav-item'
 import { Button } from './ui/button'
