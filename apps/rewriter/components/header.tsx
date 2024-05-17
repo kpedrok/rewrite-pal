@@ -28,10 +28,8 @@ export default function Header() {
         </SheetTrigger>
         <SheetContent side='right'>
           <div className='grid gap-4 p-4'>
-            <NavItem className='flex md:hidden' href='/'>
-              Paraphraser
-            </NavItem>
-            <NavItem className='hidden' target='_blank' href='https://editor.rewritepal.com'>
+            <NavItem href='/'>Paraphraser</NavItem>
+            <NavItem target='_blank' href='https://editor.rewritepal.com'>
               AI Text Editor
             </NavItem>
             <NavItem href='/blog'>Blog</NavItem>
