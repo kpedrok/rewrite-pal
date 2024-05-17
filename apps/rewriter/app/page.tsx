@@ -101,11 +101,8 @@ export default function Home() {
       await postToApiOpenai(text)
       await postToApiViews()
     } catch (error) {
-      console.log('🚀 ~ rewrite ~ error:', error)
       console.error(error)
-      toast(`${error}`, {
-        icon: '❌',
-      })
+      toast.error(`${error}`)
       posthog.capture(TrackingEvents.ERROR, {
         message: `${error}`,
       })

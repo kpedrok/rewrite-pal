@@ -63,7 +63,7 @@ export default function RoleSelect() {
   }
 
   const handleCustomRoleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value.slice(0, 20)
+    const inputValue = event.target.value.slice(0, 30)
     setCustomRole(inputValue)
     localStorage.setItem(StorageKey.SELECTED_ROLE, inputValue)
   }
@@ -88,7 +88,7 @@ export default function RoleSelect() {
           value={customRole}
           onChange={handleCustomRoleInput}
           placeholder='Enter custom role'
-          maxLength={20}
+          maxLength={30}
           className='md:ml-4 mt-2 md:mt-0 w-[240]'
         />
       )}

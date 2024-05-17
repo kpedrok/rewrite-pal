@@ -13,7 +13,7 @@ export default function Header() {
       <div className='flex gap-3'>
         <NavItem href='/'>Paraphraser</NavItem>
         <NavItem target='_blank' href='https://editor.rewritepal.com'>
-          Text Editor
+          AI Text Editor
         </NavItem>
       </div>
       <div className='flex gap-3'>
