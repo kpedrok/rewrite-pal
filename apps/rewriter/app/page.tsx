@@ -199,7 +199,7 @@ export default function Home() {
         Instantly generate clear, compelling writing while maintaining your unique voice.
       </h3>
       <p className='border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out  mt-7 '>
-        <b>{views.toLocaleString()}</b> phrases improved so far
+        <b>{views?.toLocaleString()}</b> phrases improved so far
       </p>
       {/* <div className='mt-7'>{<Toggle isGPT={isGPT} setIsGPT={setIsGPT} />}</div> */}
       <div className='max-w-4xl w-full'>
