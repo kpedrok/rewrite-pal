@@ -1,7 +1,8 @@
 import { Ratelimit } from '@upstash/ratelimit'
-import { kv } from '@vercel/kv'
+import { Redis } from '@upstash/redis'
 import { OpenAIStream, OpenAIStreamPayload } from './OpenAIStream'
 export const runtime = 'edge'
+const redis = Redis.fromEnv()
 
 if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
   throw new Error('Missing env var from OpenAI')
@@ -27,7 +28,7 @@ export async function POST(req: Request) {
   if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
     const ip = req.headers.get('x-forwarded-for')
     const ratelimit = new Ratelimit({
-      redis: kv,
+      redis: redis,
       limiter: Ratelimit.slidingWindow(300, '1 d'),
     })
 
