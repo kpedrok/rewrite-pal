@@ -33,7 +33,6 @@ export async function POST(req: Request) {
     })
 
     const { success, limit, reset, remaining } = await ratelimit.limit(`novel_ratelimit_${ip}`)
-
     if (!success) {
       return new Response('You have reached your request limit for the day.', {
         status: 429,
