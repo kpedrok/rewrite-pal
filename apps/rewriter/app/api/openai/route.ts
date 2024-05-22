@@ -8,7 +8,7 @@ const redis = Redis.fromEnv()
 if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
   throw new Error('Missing env var from OpenAI')
 }
-const ALLOWED_DOMAIN = 'rewritepal.com' // Domain you want to allow
+const ALLOWED_DOMAIN = 'www.rewritepal.com' // Domain you want to allow
 
 export async function POST(req: NextRequest) {
   const {
@@ -23,18 +23,18 @@ export async function POST(req: NextRequest) {
     role?: string
   }
 
-  const origin = req.nextUrl.origin
-  console.log('🚀 ~ POST ~ origin:', origin)
+  const origin = JSON.stringify(req)
+  console.log('🚀 ~ POST ~ JSON:', JSON)
 
   // Extract the domain from the origin
-  const domain = new URL(origin).hostname
-  console.log('🚀 ~ POST ~ domain:', domain)
-  console.log('🚀 ~ POST ~ ALLOWED_DOMAIN:', ALLOWED_DOMAIN)
+  // const domain = new URL(origin).hostname
+  // console.log('🚀 ~ POST ~ domain:', domain)
+  // console.log('🚀 ~ POST ~ ALLOWED_DOMAIN:', ALLOWED_DOMAIN)
 
-  // Check if the request's domain is in the list of allowed domains
-  if (domain !== ALLOWED_DOMAIN) {
-    console.log('Unauthorized: Domain not allowed', { status: 403 })
-  }
+  // // Check if the request's domain is in the list of allowed domains
+  // if (domain !== ALLOWED_DOMAIN) {
+  //   console.log('Unauthorized: Domain not allowed', { status: 403 })
+  // }
 
   if (!sentence) {
     return new Response('No text in the request', { status: 400 })
