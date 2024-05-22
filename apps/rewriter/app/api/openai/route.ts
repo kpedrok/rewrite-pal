@@ -8,6 +8,7 @@ const redis = Redis.fromEnv()
 if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
   throw new Error('Missing env var from OpenAI')
 }
+const ALLOWED_DOMAIN = 'rewritepal.com' // Domain you want to allow
 
 export async function POST(req: NextRequest) {
   const {
@@ -24,9 +25,16 @@ export async function POST(req: NextRequest) {
 
   const origin = req.nextUrl.origin
   console.log('🚀 ~ POST ~ origin:', origin)
+
   // Extract the domain from the origin
   const domain = new URL(origin).hostname
   console.log('🚀 ~ POST ~ domain:', domain)
+  console.log('🚀 ~ POST ~ ALLOWED_DOMAIN:', ALLOWED_DOMAIN)
+
+  // Check if the request's domain is in the list of allowed domains
+  if (domain !== ALLOWED_DOMAIN) {
+    console.log('Unauthorized: Domain not allowed', { status: 403 })
+  }
 
   if (!sentence) {
     return new Response('No text in the request', { status: 400 })
@@ -36,7 +44,7 @@ export async function POST(req: NextRequest) {
     const ip = req.headers.get('x-forwarded-for')
     const ratelimit = new Ratelimit({
       redis: redis,
-      limiter: Ratelimit.slidingWindow(200, '1 d'),
+      limiter: Ratelimit.slidingWindow(300, '1 d'),
     })
 
     const { success, limit, reset, remaining } = await ratelimit.limit(`novel_ratelimit_${ip}`)
