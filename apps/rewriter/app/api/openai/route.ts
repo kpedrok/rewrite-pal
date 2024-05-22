@@ -1,6 +1,5 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
-import { NextRequest, NextResponse } from 'next/server'
 import { OpenAIStream, OpenAIStreamPayload } from './OpenAIStream'
 export const runtime = 'edge'
 const redis = Redis.fromEnv()
@@ -8,9 +7,8 @@ const redis = Redis.fromEnv()
 if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
   throw new Error('Missing env var from OpenAI')
 }
-const ALLOWED_DOMAIN = 'rewritepal.com' // Domain you want to allow
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const {
     sentence,
     vibe,
@@ -21,16 +19,6 @@ export async function POST(req: NextRequest) {
     vibe?: string
     language?: string
     role?: string
-  }
-
-  const origin = req.nextUrl.origin
-
-  // Extract the domain from the origin
-  const domain = new URL(origin).hostname
-
-  // Check if the request's domain is in the list of allowed domains
-  if (domain !== ALLOWED_DOMAIN) {
-    return new NextResponse('Unauthorized: Domain not allowed', { status: 403 })
   }
 
   if (!sentence) {
