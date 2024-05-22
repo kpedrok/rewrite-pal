@@ -1,5 +1,6 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
+import { NextRequest } from 'next/server'
 import { OpenAIStream, OpenAIStreamPayload } from './OpenAIStream'
 export const runtime = 'edge'
 const redis = Redis.fromEnv()
@@ -8,7 +9,7 @@ if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
   throw new Error('Missing env var from OpenAI')
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const {
     sentence,
     vibe,
@@ -21,6 +22,12 @@ export async function POST(req: Request) {
     role?: string
   }
 
+  const origin = req.nextUrl.origin
+  console.log('🚀 ~ POST ~ origin:', origin)
+  // Extract the domain from the origin
+  const domain = new URL(origin).hostname
+  console.log('🚀 ~ POST ~ domain:', domain)
+
   if (!sentence) {
     return new Response('No text in the request', { status: 400 })
   }
@@ -29,7 +36,7 @@ export async function POST(req: Request) {
     const ip = req.headers.get('x-forwarded-for')
     const ratelimit = new Ratelimit({
       redis: redis,
-      limiter: Ratelimit.slidingWindow(300, '1 d'),
+      limiter: Ratelimit.slidingWindow(200, '1 d'),
     })
 
     const { success, limit, reset, remaining } = await ratelimit.limit(`novel_ratelimit_${ip}`)
