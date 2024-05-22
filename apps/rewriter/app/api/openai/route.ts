@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
   }
 
   const origin = JSON.stringify(req)
-  console.log('🚀 ~ POST ~ JSON:', JSON)
+  console.log('🚀 ~ POST ~ JSON:', origin)
 
   // Extract the domain from the origin
   // const domain = new URL(origin).hostname
