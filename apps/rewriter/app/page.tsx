@@ -276,9 +276,7 @@ export default function Home() {
         )}
 
         {loading && (
-          <Button
-            className='bg-black rounded-xl text-white font-medium px-6 py-4 sm:mt-10 mt-8 hover:bg-black/80 w-1/2'
-            disabled>
+          <Button size='xl' variant='xl' className='sm:mt-10 mt-8' disabled>
             Loading...
           </Button>
         )}
@@ -305,7 +303,7 @@ export default function Home() {
           </>
         )}
       </div>
-      <div className=' mt-32'></div>
+      <div className='mt-32'></div>
       <Link href='https://editor.rewritepal.com/' target='_blank' className='mt-5 mb-2'>
         <CoolButton>Check out our new AI Text Editor (beta)</CoolButton>
       </Link>
