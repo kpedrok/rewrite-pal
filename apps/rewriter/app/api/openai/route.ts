@@ -9,7 +9,7 @@ const redis = Redis.fromEnv()
 
 const client = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY!, { host: 'https://us.i.posthog.com' })
 
-if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
+if (!process.env.OPENAI_API_KEY) {
   throw new Error('Missing env var from OpenAI')
 }
 
