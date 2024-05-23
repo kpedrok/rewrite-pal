@@ -6,6 +6,6 @@
       "@ui/*": ["./src/*"]
     }
   },
-  "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
