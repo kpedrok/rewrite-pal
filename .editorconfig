@@ -1,27 +1,16 @@
 # root = true
 
 # [*]
-# # # indent_style = space
-# # # indent_size = 2
-# # # tab_width = 2
-# # # end_of_line = lf
-# # # charset = utf-8
-# # # trim_trailing_whitespace = true
-# # # insert_final_newline = true
-# semi= false,
-# single_quote= true
-# print_width= 120
-# jsx_single_quote= true
-# bracket_same_line= true
+# indent_style = space
+# indent_size = 2
+# tab_width = 2
+# end_of_line = lf
+# charset = utf-8
+# trim_trailing_whitespace = true
+# insert_final_newline = true
 
-# # [*.ts]
-# # quote_type = single
-# # semi = false
+# [*.js]
+# quote_type = single
 
-# # # [*.js]
-# # # quote_type = single
-
-# # # [*.md]
-# # # trim_trailing_whitespace = false
-
-
+# [*.ts]
+# quote_type = single
