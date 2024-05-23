@@ -1,7 +1,7 @@
+import { Input } from '@repo/ui/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/ui/select'
 import { useEffect, useState } from 'react'
 import { StorageKey } from '../lib/StorageKey'
-import { Input } from './ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 
 const rolesList: { role: string; emoji: string }[] = [
   { role: 'Standard', emoji: '' },
