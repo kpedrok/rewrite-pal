@@ -1,6 +1,6 @@
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/ui/select'
 import { useEffect, useState } from 'react'
 import { StorageKey } from '../lib/StorageKey'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 
 type Language = {
   name: string

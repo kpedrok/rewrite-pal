@@ -1,5 +1,7 @@
 'use client'
 import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
+import { Button } from '@repo/ui/components/ui/button'
+import { ToggleGroup, ToggleGroupItem } from '@repo/ui/components/ui/toggle-group'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import Link from 'next/link'
 import posthog from 'posthog-js'
@@ -8,7 +10,6 @@ import { Toaster, toast } from 'react-hot-toast'
 import CoolButton from '../components/cool-button'
 import LanguageSelect from '../components/language-select'
 import RoleSelect from '../components/role-select'
-import { ToggleGroup, ToggleGroupItem } from '../components/ui/toggle-group'
 import { StorageKey } from '../lib/StorageKey'
 import { TrackingEvents } from '../lib/TrackingEvents'
 import { scrollToBottom } from '../lib/utils'
@@ -263,21 +264,21 @@ export default function Home() {
         </div>
 
         {!loading && (
-          <button
+          <Button
             ref={buttonRef}
             aria-label='Rewrite text'
-            className='bg-black rounded-xl text-white font-medium px-6 py-4 sm:mt-10 mt-8 hover:bg-black/80 w-1/2'
+            size='xl'
+            variant='xl'
+            className='sm:mt-10 mt-8'
             onClick={(e) => rewrite(e)}>
             Rewrite &rarr;
-          </button>
+          </Button>
         )}
 
         {loading && (
-          <button
-            className='bg-black rounded-xl text-white font-medium px-6 py-4 sm:mt-10 mt-8 hover:bg-black/80 w-1/2'
-            disabled>
+          <Button size='xl' variant='xl' className='sm:mt-10 mt-8' disabled>
             Loading...
-          </button>
+          </Button>
         )}
       </div>
       <Toaster position='top-center' reverseOrder={false} toastOptions={{ duration: 2000 }} />
@@ -302,7 +303,7 @@ export default function Home() {
           </>
         )}
       </div>
-      <div className=' mt-32'></div>
+      <div className='mt-32'></div>
       <Link href='https://editor.rewritepal.com/' target='_blank' className='mt-5 mb-2'>
         <CoolButton>Check out our new AI Text Editor (beta)</CoolButton>
       </Link>

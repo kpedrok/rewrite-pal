@@ -1,8 +1,8 @@
 import { GeistSans } from 'geist/font/sans'
-import { ReactNode } from 'react'
+import React from 'react'
 import './globals.css'
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en' className={GeistSans.variable}>
       <body>{children}</body>
