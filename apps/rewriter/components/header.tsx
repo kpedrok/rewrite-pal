@@ -2,9 +2,9 @@
 
 import { List } from '@phosphor-icons/react/dist/ssr'
 import { RewritePalLogo } from '@repo/ui/components/rewritepal/logo'
+import { Button } from '@repo/ui/components/ui/button'
 import Link from 'next/link'
 import { NavItem } from './nav-item'
-import { Button } from './ui/button'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
 
 export default function Header() {

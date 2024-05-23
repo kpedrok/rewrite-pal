@@ -1,5 +1,6 @@
 'use client'
 import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
+import { Button } from '@repo/ui/components/ui/button'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import Link from 'next/link'
 import posthog from 'posthog-js'
@@ -263,21 +264,23 @@ export default function Home() {
         </div>
 
         {!loading && (
-          <button
+          <Button
             ref={buttonRef}
             aria-label='Rewrite text'
-            className='bg-black rounded-xl text-white font-medium px-6 py-4 sm:mt-10 mt-8 hover:bg-black/80 w-1/2'
+            size='xl'
+            variant='xl'
+            className='sm:mt-10 mt-8'
             onClick={(e) => rewrite(e)}>
             Rewrite &rarr;
-          </button>
+          </Button>
         )}
 
         {loading && (
-          <button
+          <Button
             className='bg-black rounded-xl text-white font-medium px-6 py-4 sm:mt-10 mt-8 hover:bg-black/80 w-1/2'
             disabled>
             Loading...
-          </button>
+          </Button>
         )}
       </div>
       <Toaster position='top-center' reverseOrder={false} toastOptions={{ duration: 2000 }} />
