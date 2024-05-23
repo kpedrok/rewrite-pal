@@ -48,6 +48,8 @@ To develop all apps and packages, run the following command:
 ```
 cd my-turborepo
 pnpm dev
+pnpm update
+
 ```
 
 ### Remote Caching
