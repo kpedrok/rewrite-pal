@@ -1,4 +1,4 @@
-import { RewritePalLogo } from '@repo/ui/logo'
+import { RewritePalLogo } from '@repo/ui/components/rewritepal/logo'
 import { kv } from '@vercel/kv'
 import { Metadata } from 'next'
 import Link from 'next/link'
