@@ -3,9 +3,9 @@
 import { List } from '@phosphor-icons/react/dist/ssr'
 import { RewritePalLogo } from '@repo/ui/components/rewritepal/logo'
 import { Button } from '@repo/ui/components/ui/button'
+import { Sheet, SheetContent, SheetTrigger } from '@repo/ui/components/ui/sheet'
 import Link from 'next/link'
 import { NavItem } from './nav-item'
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
 
 export default function Header() {
   return (
