@@ -1,6 +1,5 @@
 'use client'
 import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
-import { Button } from '@repo/ui/components/ui/button'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import Link from 'next/link'
 import posthog from 'posthog-js'
@@ -202,7 +201,6 @@ export default function Home() {
       <p className='border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out  mt-7 '>
         <b>{views?.toLocaleString()}</b> phrases improved so far
       </p>
-      <Button>Click me</Button>
 
       {/* <div className='mt-7'>{<Toggle isGPT={isGPT} setIsGPT={setIsGPT} />}</div> */}
       <div className='max-w-4xl w-full'>
