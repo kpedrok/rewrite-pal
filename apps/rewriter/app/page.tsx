@@ -303,10 +303,6 @@ export default function Home() {
           </>
         )}
       </div>
-      <div className='mt-32'></div>
-      <Link href='https://editor.rewritepal.com/' target='_blank' className='mt-5 mb-2'>
-        <CoolButton>Check out our new AI Text Editor (beta)</CoolButton>
-      </Link>
     </div>
   )
 }
