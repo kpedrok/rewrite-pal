@@ -15,7 +15,7 @@ export function NavItem({ href, className = '', children, ...props }: NavItemPro
   const linkClasses = cn(
     className,
     'flex items-center justify-center space-x-2 px-4 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-100 rounded-md',
-    { 'text-gray-900': pathname === href }
+    { 'text-gray-900 font-semibold': pathname === href }
   )
 
   return (

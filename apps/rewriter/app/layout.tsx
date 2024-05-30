@@ -49,7 +49,7 @@ export default function RootLayout({
           <PostHogPageView />
           <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
             <Header />
-            <main className='flex flex-col flex-1 '>{children}</main>
+            <main className='flex flex-col flex-1 w-full'>{children}</main>
             <Toaster position='top-center' reverseOrder={false} toastOptions={{ duration: 2000 }} />
             <Footer />
           </div>
