@@ -38,6 +38,8 @@ export default function Footer() {
           aria-label='Rewrite Pal on Twitter'>
           <TwitterLogo weight='bold' aria-hidden='true' className='h-6 w-6 fill-slate-500 group-hover:fill-slate-700' />
         </Link>
+        <p className='text-slate-500'>© {new Date().getFullYear()} RewritePal, Inc.</p>
+
         {/* <Link href='mailto:hello@rewritepal.com' target='_blank' className='group' aria-label='Rewrite AI Email'>
           hello@rewritepal.com
         </Link> */}

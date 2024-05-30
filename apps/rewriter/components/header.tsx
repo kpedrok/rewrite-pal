@@ -33,12 +33,12 @@ export default function Header() {
         <SheetContent side='right'>
           <div className='grid gap-4 p-4'>
             <NavItem href='/'>Paraphraser</NavItem>
-            <NavItem target='_blank' href='https://editor.rewritepal.com'>
-              AI Text Editor (beta)
-            </NavItem>
 
             <NavItem href='/download?product=desktop'>Desktop App</NavItem>
             <NavItem href='/download?product=chrome'>Chrome Extension</NavItem>
+            <NavItem target='_blank' href='https://editor.rewritepal.com'>
+              AI Text Editor (beta)
+            </NavItem>
             <NavItem href='/blog'>Blog</NavItem>
 
             <NavItem target='_blank' href='https://roadmap.rewritepal.com'>
@@ -46,7 +46,7 @@ export default function Header() {
             </NavItem>
 
             <NavItem href='mailto:hello@rewritepal.com' target='_blank'>
-              Contact
+              hello@rewritepal.com
             </NavItem>
           </div>
         </SheetContent>
