@@ -18,7 +18,7 @@ export default function Header() {
         <NavItem href='/'>Paraphraser</NavItem>
 
         <NavItem href='/download?product=desktop'>Desktop App</NavItem>
-        <NavItem href='/download?product=chrome'>Chrome Extension</NavItem>
+        <NavItem href='/download?product=browser'>Browser Extension</NavItem>
         <NavItem target='_blank' href='https://editor.rewritepal.com'>
           AI Text Editor (beta)
         </NavItem>
@@ -35,7 +35,7 @@ export default function Header() {
             <NavItem href='/'>Paraphraser</NavItem>
 
             <NavItem href='/download?product=desktop'>Desktop App</NavItem>
-            <NavItem href='/download?product=chrome'>Chrome Extension</NavItem>
+            <NavItem href='/download?product=browser'>Browser Extension</NavItem>
             <NavItem target='_blank' href='https://editor.rewritepal.com'>
               AI Text Editor (beta)
             </NavItem>

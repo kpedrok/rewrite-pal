@@ -12,7 +12,7 @@ export default function DownloadPage() {
     if (product === 'desktop') {
       product = 'Desktop App'
     } else {
-      product = 'Chrome Extension'
+      product = 'Browser Extension'
     }
     return product
   }
