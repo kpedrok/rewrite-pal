@@ -16,8 +16,11 @@ export default function Header() {
       </Link>
       <div className='hidden gap-3 md:flex'>
         <NavItem href='/'>Paraphraser</NavItem>
+
+        <NavItem href='/download?product=desktop'>Desktop App</NavItem>
+        <NavItem href='/download?product=chrome'>Chrome Extension</NavItem>
         <NavItem target='_blank' href='https://editor.rewritepal.com'>
-          AI Text Editor
+          AI Text Editor (beta)
         </NavItem>
       </div>
       <Sheet>
@@ -31,8 +34,11 @@ export default function Header() {
           <div className='grid gap-4 p-4'>
             <NavItem href='/'>Paraphraser</NavItem>
             <NavItem target='_blank' href='https://editor.rewritepal.com'>
-              AI Text Editor
+              AI Text Editor (beta)
             </NavItem>
+
+            <NavItem href='/download?product=desktop'>Desktop App</NavItem>
+            <NavItem href='/download?product=chrome'>Chrome Extension</NavItem>
             <NavItem href='/blog'>Blog</NavItem>
 
             <NavItem target='_blank' href='https://roadmap.rewritepal.com'>

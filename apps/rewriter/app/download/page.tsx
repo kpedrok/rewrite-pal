@@ -1,12 +1,21 @@
+'use client'
 import { Button } from '@repo/ui/components/ui/button'
 import { Input } from '@repo/ui/components/ui/input'
+import { useSearchParams } from 'next/navigation'
 import { saveEmail } from '../actions'
 
 export default function DownloadPage() {
+  const searchParams = useSearchParams()
+  let product = searchParams.get('product')
+  if (product === 'desktop') {
+    product = 'Desktop App'
+  } else {
+    product = 'Chrome Extension'
+  }
   return (
     <div className='flex flex-col items-center justify-center min-h-screen py-2'>
       <main className='flex flex-col items-center flex-1 px-4 sm:px-20 text-center mt-10 gap-5'>
-        <h1 className='text-5xl font-bold mb-2'>Desktop App</h1>
+        <h1 className='text-5xl font-bold mb-2'>{product}</h1>
         <h2 className='text-md sm:text-xl mx-4'>
           Leave your email address here to be notified when our desktop version is released.
         </h2>
