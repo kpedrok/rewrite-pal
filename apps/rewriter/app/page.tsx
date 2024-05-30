@@ -3,11 +3,9 @@ import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/r
 import { Button } from '@repo/ui/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from '@repo/ui/components/ui/toggle-group'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
-import Link from 'next/link'
 import posthog from 'posthog-js'
 import { SetStateAction, useEffect, useRef, useState } from 'react'
-import { Toaster, toast } from 'react-hot-toast'
-import CoolButton from '../components/cool-button'
+import { toast } from 'react-hot-toast'
 import LanguageSelect from '../components/language-select'
 import RoleSelect from '../components/role-select'
 import { StorageKey } from '../lib/StorageKey'
@@ -281,7 +279,6 @@ export default function Home() {
           </Button>
         )}
       </div>
-      <Toaster position='top-center' reverseOrder={false} toastOptions={{ duration: 2000 }} />
       <hr className='h-px bg-gray-700 border-1 dark:bg-gray-700' />
       <div className='space-mt-10 mt-5'>
         {generatedText && (

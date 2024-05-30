@@ -2,6 +2,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
+import { Toaster } from 'react-hot-toast'
 import Footer from '../components/footer'
 import Header from '../components/header'
 import './globals.css'
@@ -49,6 +50,7 @@ export default function RootLayout({
           <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
             <Header />
             <main className='flex flex-col flex-1 '>{children}</main>
+            <Toaster position='top-center' reverseOrder={false} toastOptions={{ duration: 2000 }} />
             <Footer />
           </div>
           <SpeedInsights />
