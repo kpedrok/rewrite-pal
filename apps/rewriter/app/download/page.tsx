@@ -26,9 +26,7 @@ export default function DownloadPage() {
           </Suspense>
         </h1>
 
-        <h2 className='text-md sm:text-xl mx-4'>
-          Leave your email address here to be notified when our desktop version is released.
-        </h2>
+        <h2 className='text-md sm:text-xl mx-4'>Leave your email address here to be notified when it is released. </h2>
 
         <div className='flex flex-col shadow-2xl border-1 rounded-md m-2 p-4 md:p-10 gap-4'>
           <p className=' text-gray-500'>
