@@ -18,7 +18,7 @@ export default function Home() {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
-  const [isGPT, setIsGPT] = useState(true)
+  // const [isGPT, setIsGPT] = useState(true)
   const [views, setViews] = useState(DEFAULT_VIEWS)
   const [loading, setLoading] = useState(false)
   const [text, setText] = useState('')
