@@ -1,11 +1,11 @@
 'use client'
 import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { Button } from '@repo/ui/components/ui/button'
-import { ToggleGroup, ToggleGroupItem } from '@repo/ui/components/ui/toggle-group'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import posthog from 'posthog-js'
-import { SetStateAction, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import TonesToggleGroup from '../components/TonesToggleGroup'
 import LanguageSelect from '../components/language-select'
 import RoleSelect from '../components/role-select'
 import { StorageKey } from '../lib/StorageKey'
@@ -24,43 +24,6 @@ export default function Home() {
   const [text, setText] = useState('')
   const [generatedText, setGeneratedText] = useState<String>('')
   const resultRef = useRef<null | HTMLDivElement>(null)
-
-  const [selectedVibes, setSelectedVibes] = useState<string[] | undefined>(undefined)
-
-  useEffect(() => {
-    const storedVibes = localStorage.getItem(StorageKey.SELECTED_VIBES)
-    if (storedVibes && storedVibes !== 'undefined' && storedVibes.length > 0) {
-      const parsedVibes = JSON.parse(storedVibes)
-      const sortedVibes = parsedVibes.sort()
-      setSelectedVibes(sortedVibes)
-    }
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem(StorageKey.SELECTED_VIBES, JSON.stringify(selectedVibes))
-  }, [selectedVibes])
-
-  const tones: { value: string; emoji: string }[] = [
-    { value: 'Casual', emoji: '😊' },
-    { value: 'Professional', emoji: '💼' },
-    { value: 'Direct', emoji: '📣' },
-
-    { value: 'Friendly', emoji: '👫' },
-    { value: 'Empathetic', emoji: '🤝' },
-    { value: 'Diplomatic', emoji: '🕊️' },
-    { value: 'Constructive', emoji: '🛠️' },
-
-    { value: 'Confident', emoji: '💪' },
-    { value: 'Assertive', emoji: '🎯' },
-    { value: 'Persuasive', emoji: '🗣️' },
-    { value: 'Inspirational', emoji: '🌟' },
-
-    { value: 'Detailed', emoji: '📝' },
-    { value: 'Instructive', emoji: '🎓' },
-
-    { value: 'Simplify it', emoji: '🔍' },
-    { value: 'Shorten it', emoji: '📏' },
-  ]
 
   useEffect(() => {
     fetchViews()
@@ -108,7 +71,7 @@ export default function Home() {
     } finally {
       setLoading(false)
       posthog.capture(TrackingEvents.REWRITE, {
-        tone: selectedVibes,
+        tone: localStorage.getItem(StorageKey.SELECTED_VIBES),
         language: localStorage.getItem(StorageKey.SELECTED_LANGUAGE),
         role: localStorage.getItem(StorageKey.SELECTED_ROLE),
         words: text?.split(' ')?.length,
@@ -134,7 +97,7 @@ export default function Home() {
       },
       body: JSON.stringify({
         sentence,
-        vibe: selectedVibes,
+        vibe: localStorage.getItem(StorageKey.SELECTED_VIBES),
         language: localStorage.getItem(StorageKey.SELECTED_LANGUAGE),
         role: localStorage.getItem(StorageKey.SELECTED_ROLE),
       }),
@@ -229,23 +192,7 @@ export default function Home() {
           </p>
         </div>
 
-        <ToggleGroup
-          variant='outline'
-          size={'lg'}
-          type='multiple'
-          className='flex flex-wrap'
-          value={selectedVibes}
-          onValueChange={(value: SetStateAction<string[] | undefined>) => {
-            if (value) setSelectedVibes(value)
-          }}>
-          {tones.map((tone) => (
-            <ToggleGroupItem key={tone.value} value={tone.value} aria-label={`Toggle ${tone.value}`}>
-              <div className='w-[120px]'>
-                {tone.emoji} {tone.value}
-              </div>
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
+        <TonesToggleGroup></TonesToggleGroup>
 
         <div className='flex mb-5 mt-6 items-center space-x-3'>
           <NumberThree weight='regular' size={30} color='#ffffff' alt='3 icon' className=' bg-black rounded-full p-1' />{' '}
