@@ -18,7 +18,7 @@ export default function DownloadPage() {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen py-2'>
+    <div className='flex flex-col items-center justify-center py-2'>
       <main className='flex flex-col items-center flex-1 px-4 sm:px-20 text-center mt-10 gap-5'>
         <h1 className='text-5xl font-bold mb-2'>
           <Suspense fallback={'Desktop App'}>

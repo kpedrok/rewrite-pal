@@ -47,9 +47,11 @@ export default function RootLayout({
       <PHProvider>
         <body className={inter.className}>
           <PostHogPageView />
-          <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
+          <div className='container flex flex-col h-screen px-2 md:px-8'>
             <Header />
-            <main className='flex flex-col flex-1 w-full'>{children}</main>
+            <main className="flex-1">{children}</main>
+            <Footer />
+
             <Toaster
               position='top-center'
               reverseOrder={false}
@@ -62,7 +64,6 @@ export default function RootLayout({
                 },
               }}
             />
-            <Footer />
           </div>
           <SpeedInsights />
         </body>
