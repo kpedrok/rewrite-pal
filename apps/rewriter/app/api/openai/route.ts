@@ -30,31 +30,29 @@ export async function POST(req: NextRequest) {
     return new Response('No text in the request', { status: 400 })
   }
 
-  if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
-    const ip = req.headers.get('x-forwarded-for')
-    const ratelimit = new Ratelimit({
-      redis: redis,
-      limiter: Ratelimit.slidingWindow(150, '1 d'),
-    })
+  const ip = req.headers.get('x-forwarded-for')
+  const ratelimit = new Ratelimit({
+    redis: redis,
+    limiter: Ratelimit.slidingWindow(150, '1 d'),
+  })
 
-    const { success, limit, reset, remaining } = await ratelimit.limit(`novel_ratelimit_${ip}`)
-    if (!success) {
-      client.capture({
-        distinctId: `${ip}`,
-        event: TrackingEvents.ERROR,
-        properties: {
-          message: `You have reached your request limit for the day.`,
-        },
-      })
-      return new Response('You have reached your request limit for the day.', {
-        status: 429,
-        headers: {
-          'X-RateLimit-Limit': limit.toString(),
-          'X-RateLimit-Remaining': remaining.toString(),
-          'X-RateLimit-Reset': reset.toString(),
-        },
-      })
-    }
+  const { success, limit, reset, remaining } = await ratelimit.limit(`novel_ratelimit_${ip}`)
+  if (!success) {
+    client.capture({
+      distinctId: `${ip}`,
+      event: TrackingEvents.ERROR,
+      properties: {
+        message: `You have reached your request limit for the day.`,
+      },
+    })
+    return new Response('You have reached your request limit for the day.', {
+      status: 429,
+      headers: {
+        'X-RateLimit-Limit': limit.toString(),
+        'X-RateLimit-Remaining': remaining.toString(),
+        'X-RateLimit-Reset': reset.toString(),
+      },
+    })
   }
   client.shutdown()
 
