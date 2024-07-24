@@ -1,6 +1,7 @@
 'use client'
 import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { Button } from '@repo/ui/components/ui/button'
+
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import posthog from 'posthog-js'
 import { useEffect, useRef, useState } from 'react'
@@ -18,7 +19,7 @@ export default function Home() {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
-  // const [isGPT, setIsGPT] = useState(true)
+  const [impersonatorMode, setImpersonatorMode] = useState(false)
   const [views, setViews] = useState(DEFAULT_VIEWS)
   const [loading, setLoading] = useState(false)
   const [text, setText] = useState('')
@@ -164,7 +165,8 @@ export default function Home() {
         <b>{views?.toLocaleString()}</b> phrases improved so far
       </p>
 
-      {/* <div className='mt-7'>{<Toggle isGPT={isGPT} setIsGPT={setIsGPT} />}</div> */}
+      {/* <ModeSwitch checked={impersonatorMode} onChecked={setImpersonatorMode}></ModeSwitch> */}
+
       <div className='max-w-4xl w-full'>
         <div className='flex mt-10 items-center space-x-3'>
           <NumberOne weight='regular' size={30} color='#ffffff' alt='1 icon' className=' bg-black rounded-full p-1' />
