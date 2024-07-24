@@ -1,5 +1,5 @@
 'use client'
-import { NumberFour, NumberOne, NumberThree, NumberTwo } from '@phosphor-icons/react/dist/ssr'
+import { NumberFour, NumberOne, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { Button } from '@repo/ui/components/ui/button'
 
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
@@ -7,23 +7,22 @@ import { useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import TonesToggleGroup from '../components/TonesToggleGroup'
-import LanguageSelect from '../components/language-select'
-import { ModeSwitch } from '../components/mode-switch'
-import RoleSelect from '../components/role-select'
-import { StorageKey } from '../lib/StorageKey'
-import { TrackingEvents } from '../lib/TrackingEvents'
-import { scrollToBottom } from '../lib/utils'
+import ImpersonatorToggleGroup from '../../components/ImpersonatorToggleGroup'
+import LanguageSelect from '../../components/language-select'
+import { ModeSwitch } from '../../components/mode-switch'
+import { StorageKey } from '../../lib/StorageKey'
+import { TrackingEvents } from '../../lib/TrackingEvents'
+import { scrollToBottom } from '../../lib/utils'
 
 const DEFAULT_VIEWS = '--'
 
-export default function Home() {
+export default function ImpersonatePage() {
   const router = useRouter()
 
   const buttonRef = useRef<HTMLButtonElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
-  const [impersonatorMode, setImpersonatorMode] = useState(false)
+  const [impersonatorMode, setImpersonatorMode] = useState(true)
   const [views, setViews] = useState(DEFAULT_VIEWS)
   const [loading, setLoading] = useState(false)
   const [text, setText] = useState('')
@@ -36,8 +35,8 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    if (impersonatorMode) {
-      router.push('/impersonator')
+    if (!impersonatorMode) {
+      router.push('/')
     }
   }, [impersonatorMode])
 
@@ -101,16 +100,15 @@ export default function Home() {
   }
 
   const postToApiOpenai = async (sentence: string) => {
-    const response = await fetch('/api/openai', {
+    const response = await fetch('/api/openai/impersonate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         sentence,
-        vibe: localStorage.getItem(StorageKey.SELECTED_VIBES),
         language: localStorage.getItem(StorageKey.SELECTED_LANGUAGE),
-        role: localStorage.getItem(StorageKey.SELECTED_ROLE),
+        person: localStorage.getItem(StorageKey.SELECTED_PERSON),
       }),
     })
     if (!response.ok) {
@@ -165,11 +163,11 @@ export default function Home() {
 
   return (
     <div className='flex flex-col items-center justify-center text-center mt-4 animate-in fade-in duration-1000'>
-      <h1 className='sm:text-6xl text-4xl max-w-5xl font-bold text-slate-900 hover:scale-105 transition duration-300 ease-in-out mb-4'>
-        Ensure your writing is mistake-free and polished
+      <h1 className='sm:text-6xl text-4xl max-w-4xl font-bold text-slate-900 hover:scale-105 transition duration-300 ease-in-out mb-4'>
+        Give your writing a legendary twist
       </h1>
       <h3 className='sm:text-lg text-md max-w-xl font-light text-slate-900 hover:scale-105 transition duration-300 ease-in-out'>
-        Instantly generate clear, compelling writing while maintaining your unique voice.
+        Have your words rewritten by the voices of famous icons and mythical figures. Unleash your inner legend!
       </h3>
       <p className='border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out  mt-7 '>
         <b>{views?.toLocaleString()}</b> phrases improved so far
@@ -200,19 +198,11 @@ export default function Home() {
         <div className='flex mb-5 items-center space-x-3'>
           <NumberTwo weight='regular' size={30} color='#ffffff' alt='2 icon' className=' bg-black rounded-full p-1' />{' '}
           <p className='text-left font-medium'>
-            Select your tone <span className='text-slate-500 font-normal'> (optional)</span>
+            Select your personality <span className='text-slate-500 font-normal'></span>
           </p>
         </div>
 
-        <TonesToggleGroup></TonesToggleGroup>
-
-        <div className='flex mb-5 mt-6 items-center space-x-3'>
-          <NumberThree weight='regular' size={30} color='#ffffff' alt='3 icon' className=' bg-black rounded-full p-1' />{' '}
-          <p className='text-left font-medium'>
-            Role<span className='text-slate-500 font-normal hidden md:contents'> (optional)</span>:
-          </p>
-          <RoleSelect />
-        </div>
+        <ImpersonatorToggleGroup></ImpersonatorToggleGroup>
 
         <div className='flex mb-5 mt-6 items-center space-x-3'>
           <NumberFour weight='regular' size={30} color='#ffffff' alt='3 icon' className=' bg-black rounded-full p-1' />{' '}

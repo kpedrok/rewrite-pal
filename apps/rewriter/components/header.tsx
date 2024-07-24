@@ -16,6 +16,7 @@ export default function Header() {
       </Link>
       <div className='hidden gap-3 md:flex'>
         <NavItem href='/'>Paraphraser</NavItem>
+        <NavItem href='/impersonator'>Impersonator</NavItem>
 
         <NavItem href='/download?product=desktop'>Desktop App</NavItem>
         <NavItem href='/download?product=browser'>Browser Extension</NavItem>
