@@ -3,7 +3,7 @@ import { cn } from '@repo/ui/lib/utils'
 
 export function ModeSwitch({ checked, onChecked }: any) {
   return (
-    <section className='flex justify-center items-center w-fit'>
+    <section className='flex justify-center items-center w-fit gap-2'>
       <div className='w-1/3'>
         <div className='flex justify-end items-center gap-1'>
           <div
