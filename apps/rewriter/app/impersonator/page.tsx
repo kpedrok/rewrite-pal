@@ -1,7 +1,8 @@
 'use client'
-import { NumberFour, NumberOne, NumberTwo } from '@phosphor-icons/react/dist/ssr'
+import { NumberOne, NumberTwo } from '@phosphor-icons/react/dist/ssr'
 import { Button } from '@repo/ui/components/ui/button'
 
+import { NumberThree } from '@phosphor-icons/react'
 import { ParsedEvent, ReconnectInterval, createParser } from 'eventsource-parser'
 import { useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
@@ -176,13 +177,23 @@ export default function ImpersonatePage() {
       <ModeSwitch checked={impersonatorMode} onChecked={setImpersonatorMode}></ModeSwitch>
 
       <div className='max-w-4xl w-full'>
-        <div className='flex mt-10 items-center space-x-3'>
+        <div className='flex mt-10 items-center space-x-3 mb-2'>
           <NumberOne weight='regular' size={30} color='#ffffff' alt='1 icon' className=' bg-black rounded-full p-1' />
+          <p className='text-left font-medium'>
+            Select a personality <span className='text-slate-500 font-normal'></span>
+          </p>
+        </div>
+
+        <ImpersonatorToggleGroup></ImpersonatorToggleGroup>
+
+        <div className='flex mb-3 items-center space-x-3 mt-8'>
+          <NumberTwo weight='regular' size={30} color='#ffffff' alt='2 icon' className=' bg-black rounded-full p-1' />{' '}
           <p className='text-left font-medium'>
             Paste your text here
             <span className='text-slate-500 font-normal'> (⌘+V)</span>
           </p>
         </div>
+
         <textarea
           id='textInput'
           name='text'
@@ -192,20 +203,12 @@ export default function ImpersonatePage() {
           onKeyDown={handleKeyDown}
           ref={inputRef}
           rows={4}
-          className='text-base font-mono w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5'
+          className='text-base font-mono w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black'
           placeholder={'Type or paste your text here.'}
         />
-        <div className='flex mb-5 items-center space-x-3'>
-          <NumberTwo weight='regular' size={30} color='#ffffff' alt='2 icon' className=' bg-black rounded-full p-1' />{' '}
-          <p className='text-left font-medium'>
-            Select your personality <span className='text-slate-500 font-normal'></span>
-          </p>
-        </div>
-
-        <ImpersonatorToggleGroup></ImpersonatorToggleGroup>
 
         <div className='flex mb-5 mt-6 items-center space-x-3'>
-          <NumberFour weight='regular' size={30} color='#ffffff' alt='3 icon' className=' bg-black rounded-full p-1' />{' '}
+          <NumberThree weight='regular' size={30} color='#ffffff' alt='3 icon' className=' bg-black rounded-full p-1' />{' '}
           <p className='text-left font-medium'>Language: </p>
           <LanguageSelect />
         </div>
