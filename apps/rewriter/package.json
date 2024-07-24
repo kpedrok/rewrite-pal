@@ -16,7 +16,6 @@
     "@blocknote/core": "^0.13.4",
     "@blocknote/mantine": "^0.13.4",
     "@blocknote/react": "^0.13.4",
-    "@headlessui/react": "^1.7.19",
     "@phosphor-icons/react": "^2.1.5",
     "@repo/ui": "workspace:*",
     "@upstash/ratelimit": "^1.1.3",
