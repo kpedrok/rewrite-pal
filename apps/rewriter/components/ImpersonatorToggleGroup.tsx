@@ -19,26 +19,34 @@ export default function ImpersonatorToggleGroup() {
     localStorage.setItem(StorageKey.SELECTED_PERSON, JSON.stringify(selectedPerson))
   }, [selectedPerson])
 
-  const tones: { value: string; emoji: string }[] = [
-    { value: 'William Shakespeare', emoji: '/assets/icons/william-shakespeare.png' },
-    { value: 'Steve Jobs', emoji: '/assets/icons/steve-jobs.png' },
-    { value: 'Elon Musk', emoji: '/assets/icons/elon-musk.png' },
-    { value: 'Coco Chanel', emoji: '/assets/icons/coco-chanel.png' },
-
+  const personalities: { value: string; emoji: string }[] = [
+    // Real Personalities
+    { value: 'Agatha Christie', emoji: '/assets/icons/Agatha-Christie.png' },
     { value: 'Albert Einstein', emoji: '/assets/icons/albert-einstein.png' },
+    { value: 'Cleopatra', emoji: '/assets/icons/Cleopatra.png' },
+    { value: 'Coco Chanel', emoji: '/assets/icons/coco-chanel.png' },
+    { value: 'Elon Musk', emoji: '/assets/icons/elon-musk.png' },
+    { value: 'Jane Austen', emoji: '/assets/icons/jane-austen.png' },
+    { value: 'Jesus Christ', emoji: '/assets/icons/jesus.png' },
+    { value: 'Marie Curie', emoji: '/assets/icons/marie-curie.png' },
+    { value: 'Mother Teresa', emoji: '/assets/icons/mother-teresa.png' },
     { value: 'Sigmund Freud', emoji: '/assets/icons/sigmund-freud.png' },
-    { value: 'Michael Scott', emoji: '/assets/icons/Michael-Scott.png' },
+    { value: 'Stephen Hawking', emoji: '/assets/icons/stephen-hawking.png' },
+    { value: 'Steve Jobs', emoji: '/assets/icons/steve-jobs.png' },
+    { value: 'William Shakespeare', emoji: '/assets/icons/william-shakespeare.png' },
 
-    { value: 'Tony Stark', emoji: '/assets/icons/iron-man.png' },
-    { value: 'Darth Vader', emoji: '/assets/icons/Darth-vader.png' },
-    { value: 'Yoda', emoji: '/assets/icons/yoda-yoga.png' },
-    { value: 'Gollum / Sméagol', emoji: '/assets/icons/gollum.png' },
-
-    { value: 'Groot', emoji: '/assets/icons/groot.png' },
-    { value: 'Chewbacca', emoji: '/assets/icons/Chewbacca.png' },
-
-    { value: 'The Joker', emoji: '/assets/icons/the-joker.png' },
+    // Fictional Personalities
     { value: 'Arya Stark', emoji: '/assets/icons/arya-stark.png' },
+    { value: 'Chewbacca', emoji: '/assets/icons/Chewbacca.png' },
+    { value: 'Darth Vader', emoji: '/assets/icons/Darth-vader.png' },
+    { value: 'Gollum / Sméagol', emoji: '/assets/icons/gollum.png' },
+    { value: 'Groot', emoji: '/assets/icons/groot.png' },
+    { value: 'Jack Sparrow', emoji: '/assets/icons/jack-Sparrow.png' },
+    { value: 'Michael Scott', emoji: '/assets/icons/Michael-Scott.png' },
+    { value: 'The Joker', emoji: '/assets/icons/the-joker.png' },
+    { value: 'Tony Stark', emoji: '/assets/icons/iron-man.png' },
+    { value: 'Yoda', emoji: '/assets/icons/yoda-yoga.png' },
+    // maquieavel, gengish kan
   ]
 
   return (
@@ -51,7 +59,7 @@ export default function ImpersonatorToggleGroup() {
       onValueChange={(value: SetStateAction<string[] | undefined>) => {
         if (value) setSelectedPerson(value)
       }}>
-      {tones.map((tone) => (
+      {personalities.map((tone) => (
         <ToggleGroupItem key={tone.value} value={tone.value} aria-label={`Toggle ${tone.value}`}>
           <div className='w-[140px] flex justify-center items-center gap-2'>
             <Image src={tone.emoji} height={36} width={36} alt='Your Name' />
