@@ -21,9 +21,9 @@ export default function ImpersonatorToggleGroup() {
 
   const personalities: { value: string; emoji: string }[] = [
     // Real Personalities
-    { value: 'Agatha Christie', emoji: '/assets/icons/Agatha-Christie.png' },
+    { value: 'Agatha Christie', emoji: '/assets/icons/agatha-christie.png' },
     { value: 'Albert Einstein', emoji: '/assets/icons/albert-einstein.png' },
-    { value: 'Cleopatra', emoji: '/assets/icons/Cleopatra.png' },
+    { value: 'Cleopatra', emoji: '/assets/icons/cleopatra.png' },
     { value: 'Coco Chanel', emoji: '/assets/icons/coco-chanel.png' },
     { value: 'Elon Musk', emoji: '/assets/icons/elon-musk.png' },
     { value: 'Jane Austen', emoji: '/assets/icons/jane-austen.png' },
@@ -37,12 +37,12 @@ export default function ImpersonatorToggleGroup() {
 
     // Fictional Personalities
     { value: 'Arya Stark', emoji: '/assets/icons/arya-stark.png' },
-    { value: 'Chewbacca', emoji: '/assets/icons/Chewbacca.png' },
-    { value: 'Darth Vader', emoji: '/assets/icons/Darth-vader.png' },
+    { value: 'Chewbacca', emoji: '/assets/icons/chewbacca.png' },
+    { value: 'Darth Vader', emoji: '/assets/icons/darth-vader.png' },
     { value: 'Gollum / Sméagol', emoji: '/assets/icons/gollum.png' },
     { value: 'Groot', emoji: '/assets/icons/groot.png' },
-    { value: 'Jack Sparrow', emoji: '/assets/icons/jack-Sparrow.png' },
-    { value: 'Michael Scott', emoji: '/assets/icons/Michael-Scott.png' },
+    { value: 'Jack Sparrow', emoji: '/assets/icons/jack-sparrow.png' },
+    { value: 'Michael Scott', emoji: '/assets/icons/michael-scott.png' },
     { value: 'The Joker', emoji: '/assets/icons/the-joker.png' },
     { value: 'Tony Stark', emoji: '/assets/icons/iron-man.png' },
     { value: 'Yoda', emoji: '/assets/icons/yoda-yoga.png' },
