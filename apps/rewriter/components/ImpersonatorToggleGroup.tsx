@@ -4,19 +4,19 @@ import { SetStateAction, useEffect, useState } from 'react'
 import { StorageKey } from '../lib/StorageKey'
 
 export default function ImpersonatorToggleGroup() {
-  const [selectedPerson, setSelectedPerson] = useState<string[] | undefined>(undefined)
+  const [selectedPerson, setSelectedPerson] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     const storedPersonality = localStorage.getItem(StorageKey.SELECTED_PERSON)
-    if (storedPersonality && storedPersonality !== 'undefined' && storedPersonality.length > 0) {
-      const parsedPersonality = JSON.parse(storedPersonality)
-      const sortedVibes = parsedPersonality.sort()
-      setSelectedPerson(sortedVibes)
+
+    if (storedPersonality) {
+      const parsedPersonality = storedPersonality
+      setSelectedPerson(parsedPersonality)
     }
   }, [])
 
   useEffect(() => {
-    localStorage.setItem(StorageKey.SELECTED_PERSON, JSON.stringify(selectedPerson))
+    if (selectedPerson) localStorage.setItem(StorageKey.SELECTED_PERSON, selectedPerson)
   }, [selectedPerson])
 
   const personalities: { value: string; emoji: string }[] = [
@@ -53,10 +53,10 @@ export default function ImpersonatorToggleGroup() {
     <ToggleGroup
       variant='outline'
       size={'lg'}
-      type='multiple'
+      type='single'
       className='flex flex-wrap'
       value={selectedPerson}
-      onValueChange={(value: SetStateAction<string[] | undefined>) => {
+      onValueChange={(value: SetStateAction<string | undefined>) => {
         if (value) setSelectedPerson(value)
       }}>
       {personalities.map((tone) => (

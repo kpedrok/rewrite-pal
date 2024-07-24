@@ -18,7 +18,6 @@ export async function POST(req: NextRequest) {
     sentence,
     person,
     language = 'English',
-    role = 'Standard',
   } = (await req.json()) as {
     sentence?: string
     person?: string
