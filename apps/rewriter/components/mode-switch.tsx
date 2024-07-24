@@ -12,7 +12,7 @@ export function ModeSwitch({ checked, onChecked }: any) {
             })}>
             🧠
           </div>
-          <span className={`font-medium ${checked ? 'text-gray-400' : 'text-gray-900'}`}>Professional</span>
+          <span className={`font-medium ${checked ? 'text-gray-400' : 'text-gray-900'}`}>Pro</span>
         </div>
       </div>
       <div className='w-1/4 text-center'>
@@ -24,13 +24,13 @@ export function ModeSwitch({ checked, onChecked }: any) {
             className={cn('text-[26px]', {
               'opacity-50': !checked,
             })}>
-            🎉
+            👾
           </div>
           <span
             className={cn('font-medium text-slate-800', {
               'text-gray-400': !checked,
             })}>
-            Impersonator
+            Fun
           </span>{' '}
         </div>
       </div>
