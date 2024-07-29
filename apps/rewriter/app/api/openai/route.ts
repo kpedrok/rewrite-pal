@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
   content = content.trim()
 
   const payload: OpenAIStreamPayload = {
-    model: 'gpt-4o-mini',
+    model: 'gpt-4o',
     messages: [
       {
         role: 'system',
