@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 export enum StorageKey {
-  SELECTED_ROLE = 'selectedRole1',
-  SELECTED_VIBES = 'selectedVibes1',
-  SELECTED_LANGUAGE = 'selectedLanguage1',
-  SELECTED_PERSON = 'selectedPerson3',
+  SELECTED_ROLE = 'selectedRole2',
+  SELECTED_VIBES = 'selectedVibes2',
+  SELECTED_LANGUAGE = 'selectedLanguage2',
+  SELECTED_PERSON = 'selectedPerson4',
 }
