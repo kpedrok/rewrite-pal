@@ -9,7 +9,6 @@ import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import TonesToggleGroup from '../components/TonesToggleGroup'
 import LanguageSelect from '../components/language-select'
-import { ModeSwitch } from '../components/mode-switch'
 import RoleSelect from '../components/role-select'
 import { StorageKey } from '../lib/StorageKey'
 import { TrackingEvents } from '../lib/TrackingEvents'
@@ -101,7 +100,7 @@ export default function Home() {
   }
 
   const postToApiOpenai = async (sentence: string) => {
-    const response = await fetch('/api/openai', {
+    const response = await fetch('/api/rewriter', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -175,7 +174,7 @@ export default function Home() {
         <b>{views?.toLocaleString()}</b> phrases improved so far
       </p>
 
-      <ModeSwitch checked={impersonatorMode} onChecked={setImpersonatorMode}></ModeSwitch>
+      {/* <ModeSwitch checked={impersonatorMode} onChecked={setImpersonatorMode}></ModeSwitch> */}
 
       <div className='max-w-4xl w-full'>
         <div className='flex mt-10 items-center space-x-3'>
