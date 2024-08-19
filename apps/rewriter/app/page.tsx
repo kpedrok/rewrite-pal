@@ -100,7 +100,7 @@ export default function Home() {
   }
 
   const postToApiOpenai = async (sentence: string) => {
-    const response = await fetch('/api/rewriter', {
+    const response = await fetch('/api/openai', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
