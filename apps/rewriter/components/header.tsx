@@ -34,7 +34,7 @@ export default function Header() {
         <SheetContent side='right'>
           <div className='grid gap-4 p-4'>
             <NavItem href='/'>Paraphraser</NavItem>
-
+            <NavItem href='/impersonator'>Impersonator</NavItem>
             <NavItem href='/download?product=desktop'>Desktop App</NavItem>
             <NavItem href='/download?product=browser'>Browser Extension</NavItem>
             <NavItem target='_blank' href='https://editor.rewritepal.com'>
