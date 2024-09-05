@@ -1,8 +1,6 @@
 import { Redis } from '@upstash/redis'
 import { NextResponse } from 'next/server'
 
-// export const runtime = 'edge'
-export const revalidate = 60
 const redis = Redis.fromEnv()
 
 const path = 'views'

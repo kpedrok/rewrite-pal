@@ -52,7 +52,6 @@ export default function ChatResponse({ text, setTriggerFunction }: { text: strin
     toast.success('Copied to clipboard', {
       icon: '✂️',
     })
-    // posthog.capture(TrackingEvents.REWRITE_COPIED)
   }
 
   const scrollToResult = () => {
