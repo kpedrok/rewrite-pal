@@ -16,7 +16,13 @@
 
 ## Getting Started
 
-First, run the development server:
+First, install deps:
+
+```bash
+pnpm install
+```
+
+Second, run the development server:
 
 ```bash
 pnpm dev
