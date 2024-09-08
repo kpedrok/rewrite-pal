@@ -1,83 +1,51 @@
-# Turborepo starter
+<a href="https://www.rewritepal.com/">
+  <img alt="RewritePal - Write Better, Communicate Better, Deliver More." src="https://rewritepal-official.vercel.app/opengraph-image.png">
+</a>
 
-This is an official starter Turborepo.
+# Features
 
-## Using this example
+- [Next.js](https://nextjs.org) App Router
+- [Vercel AI SDK](https://sdk.vercel.ai/docs) for streaming completion UI
+- Support for OpenAI (default), Anthropic, Cohere, Hugging Face, or custom AI chat models and/or LangChain
+- [shadcn/ui](https://ui.shadcn.com)
+  - Styling with [Tailwind CSS](https://tailwindcss.com)
+  - [Radix UI](https://radix-ui.com) for headless component primitives
+  - Icons from [Phosphor Icons](https://phosphoricons.com)
+- Rate limiting, and views count with [Vercel KV](https://vercel.com/storage/kv)
+- State management in React with [Zustand](https://zustand-demo.pmnd.rs/)
 
-Run the following command:
+## Getting Started
 
-```sh
-npx create-turbo@latest
+First, install deps:
+
+```bash
+pnpm install
 ```
 
-## What's inside?
+Second, run the development server:
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
+```bash
 pnpm dev
-pnpm update
-pnpm dlx depcheck
 ```
 
-### Remote Caching
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+Remember to update your environment variables in the .env file with the appropriate credentials.
 
+## Components
+
+### Shadcn
+
+https://ui.shadcn.com/docs
+
+To add new shadcn/ui components:
+
+```bash
+pnpm dlx shadcn@latest add
 ```
-cd my-turborepo
-npx turbo login
-```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### OG Image
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+- [OG Generator](https://og-playground.vercel.app/?share=nVTbjtowEP0V16sqL0brmJANESDtspXoA1LVrnYlxIshTuKtE0eJw6WIf-84IeVStZUqQIzPzDkzE8_kgNc6EjjEo0huljlCldkrMT4crI1QKmSSmhA5LqUfHdKCWxmZ9AaLZFUovgc0VmLXodZ-lqVYG6lz8K21qrO883Ilk_yzEVllXSI3ouxc73VlZLyfagBzm__aveLr70mp6zyaaqVL8N_FcfwrK7C-yR8iRH12Ab2devEpbdDjcZlPrDGqNslFZ-Mlhs6W-MSUSgFyR89Q94hQxstE2r4oehgUO6eRtBEbKbZPejcGB0Vs4Nufc6HnWLkT0JQARRTcpCgaO3PGPOIFsz57dH0CX9p8wPC9V3fI-A3q-jNg3KA913_1vSuBVnaRgdvzQB38lmglFxnE93yPByRoBXpgzQb-GSAUQmaM0sczxGhAXGYle332H9yhv5g_MKiQ_oucBhfUlrLIhtDZDXH4GxEewhlxfSjYUj04X1PTXvC3nE2rwHQmo3t7UXBpo3sYG_hvJgiW53YsXnQRIpfCTEy-im0pjfjC1egeIrsb_xNpQM4jzGh7OA2vRxvBNyuHnoSBnSBoqrOszuWaX2DPQsmNKNFcl-JDl9UW3VqYYF3YpaxweMDN2OMwgMXA7cZjm4ngSKzqBIcxV5UgWGT6Xb7sC_u6MNvmBDq2uk_ZSkQ4NGUtjgQbvoKIVCilt7pUET7-BA)
