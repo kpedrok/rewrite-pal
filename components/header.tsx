@@ -9,12 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
 
 const navLinks = [
   { href: '/', label: 'Paraphraser' },
-  { href: '/impersonator', label: 'Impersonator' },
-  { href: '/download?product=desktop', label: 'Desktop App' },
-  { href: '/download?product=browser', label: 'Browser Extension' },
-  { href: 'https://editor.rewritepal.com', label: 'AI Text Editor (beta)', external: true },
-  { href: '/blog', label: 'Blog' },
-  { href: 'https://roadmap.rewritepal.com', label: 'Roadmap', external: true },
+  { href: 'https://github.com/kpedrok/rewrite-pal', label: 'Open Source', external: true },
   { href: 'mailto:hello@rewritepal.com', label: 'hello@rewritepal.com', external: true },
 ]
 
@@ -50,8 +45,8 @@ const MobileMenu = () => (
 
 export function Header() {
   return (
-    <header className='flex justify-between items-center w-full mt-5 border-b-2 pb-7 sm:px-4 px-2'>
-      <NavItem href='/' className='flex space-x-3 items-center'>
+    <header className='flex justify-between items-center w-full border-b-2 p-2'>
+      <a href='/' className='flex items-center'>
         <Image
           className='w-[42px]'
           width={42}
@@ -60,9 +55,9 @@ export function Header() {
           alt={'Rewrite Pal Logo'}
         />
         <h1 className='sm:text-3xl hover:underline text-2xl font-bold ml-2 tracking-tight leading-tight'>RewritePal</h1>
-      </NavItem>
+      </a>
 
-      <NavigationLinks className='hidden gap-3 md:flex' />
+      <NavigationLinks className='hidden gap-3 lg:flex' />
 
       <MobileMenu />
     </header>

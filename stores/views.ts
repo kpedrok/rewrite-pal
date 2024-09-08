@@ -6,6 +6,7 @@ type ViewsStore = {
   setCount: (count: ViewsStore['count']) => void
   incrementCount: () => void
 }
+
 export const useViewsStore = create(
   persist<ViewsStore>(
     (set, get) => ({

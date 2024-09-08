@@ -19,14 +19,8 @@ export default function ChatResponse({ text, setTriggerFunction }: { text: strin
   const { completion, complete } = useCompletion({
     api: '/api/rewriter',
     onResponse: () => scrollToResult(),
-    onFinish: () => {
-      scrollToResult()
-      setLoading(false)
-    },
-    onError: (error) => {
-      toast.error(error.message)
-      setLoading(false)
-    },
+    onFinish: () => scrollToResult(),
+    onError: (error) => toast.error(error.message),
   })
 
   useEffect(() => {
@@ -49,9 +43,6 @@ export default function ChatResponse({ text, setTriggerFunction }: { text: strin
     toast('Copied to clipboard', {
       icon: '✂️',
     })
-    toast.success('Copied to clipboard', {
-      icon: '✂️',
-    })
   }
 
   const scrollToResult = () => {
@@ -59,6 +50,13 @@ export default function ChatResponse({ text, setTriggerFunction }: { text: strin
   }
 
   const rewrite = async () => {
+    if (!text.trim()) {
+      toast.error('Please enter some text to rewrite.', {
+        icon: '⚠️',
+      })
+      return
+    }
+
     setLoading(true)
     const body = {
       sentence: text,
@@ -66,9 +64,16 @@ export default function ChatResponse({ text, setTriggerFunction }: { text: strin
       language: selectedLanguage,
       role: selectedRole === CUSTOM_ROLE ? customRole : selectedRole,
     }
-    await complete(text, { body })
-    await postToApiViews()
-    incrementCount()
+    try {
+      await complete(text, { body })
+      await postToApiViews()
+      incrementCount()
+    } catch (error) {
+      console.error('An error occurred during rewriting.', error)
+      toast.error('An error occurred during rewriting.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (

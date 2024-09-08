@@ -1,4 +1,4 @@
-import { rolesList } from '@rewritepal/lib/constants/roles'
+import { CUSTOM_ROLE, rolesList } from '@rewritepal/lib/constants/roles'
 import { ListItem } from '@rewritepal/lib/interfaces/items'
 import { useRoleStore } from '@rewritepal/stores/roles'
 import { useCallback } from 'react'
@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 
 export default function RoleSelect() {
   const { selectedRole, setRole, customRole, setCustomRole } = useRoleStore()
-  const showCustomRoleInput = selectedRole === 'Custom'
+  const showCustomRoleInput = selectedRole === CUSTOM_ROLE
 
   const handleCustomRoleInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

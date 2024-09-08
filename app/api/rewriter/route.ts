@@ -38,7 +38,7 @@ export async function POST(req: Request): Promise<Response> {
       system: systemMessage,
       prompt,
       temperature: 0.6,
-      maxTokens: 2000,
+      maxTokens: 5000,
     })
 
     return result.toDataStreamResponse()

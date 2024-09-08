@@ -1,5 +1,5 @@
 <a href="https://www.rewritepal.com/">
-  <h1 align="center">RewritePal</h1>
+  <img alt="RewritePal - Write Better, Communicate Better, Deliver More." src="https://rewritepal-official.vercel.app/opengraph-image.png">
 </a>
 
 # Features
@@ -45,3 +45,7 @@ To add new shadcn/ui components:
 ```bash
 pnpm dlx shadcn@latest add
 ```
+
+### OG Image
+
+- [OG Generator](https://og-playground.vercel.app/?share=nVTbjtowEP0V16sqL0brmJANESDtspXoA1LVrnYlxIshTuKtE0eJw6WIf-84IeVStZUqQIzPzDkzE8_kgNc6EjjEo0huljlCldkrMT4crI1QKmSSmhA5LqUfHdKCWxmZ9AaLZFUovgc0VmLXodZ-lqVYG6lz8K21qrO883Ilk_yzEVllXSI3ouxc73VlZLyfagBzm__aveLr70mp6zyaaqVL8N_FcfwrK7C-yR8iRH12Ab2devEpbdDjcZlPrDGqNslFZ-Mlhs6W-MSUSgFyR89Q94hQxstE2r4oehgUO6eRtBEbKbZPejcGB0Vs4Nufc6HnWLkT0JQARRTcpCgaO3PGPOIFsz57dH0CX9p8wPC9V3fI-A3q-jNg3KA913_1vSuBVnaRgdvzQB38lmglFxnE93yPByRoBXpgzQb-GSAUQmaM0sczxGhAXGYle332H9yhv5g_MKiQ_oucBhfUlrLIhtDZDXH4GxEewhlxfSjYUj04X1PTXvC3nE2rwHQmo3t7UXBpo3sYG_hvJgiW53YsXnQRIpfCTEy-im0pjfjC1egeIrsb_xNpQM4jzGh7OA2vRxvBNyuHnoSBnSBoqrOszuWaX2DPQsmNKNFcl-JDl9UW3VqYYF3YpaxweMDN2OMwgMXA7cZjm4ngSKzqBIcxV5UgWGT6Xb7sC_u6MNvmBDq2uk_ZSkQ4NGUtjgQbvoKIVCilt7pUET7-BA)

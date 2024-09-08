@@ -7,15 +7,30 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const title = 'RewritePal | Write Better, Communicate Better, Deliver More'
+const description =
+  "Your Free AI Writing Tool. Paraphrasing tool, improve any paragraph's readability and rewrite it to make it sound more human-like with this powerful free tool."
+
 export const metadata: Metadata = {
   title: {
-    default: 'RewritePal | Write Better, Communicate Better, Deliver More',
+    default: title,
     template: '%s | RewritePal',
   },
-  description: `Your Free AI Writing Tool. Paraphrasing tool, improve any paragraph's readability and rewrite it to make it sound more human-like with this powerful free tool.`,
+  description,
   icons: {
     icon: '/images/icons/favicon.svg',
   },
+  openGraph: {
+    title,
+    description,
+  },
+  twitter: {
+    title,
+    description,
+    card: 'summary_large_image',
+    creator: '@CreatedByPed',
+  },
+  metadataBase: new URL('https://www.rewritepal.com/'),
   keywords: [
     'paraphrasing',
     'rewrite',

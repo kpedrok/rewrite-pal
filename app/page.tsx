@@ -36,8 +36,6 @@ export default function Home() {
         <ViewsCounter />
       </div>
 
-      {/* <ModeSwitch checked={impersonatorMode} onChecked={setImpersonatorMode}></ModeSwitch> */}
-
       <div className='max-w-4xl w-full gap-6 flex flex-col'>
         <section>
           <div className='flex mt-10 items-center space-x-3 mb-5'>
