@@ -28,6 +28,20 @@ Second, run the development server:
 pnpm dev
 ```
 
+## Using Docker
+
+First, build docker image:
+
+```bash
+sudo docker build -t rewritepal .
+```
+
+Second, run the server:
+
+```bash
+sudo docker run -p 3000:3000 rewritepal
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
