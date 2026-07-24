@@ -1,8 +1,5 @@
 'use client'
 
-import { Check, ChevronsUpDown } from 'lucide-react'
-import * as React from 'react'
-
 import { Button } from '@rewritepal/components/ui/button'
 import {
   Command,
@@ -12,8 +9,14 @@ import {
   CommandItem,
   CommandList,
 } from '@rewritepal/components/ui/command'
-import { Popover, PopoverContent, PopoverTrigger } from '@rewritepal/components/ui/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@rewritepal/components/ui/popover'
 import { cn } from '@rewritepal/lib/utils'
+import { Check, ChevronsUpDown } from 'lucide-react'
+import * as React from 'react'
 
 const frameworks = [
   {
@@ -93,14 +96,21 @@ export function ComboboxDemo() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant='outline' role='combobox' aria-expanded={open} className='w-[200px] justify-between'>
-          {value ? frameworks.find((framework) => framework.value === value)?.label : 'Select framework...'}
-          <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-[200px] justify-between"
+        >
+          {value
+            ? frameworks.find((framework) => framework.value === value)?.label
+            : 'Select framework...'}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-[200px] p-0'>
+      <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder='Search framework...' />
+          <CommandInput placeholder="Search framework..." />
           <CommandList>
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
@@ -111,8 +121,14 @@ export function ComboboxDemo() {
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? '' : currentValue)
                     setOpen(false)
-                  }}>
-                  <Check className={cn('mr-2 h-4 w-4', value === framework.value ? 'opacity-100' : 'opacity-0')} />
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      'mr-2 h-4 w-4',
+                      value === framework.value ? 'opacity-100' : 'opacity-0',
+                    )}
+                  />
                   {framework.label}
                 </CommandItem>
               ))}

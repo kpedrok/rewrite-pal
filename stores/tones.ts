@@ -8,13 +8,13 @@ type ToneStore = {
 
 export const useToneStore = create(
   persist<ToneStore>(
-    (set, get) => ({
+    (set) => ({
       selectedTones: [],
       setTones: (selectedTones) => set(() => ({ selectedTones })),
     }),
     {
       name: 'tone-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 )

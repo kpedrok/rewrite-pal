@@ -17,6 +17,6 @@ export const useViewsStore = create(
     {
       name: 'count-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 )

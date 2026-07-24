@@ -1,5 +1,5 @@
-# Use the official Node.js slim image
-FROM node:20-slim
+# Use the pinned Bun runtime and its Node.js 22-compatible environment.
+FROM oven/bun:1.3.14-slim
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -7,14 +7,14 @@ WORKDIR /app
 # Copy the rest of the application code
 COPY . .
 
-# Install the dependencies
-RUN npm install -g pnpm && pnpm install
+# Install the locked dependencies.
+RUN bun install --frozen-lockfile
 
 # Build the Next.js application
-RUN pnpm run build
+RUN bun run build
 
 # Expose the port that the app will run on
 EXPOSE 3000
 
 # Run the Next.js application
-CMD ["pnpm", "run", "start"]
+CMD ["bun", "run", "start"]

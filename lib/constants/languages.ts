@@ -1,4 +1,4 @@
-import { ListItem } from '../interfaces/items'
+import type { ListItem } from '../interfaces/items'
 
 export const topLanguages: ListItem[] = [
   { value: 'Bengali', emoji: '🇧🇩' },

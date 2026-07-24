@@ -8,13 +8,13 @@ type LanguageStore = {
 
 export const useLanguageStore = create(
   persist<LanguageStore>(
-    (set, get) => ({
+    (set) => ({
       selectedLanguage: 'English',
       setLanguage: (selectedLanguage) => set(() => ({ selectedLanguage })),
     }),
     {
       name: 'language-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 )

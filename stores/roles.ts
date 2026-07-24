@@ -11,7 +11,7 @@ type RoleStore = {
 
 export const useRoleStore = create(
   persist<RoleStore>(
-    (set, get) => ({
+    (set) => ({
       selectedRole: 'Standard',
       setRole: (selectedRole) => set(() => ({ selectedRole })),
       customRole: '',
@@ -20,6 +20,6 @@ export const useRoleStore = create(
     {
       name: 'role-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 )

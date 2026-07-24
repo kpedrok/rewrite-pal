@@ -54,10 +54,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body className={inter.className}>
         <Toaster
-          position='top-center'
+          position="top-center"
           reverseOrder={false}
           toastOptions={{
             duration: 2000,
@@ -68,10 +68,10 @@ export default function RootLayout({
             },
           }}
         />
-        <div className='container flex flex-col min-h-screen px-2 md:px-8'>
+        <div className="container flex flex-col min-h-screen px-2 md:px-8">
           <Header />
 
-          <main className='flex flex-col flex-1'>{children}</main>
+          <main className="flex flex-col flex-1">{children}</main>
           <Footer />
         </div>
       </body>

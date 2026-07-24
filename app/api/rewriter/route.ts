@@ -10,13 +10,18 @@ interface RequestPayload {
   role?: string
 }
 
-interface SystemMessageProperties extends Pick<RequestPayload, 'tone' | 'language' | 'role'> {}
+type SystemMessageProperties = Pick<
+  RequestPayload,
+  'tone' | 'language' | 'role'
+>
 
 export async function POST(req: Request): Promise<Response> {
   try {
     const ratelimit = createRatelimit()
     const ip = req.headers.get('x-forwarded-for') || 'unknown'
-    const { success, limit, reset, remaining } = await ratelimit.limit(`api_${ip}`)
+    const { success, limit, reset, remaining } = await ratelimit.limit(
+      `api_${ip}`,
+    )
 
     if (!success) {
       return createRateLimitExceededResponse(limit, remaining, reset)
@@ -36,10 +41,10 @@ export async function POST(req: Request): Promise<Response> {
       system: systemMessage,
       prompt,
       temperature: 0.6,
-      maxTokens: 5000,
+      maxOutputTokens: 5000,
     })
 
-    return result.toDataStreamResponse()
+    return result.toTextStreamResponse()
   } catch (error) {
     console.error('Error processing request:', error)
     return new Response('Internal server error', { status: 500 })
@@ -54,7 +59,11 @@ function createRatelimit(): Ratelimit {
   })
 }
 
-function createRateLimitExceededResponse(limit: number, remaining: number, reset: number): Response {
+function createRateLimitExceededResponse(
+  limit: number,
+  remaining: number,
+  reset: number,
+): Response {
   return new Response('You have reached your request limit for the day.', {
     status: 429,
     headers: {
@@ -65,7 +74,11 @@ function createRateLimitExceededResponse(limit: number, remaining: number, reset
   })
 }
 
-function buildSystemMessage({ tone, language, role }: SystemMessageProperties): string {
+function buildSystemMessage({
+  tone,
+  language,
+  role,
+}: SystemMessageProperties): string {
   let message = `You will be provided with sentences, and your task is to rewrite them to standard ${
     language || 'English'
   }.`

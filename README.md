@@ -19,13 +19,13 @@
 First, install deps:
 
 ```bash
-pnpm install
+bun install
 ```
 
 Second, run the development server:
 
 ```bash
-pnpm dev
+bun dev
 ```
 
 ## Using Docker
@@ -57,7 +57,7 @@ https://ui.shadcn.com/docs
 To add new shadcn/ui components:
 
 ```bash
-pnpm dlx shadcn@latest add
+bunx shadcn@latest add
 ```
 
 ### OG Image
