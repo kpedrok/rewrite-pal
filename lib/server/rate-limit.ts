@@ -16,7 +16,9 @@ function getRewriteRateLimit(): Ratelimit {
 }
 
 export function getClientIp(headers: Headers): string {
-  return headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  return (
+    headers.get('x-vercel-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  )
 }
 
 export function limitRewrite(headers: Headers) {

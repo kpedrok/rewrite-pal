@@ -15,7 +15,7 @@ It is built as a small, production-oriented Next.js App Router project.
 - Tailwind CSS 4 with shadcn/Radix UI primitives
 - Vercel AI SDK with OpenAI
 - Upstash Redis for rate limiting and the public rewrite counter
-- Biome, Vitest, Playwright, and Bun
+- Biome, Bun Test, Playwright, and Bun
 
 ## Local development
 
@@ -40,7 +40,7 @@ UPSTASH_REDIS_REST_TOKEN=
 ```bash
 bun run check       # lint, formatting, and safe static checks
 bun run typecheck   # TypeScript without emitting files
-bun run test        # rewrite request and prompt behavior
+bun run test        # unit and route contracts, including rate limits and counters
 bun run test:e2e    # mocked browser journey through the rewrite flow
 bun run build       # production build
 ```
@@ -78,10 +78,10 @@ public/              static logos and icons
 
 ## Security and privacy
 
-The rewrite endpoint is rate limited through Upstash. Submitted text is sent to
-the configured AI provider to generate a rewrite. Avoid entering sensitive
-information unless the provider and deployment privacy policies meet your
-requirements.
+The rewrite endpoint is rate limited through Upstash using Vercel’s trusted
+proxy header. Submitted text is sent to the configured AI provider to generate
+a rewrite. Avoid entering sensitive information unless the provider and
+deployment privacy policies meet your requirements.
 
 ## Contributing
 

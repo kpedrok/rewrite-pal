@@ -37,17 +37,6 @@ export default function RewriteForm() {
   const [viewCount, setViewCount] = useState(0)
   const resultRef = useRef<HTMLDivElement>(null)
 
-  const { completion, complete } = useCompletion({
-    api: '/api/rewriter',
-    streamProtocol: 'text',
-    onFinish: () => {
-      resultRef.current?.scrollIntoView({ behavior: 'smooth' })
-      void loadViewCount()
-    },
-    onError: () =>
-      toast.error('Unable to rewrite your text. Please try again.'),
-  })
-
   const loadViewCount = useCallback(async () => {
     try {
       const response = await fetch('/api/views')
@@ -65,8 +54,28 @@ export default function RewriteForm() {
     void loadViewCount()
   }, [loadViewCount])
 
+  const refreshViewCount = useCallback(() => {
+    void loadViewCount()
+    window.setTimeout(() => void loadViewCount(), 300)
+  }, [loadViewCount])
+
+  const { completion, complete } = useCompletion({
+    api: '/api/rewriter',
+    streamProtocol: 'text',
+    onFinish: () => {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth' })
+      refreshViewCount()
+    },
+    onError: () =>
+      toast.error('Unable to rewrite your text. Please try again.'),
+  })
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+
+    if (isRewriting) {
+      return
+    }
 
     if (!text.trim()) {
       toast.error('Please enter some text to rewrite.')

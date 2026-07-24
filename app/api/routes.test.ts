@@ -66,14 +66,14 @@ beforeEach(() => {
 })
 
 describe('POST /api/rewriter', () => {
-  it('rejects malformed JSON before contacting infrastructure', async () => {
+  it('charges malformed JSON to protect parsing resources', async () => {
     const response = await rewritePost(createRewriteRequest('{'))
 
     expect(response.status).toBe(400)
-    expect(mocks.limitRewrite).not.toHaveBeenCalled()
+    expect(mocks.limitRewrite).toHaveBeenCalledTimes(1)
   })
 
-  it('rejects invalid rewrite options before contacting infrastructure', async () => {
+  it('charges invalid rewrite options to protect validation resources', async () => {
     const response = await rewritePost(
       createRewriteRequest(
         JSON.stringify({ ...validRequest, language: 'Klingon' }),
@@ -81,7 +81,19 @@ describe('POST /api/rewriter', () => {
     )
 
     expect(response.status).toBe(400)
-    expect(mocks.limitRewrite).not.toHaveBeenCalled()
+    expect(mocks.limitRewrite).toHaveBeenCalledTimes(1)
+  })
+
+  it('rejects oversized request bodies after rate limiting', async () => {
+    const response = await rewritePost(
+      createRewriteRequest(
+        JSON.stringify({ ...validRequest, prompt: 'x'.repeat(50_000) }),
+      ),
+    )
+
+    expect(response.status).toBe(413)
+    expect(mocks.limitRewrite).toHaveBeenCalledTimes(1)
+    expect(mocks.createRewriteStream).not.toHaveBeenCalled()
   })
 
   it('returns rate-limit headers when the client quota is exhausted', async () => {
@@ -135,6 +147,23 @@ describe('POST /api/rewriter', () => {
     await scheduledWork()
 
     expect(mocks.incrementViewCount).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not increment the counter when the streamed rewrite fails', async () => {
+    mocks.createRewriteStream.mockReturnValue({
+      stream: new ReadableStream(),
+      text: Promise.reject(new Error('stream interrupted')),
+    })
+
+    const response = await rewritePost(
+      createRewriteRequest(JSON.stringify(validRequest)),
+    )
+
+    expect(response.status).toBe(200)
+    const scheduledWork = mocks.after.mock.calls[0]?.[0] as () => Promise<void>
+    await scheduledWork()
+
+    expect(mocks.incrementViewCount).not.toHaveBeenCalled()
   })
 })
 

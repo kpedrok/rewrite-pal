@@ -42,7 +42,7 @@ test('rewrites text with selected preferences, supports copy, and handles errors
   await page.getByLabel('Custom role').fill('Editor')
   await page.locator('#language').click()
   await page.getByRole('option', { name: /Portuguese/ }).click()
-  await page.getByRole('button', { name: 'Rewrite →' }).click()
+  await page.locator('#text-input').press('Control+Enter')
 
   await expect(
     page.getByText(
@@ -68,7 +68,7 @@ test('rewrites text with selected preferences, supports copy, and handles errors
   await expect(page.getByText('Copied to clipboard.')).toBeVisible()
 
   await page.locator('#text-input').fill('Trigger an error.')
-  await page.locator('#text-input').press('Control+Enter')
+  await page.getByRole('button', { name: 'Rewrite →' }).click()
   await expect(
     page.getByText('Unable to rewrite your text. Please try again.'),
   ).toBeVisible()

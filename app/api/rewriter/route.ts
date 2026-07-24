@@ -3,11 +3,17 @@ import { rewriteRequestSchema } from '@rewritepal/lib/rewrite/schema'
 import { getRewriteEnv } from '@rewritepal/lib/server/env'
 import { limitRewrite } from '@rewritepal/lib/server/rate-limit'
 import {
+  JsonRequestError,
+  readJsonRequest,
+} from '@rewritepal/lib/server/request'
+import {
   createRewriteStream,
   createRewriteTextResponse,
 } from '@rewritepal/lib/server/rewrite-stream'
 import { incrementViewCount } from '@rewritepal/lib/server/views'
 import { after } from 'next/server'
+
+const maximumRewriteRequestBytes = 48 * 1024
 
 export async function POST(req: Request): Promise<Response> {
   try {
@@ -15,11 +21,21 @@ export async function POST(req: Request): Promise<Response> {
       return new Response('Expected a JSON request.', { status: 415 })
     }
 
+    const { success, limit, reset, remaining } = await limitRewrite(req.headers)
+
+    if (!success) {
+      return createRateLimitExceededResponse(limit, remaining, reset)
+    }
+
     let body: unknown
     try {
-      body = await req.json()
-    } catch {
-      return new Response('Expected a valid JSON request.', { status: 400 })
+      body = await readJsonRequest(req, maximumRewriteRequestBytes)
+    } catch (error) {
+      if (error instanceof JsonRequestError) {
+        return new Response(error.message, { status: error.status })
+      }
+
+      throw error
     }
 
     const parsedRequest = rewriteRequestSchema.safeParse(body)
@@ -28,12 +44,6 @@ export async function POST(req: Request): Promise<Response> {
       return new Response('Please provide valid rewrite options.', {
         status: 400,
       })
-    }
-
-    const { success, limit, reset, remaining } = await limitRewrite(req.headers)
-
-    if (!success) {
-      return createRateLimitExceededResponse(limit, remaining, reset)
     }
 
     getRewriteEnv()
