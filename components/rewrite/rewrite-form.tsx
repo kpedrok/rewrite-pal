@@ -2,10 +2,10 @@
 
 import { useCompletion } from '@ai-sdk/react'
 import {
-  NumberFour,
-  NumberOne,
-  NumberThree,
-  NumberTwo,
+  NumberFourIcon,
+  NumberOneIcon,
+  NumberThreeIcon,
+  NumberTwoIcon,
 } from '@phosphor-icons/react/dist/ssr'
 import { topLanguages } from '@rewritepal/lib/constants/languages'
 import { CUSTOM_ROLE, rolesList } from '@rewritepal/lib/constants/roles'
@@ -120,7 +120,7 @@ export default function RewriteForm() {
 
       <section aria-labelledby="text-label">
         <div className="flex mt-10 items-center space-x-3 mb-5">
-          <NumberOne
+          <NumberOneIcon
             aria-hidden="true"
             className={stepIconClassName}
             size={30}
@@ -152,7 +152,7 @@ export default function RewriteForm() {
 
       <section aria-labelledby="tones-label">
         <div className="flex mb-5 items-center space-x-3">
-          <NumberTwo
+          <NumberTwoIcon
             aria-hidden="true"
             className={stepIconClassName}
             size={30}
@@ -175,7 +175,7 @@ export default function RewriteForm() {
         >
           {possibleTones.map(({ emoji, value }) => (
             <ToggleGroupItem key={value} value={value} aria-label={value}>
-              <span className="w-[120px]">
+              <span className="w-30">
                 {emoji} {value}
               </span>
             </ToggleGroupItem>
@@ -185,7 +185,7 @@ export default function RewriteForm() {
 
       <section aria-labelledby="role-label">
         <div className="flex items-center space-x-3">
-          <NumberThree
+          <NumberThreeIcon
             aria-hidden="true"
             className={stepIconClassName}
             size={30}
@@ -199,7 +199,7 @@ export default function RewriteForm() {
             :
           </label>
           <Select value={role} onValueChange={setRole}>
-            <SelectTrigger id="role" className="w-[240px]">
+            <SelectTrigger id="role" className="w-60">
               <SelectValue placeholder="Role" />
             </SelectTrigger>
             <SelectContent>
@@ -215,7 +215,7 @@ export default function RewriteForm() {
         {role === CUSTOM_ROLE && (
           <Input
             aria-label="Custom role"
-            className="md:ml-[42px] mt-2 w-[240px]"
+            className="md:ml-10 mt-2 w-60"
             maxLength={30}
             placeholder="Enter custom role"
             value={customRole}
@@ -226,7 +226,7 @@ export default function RewriteForm() {
 
       <section aria-labelledby="language-label">
         <div className="flex items-center space-x-3">
-          <NumberFour
+          <NumberFourIcon 
             aria-hidden="true"
             className={stepIconClassName}
             size={30}
@@ -236,7 +236,7 @@ export default function RewriteForm() {
             Language:
           </label>
           <Select value={language} onValueChange={setLanguage}>
-            <SelectTrigger id="language" className="w-[200px]">
+            <SelectTrigger id="language" className="w-50">
               <SelectValue placeholder="Language" />
             </SelectTrigger>
             <SelectContent>

@@ -8,6 +8,8 @@
 
 # testing
 /coverage
+/playwright-report
+/test-results
 
 # next.js
 /.next/
@@ -37,3 +39,4 @@ next-env.d.ts
 .agents/skills/*
 .claude/
 skills-lock.json
+AGENTS.md
