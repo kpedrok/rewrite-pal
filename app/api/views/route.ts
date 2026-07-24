@@ -1,16 +1,14 @@
-import { Redis } from '@upstash/redis'
+import { getViewCount } from '@rewritepal/lib/server/views'
 import { NextResponse } from 'next/server'
 
-const redis = Redis.fromEnv()
-
-const path = 'views'
-
 export async function GET() {
-  const views = await redis.get(path)
-  return NextResponse.json(views)
-}
-
-export async function POST() {
-  const user = await redis.incr(path)
-  return NextResponse.json(user)
+  try {
+    return NextResponse.json(await getViewCount())
+  } catch (error) {
+    console.error('Unable to read the view counter.', error)
+    return NextResponse.json(
+      { error: 'View counter unavailable.' },
+      { status: 503 },
+    )
+  }
 }

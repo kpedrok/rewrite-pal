@@ -1,65 +1,89 @@
-<a href="https://www.rewritepal.com/">
-  <img alt="RewritePal - Write Better, Communicate Better, Deliver More." src="https://rewritepal-official.vercel.app/opengraph-image.png">
-</a>
+# RewritePal
 
-# Features
+[![CI](https://github.com/kpedrok/rewrite-pal/actions/workflows/ci.yml/badge.svg)](https://github.com/kpedrok/rewrite-pal/actions/workflows/ci.yml)
+![Tests](https://img.shields.io/badge/tests-Bun%20Test%20%2B%20Playwright-f9f1e1?logo=bun&logoColor=black)
 
-- [Next.js](https://nextjs.org) App Router
-- [Vercel AI SDK](https://sdk.vercel.ai/docs) for streaming completion UI
-- Support for OpenAI (default), Anthropic, Cohere, Hugging Face, or custom AI chat models and/or LangChain
-- [shadcn/ui](https://ui.shadcn.com)
-  - Styling with [Tailwind CSS](https://tailwindcss.com)
-  - [Radix UI](https://radix-ui.com) for headless component primitives
-  - Icons from [Phosphor Icons](https://phosphoricons.com)
-- Rate limiting, and views count with [Vercel KV](https://vercel.com/storage/kv)
-- State management in React with [Zustand](https://zustand-demo.pmnd.rs/)
+RewritePal is a focused AI writing assistant that rewrites supplied text while
+preserving its intent and applying optional tone, role, and language choices.
+It is built as a small, production-oriented Next.js App Router project.
 
-## Getting Started
+![RewritePal interface](public/images/rewritepal-overview.png)
 
-First, install deps:
+## Stack
 
-```bash
-pnpm install
-```
+- Next.js 16, React 19, TypeScript, and React Compiler
+- Tailwind CSS 4 with shadcn/Radix UI primitives
+- Vercel AI SDK with OpenAI
+- Upstash Redis for rate limiting and the public rewrite counter
+- Biome, Vitest, Playwright, and Bun
 
-Second, run the development server:
+## Local development
+
+Prerequisites: Bun 1.3.14+ and Node.js 22+.
 
 ```bash
-pnpm dev
+cp .env.example .env.local
+bun install
+bun dev
 ```
 
-## Using Docker
-
-First, build docker image:
+Set these variables in `.env.local` (never commit this file):
 
 ```bash
-sudo docker build -t rewritepal .
+OPENAI_API_KEY=
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
 ```
 
-Second, run the server:
+## Quality checks
 
 ```bash
-sudo docker run -p 3000:3000 rewritepal
+bun run check       # lint, formatting, and safe static checks
+bun run typecheck   # TypeScript without emitting files
+bun run test        # rewrite request and prompt behavior
+bun run test:e2e    # mocked browser journey through the rewrite flow
+bun run build       # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+GitHub Actions runs the same install, static checks, type check, and production
+build on pull requests and pushes to `main`, including the Playwright journey.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture decisions
 
-Remember to update your environment variables in the .env file with the appropriate credentials.
+- The homepage is a Server Component; only `components/rewrite/rewrite-form.tsx`
+  is client-side. This keeps the interactive boundary explicit and small.
+- A shared Zod contract validates every rewrite request before prompt creation.
+  Prompt construction is a pure function with focused unit tests.
+- Form choices use local React state because they belong to one screen. This
+  avoids global-state machinery for temporary UI state.
+- The view counter remains visible as a simple client/server metric, but its
+  state is local to the rewrite feature rather than globally persisted. Only a
+  completed rewrite schedules its server-side increment; the browser can only
+  read the displayed count.
+- Redis and environment configuration are lazy server-only modules; routes fail
+  safely when required deployment variables are absent.
+- Playwright mocks provider and counter endpoints, so the core browser journey
+  is deterministic and does not spend API credits in CI.
 
-## Components
+## Project structure
 
-### Shadcn
-
-https://ui.shadcn.com/docs
-
-To add new shadcn/ui components:
-
-```bash
-pnpm dlx shadcn@latest add
+```text
+app/                 routes, metadata, and API route handlers
+components/rewrite/  interactive rewrite feature
+components/ui/       reusable UI primitives
+e2e/                 one realistic mocked browser journey
+lib/rewrite/         request contract and prompt construction
+public/              static logos and icons
 ```
 
-### OG Image
+## Security and privacy
 
-- [OG Generator](https://og-playground.vercel.app/?share=nVTbjtowEP0V16sqL0brmJANESDtspXoA1LVrnYlxIshTuKtE0eJw6WIf-84IeVStZUqQIzPzDkzE8_kgNc6EjjEo0huljlCldkrMT4crI1QKmSSmhA5LqUfHdKCWxmZ9AaLZFUovgc0VmLXodZ-lqVYG6lz8K21qrO883Ilk_yzEVllXSI3ouxc73VlZLyfagBzm__aveLr70mp6zyaaqVL8N_FcfwrK7C-yR8iRH12Ab2devEpbdDjcZlPrDGqNslFZ-Mlhs6W-MSUSgFyR89Q94hQxstE2r4oehgUO6eRtBEbKbZPejcGB0Vs4Nufc6HnWLkT0JQARRTcpCgaO3PGPOIFsz57dH0CX9p8wPC9V3fI-A3q-jNg3KA913_1vSuBVnaRgdvzQB38lmglFxnE93yPByRoBXpgzQb-GSAUQmaM0sczxGhAXGYle332H9yhv5g_MKiQ_oucBhfUlrLIhtDZDXH4GxEewhlxfSjYUj04X1PTXvC3nE2rwHQmo3t7UXBpo3sYG_hvJgiW53YsXnQRIpfCTEy-im0pjfjC1egeIrsb_xNpQM4jzGh7OA2vRxvBNyuHnoSBnSBoqrOszuWaX2DPQsmNKNFcl-JDl9UW3VqYYF3YpaxweMDN2OMwgMXA7cZjm4ngSKzqBIcxV5UgWGT6Xb7sC_u6MNvmBDq2uk_ZSkQ4NGUtjgQbvoKIVCilt7pUET7-BA)
+The rewrite endpoint is rate limited through Upstash. Submitted text is sent to
+the configured AI provider to generate a rewrite. Avoid entering sensitive
+information unless the provider and deployment privacy policies meet your
+requirements.
+
+## Contributing
+
+Keep changes small and accessible, run the quality checks above, and describe
+any environment-variable or user-facing behavior changes in the pull request.
