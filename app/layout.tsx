@@ -56,6 +56,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-slate-900 focus:shadow"
+        >
+          Skip to content
+        </a>
         <Toaster
           position="top-center"
           reverseOrder={false}
@@ -71,7 +77,9 @@ export default function RootLayout({
         <div className="container flex flex-col min-h-screen px-2 md:px-8">
           <Header />
 
-          <main className="flex flex-col flex-1">{children}</main>
+          <main id="main-content" className="flex flex-col flex-1">
+            {children}
+          </main>
           <Footer />
         </div>
       </body>

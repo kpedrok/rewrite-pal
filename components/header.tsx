@@ -33,27 +33,29 @@ const NavigationLinks = ({ className }: { className: string }) => (
 )
 
 const MobileMenu = () => (
-  <Sheet>
-    <SheetTrigger asChild>
-      <Button className="rounded-full" size="icon" variant="outline">
-        <List className="h-6 w-6" size={32} />
-        <span className="sr-only">Toggle navigation menu</span>
-      </Button>
-    </SheetTrigger>
-    <SheetContent side="right">
-      <div className="grid gap-4 p-4">
-        {navLinks.map(({ href, label, external }) => (
-          <NavItem
-            key={href}
-            href={href}
-            target={external ? '_blank' : undefined}
-          >
-            {label}
-          </NavItem>
-        ))}
-      </div>
-    </SheetContent>
-  </Sheet>
+  <div className="lg:hidden">
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button className="rounded-full" size="icon" variant="outline">
+          <List className="h-6 w-6" size={32} />
+          <span className="sr-only">Toggle navigation menu</span>
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="right">
+        <div className="grid gap-4 p-4">
+          {navLinks.map(({ href, label, external }) => (
+            <NavItem
+              key={href}
+              href={href}
+              target={external ? '_blank' : undefined}
+            >
+              {label}
+            </NavItem>
+          ))}
+        </div>
+      </SheetContent>
+    </Sheet>
+  </div>
 )
 
 export function Header() {
@@ -67,9 +69,9 @@ export function Header() {
           src="/images/logos/rewritepal.svg"
           alt={'Rewrite Pal Logo'}
         />
-        <h1 className="sm:text-3xl hover:underline text-2xl font-bold ml-2 tracking-tight leading-tight">
+        <span className="sm:text-3xl hover:underline text-2xl font-bold ml-2 tracking-tight leading-tight">
           RewritePal
-        </h1>
+        </span>
       </Link>
 
       <NavigationLinks className="hidden gap-3 lg:flex" />
