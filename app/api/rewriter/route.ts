@@ -1,10 +1,12 @@
-import { openai } from '@ai-sdk/openai'
 import { buildRewriteSystemPrompt } from '@rewritepal/lib/rewrite/prompt'
 import { rewriteRequestSchema } from '@rewritepal/lib/rewrite/schema'
 import { getRewriteEnv } from '@rewritepal/lib/server/env'
 import { limitRewrite } from '@rewritepal/lib/server/rate-limit'
+import {
+  createRewriteStream,
+  createRewriteTextResponse,
+} from '@rewritepal/lib/server/rewrite-stream'
 import { incrementViewCount } from '@rewritepal/lib/server/views'
-import { createTextStreamResponse, streamText, toTextStream } from 'ai'
 import { after } from 'next/server'
 
 export async function POST(req: Request): Promise<Response> {
@@ -38,16 +40,8 @@ export async function POST(req: Request): Promise<Response> {
 
     const { prompt } = parsedRequest.data
 
-    const model = openai('gpt-4o-mini')
     const systemMessage = buildRewriteSystemPrompt(parsedRequest.data)
-
-    const result = await streamText({
-      model,
-      system: systemMessage,
-      prompt,
-      temperature: 0.6,
-      maxOutputTokens: 1500,
-    })
+    const result = createRewriteStream({ prompt, system: systemMessage })
 
     after(async () => {
       try {
@@ -58,9 +52,7 @@ export async function POST(req: Request): Promise<Response> {
       }
     })
 
-    return createTextStreamResponse({
-      stream: toTextStream({ stream: result.stream }),
-    })
+    return createRewriteTextResponse(result)
   } catch (error) {
     console.error('Error processing request:', error)
     return new Response('Internal server error', { status: 500 })

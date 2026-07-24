@@ -1,7 +1,7 @@
 # RewritePal
 
 [![CI](https://github.com/kpedrok/rewrite-pal/actions/workflows/ci.yml/badge.svg)](https://github.com/kpedrok/rewrite-pal/actions/workflows/ci.yml)
-![Tests](https://img.shields.io/badge/tests-Vitest%20%2B%20Playwright-6E9F18?logo=vitest&logoColor=white)
+![Tests](https://img.shields.io/badge/tests-Bun%20Test%20%2B%20Playwright-f9f1e1?logo=bun&logoColor=black)
 
 RewritePal is a focused AI writing assistant that rewrites supplied text while
 preserving its intent and applying optional tone, role, and language choices.

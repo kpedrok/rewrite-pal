@@ -226,7 +226,7 @@ export default function RewriteForm() {
 
       <section aria-labelledby="language-label">
         <div className="flex items-center space-x-3">
-          <NumberFourIcon 
+          <NumberFourIcon
             aria-hidden="true"
             className={stepIconClassName}
             size={30}
