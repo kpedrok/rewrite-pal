@@ -4,14 +4,18 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.ts",
+    "config": "",
     "css": "app/globals.css",
-    "baseColor": "slate",
+    "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "@rewritepal/components",
-    "utils": "@rewritepal/lib/utils"
+    "utils": "@rewritepal/lib/utils",
+    "ui": "@rewritepal/components/ui",
+    "lib": "@rewritepal/lib",
+    "hooks": "@rewritepal/hooks"
   }
 }

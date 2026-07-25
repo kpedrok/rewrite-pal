@@ -3,10 +3,11 @@
 import { List } from '@phosphor-icons/react/dist/ssr'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ModeToggle } from './mode-toggle'
 import { Button } from './ui/button'
 import { NavItem } from './ui/nav-item'
 
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from './ui/sheet'
 
 const navLinks = [
   { href: '/', label: 'Paraphraser' },
@@ -36,12 +37,17 @@ const MobileMenu = () => (
   <div className="lg:hidden">
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="rounded-full" size="icon" variant="outline">
-          <List className="h-6 w-6" size={32} />
-          <span className="sr-only">Toggle navigation menu</span>
+        <Button
+          aria-label="Toggle navigation menu"
+          className="rounded-full"
+          size="icon"
+          variant="outline"
+        >
+          <List aria-hidden="true" />
         </Button>
       </SheetTrigger>
       <SheetContent side="right">
+        <SheetTitle className="sr-only">Navigation</SheetTitle>
         <div className="grid gap-4 p-4">
           {navLinks.map(({ href, label, external }) => (
             <NavItem
@@ -60,23 +66,25 @@ const MobileMenu = () => (
 
 export function Header() {
   return (
-    <header className="flex justify-between items-center w-full border-b-2 p-2">
-      <Link href="/" className="flex items-center">
+    <header className="flex w-full items-center justify-between border-b-2 p-2">
+      <Link href="/" className="flex items-center gap-2">
         <Image
-          className="w-[42px]"
+          className="size-[42px] dark:invert"
           width={42}
           height={42}
           src="/images/logos/rewritepal.svg"
-          alt={'Rewrite Pal Logo'}
+          alt=""
         />
-        <span className="sm:text-3xl hover:underline text-2xl font-bold ml-2 tracking-tight leading-tight">
+        <span className="text-2xl font-bold leading-tight tracking-tight hover:underline sm:text-3xl">
           RewritePal
         </span>
       </Link>
 
-      <NavigationLinks className="hidden gap-3 lg:flex" />
-
-      <MobileMenu />
+      <div className="flex items-center gap-2">
+        <NavigationLinks className="hidden gap-3 lg:flex" />
+        <ModeToggle />
+        <MobileMenu />
+      </div>
     </header>
   )
 }

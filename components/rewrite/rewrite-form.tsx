@@ -17,6 +17,7 @@ import { Input } from '../ui/input'
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -25,7 +26,7 @@ import { Textarea } from '../ui/textarea'
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group'
 import ViewsCounter from '../views-counter'
 
-const stepIconClassName = 'bg-black rounded-full p-1 text-white'
+const stepIconClassName = 'rounded-full bg-primary p-1 text-primary-foreground'
 
 export default function RewriteForm() {
   const [text, setText] = useState('')
@@ -128,7 +129,7 @@ export default function RewriteForm() {
       </div>
 
       <section aria-labelledby="text-label">
-        <div className="flex mt-10 items-center space-x-3 mb-5">
+        <div className="mt-10 mb-5 flex items-center gap-3">
           <NumberOneIcon
             aria-hidden="true"
             className={stepIconClassName}
@@ -137,7 +138,7 @@ export default function RewriteForm() {
           />
           <label id="text-label" htmlFor="text-input" className="font-medium">
             Paste your text here{' '}
-            <span className="text-slate-500 font-normal">(⌘+V)</span>
+            <span className="font-normal text-muted-foreground">(⌘+V)</span>
           </label>
         </div>
 
@@ -160,7 +161,7 @@ export default function RewriteForm() {
       </section>
 
       <section aria-labelledby="tones-label">
-        <div className="flex mb-5 items-center space-x-3">
+        <div className="mb-5 flex items-center gap-3">
           <NumberTwoIcon
             aria-hidden="true"
             className={stepIconClassName}
@@ -169,7 +170,9 @@ export default function RewriteForm() {
           />
           <h2 id="tones-label" className="font-medium">
             Select your tone{' '}
-            <span className="text-slate-500 font-normal">(optional)</span>
+            <span className="font-normal text-muted-foreground">
+              (optional)
+            </span>
           </h2>
         </div>
 
@@ -193,7 +196,7 @@ export default function RewriteForm() {
       </section>
 
       <section aria-labelledby="role-label">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center gap-3">
           <NumberThreeIcon
             aria-hidden="true"
             className={stepIconClassName}
@@ -202,7 +205,7 @@ export default function RewriteForm() {
           />
           <label id="role-label" htmlFor="role" className="font-medium">
             Role{' '}
-            <span className="text-slate-500 font-normal hidden md:contents">
+            <span className="hidden font-normal text-muted-foreground md:contents">
               (optional)
             </span>
             :
@@ -212,11 +215,13 @@ export default function RewriteForm() {
               <SelectValue placeholder="Role" />
             </SelectTrigger>
             <SelectContent>
-              {rolesList.map(({ emoji, value }) => (
-                <SelectItem key={value} value={value}>
-                  {emoji} {value}
-                </SelectItem>
-              ))}
+              <SelectGroup>
+                {rolesList.map(({ emoji, value }) => (
+                  <SelectItem key={value} value={value}>
+                    {emoji} {value}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
             </SelectContent>
           </Select>
         </div>
@@ -234,7 +239,7 @@ export default function RewriteForm() {
       </section>
 
       <section aria-labelledby="language-label">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center gap-3">
           <NumberFourIcon
             aria-hidden="true"
             className={stepIconClassName}
@@ -249,11 +254,13 @@ export default function RewriteForm() {
               <SelectValue placeholder="Language" />
             </SelectTrigger>
             <SelectContent>
-              {topLanguages.map(({ emoji, value }) => (
-                <SelectItem key={value} value={value}>
-                  {emoji} {value}
-                </SelectItem>
-              ))}
+              <SelectGroup>
+                {topLanguages.map(({ emoji, value }) => (
+                  <SelectItem key={value} value={value}>
+                    {emoji} {value}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
             </SelectContent>
           </Select>
         </div>
@@ -274,17 +281,17 @@ export default function RewriteForm() {
           <section className="mt-5" aria-labelledby="rewritten-text-heading">
             <h2
               id="rewritten-text-heading"
-              className="sm:text-xl text-3xl font-bold text-slate-900 mx-auto mb-4"
+              className="mx-auto mb-4 text-3xl font-bold sm:text-xl"
             >
               Rewritten text
             </h2>
             <button
               type="button"
-              className="bg-white rounded-xl shadow-2xl p-4 hover:bg-gray-100 transition cursor-copy border shadow-slate-300"
+              className="cursor-copy rounded-xl border bg-card p-4 text-card-foreground shadow-2xl transition hover:bg-accent hover:text-accent-foreground"
               onClick={handleCopy}
             >
               <span className="block mb-2">{completion}</span>
-              <span className="text-gray-400">Click to copy</span>
+              <span className="text-muted-foreground">Click to copy</span>
             </button>
           </section>
         )}

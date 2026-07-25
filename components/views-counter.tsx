@@ -4,7 +4,7 @@ type ViewsCounterProps = {
 
 export default function ViewsCounter({ count }: ViewsCounterProps) {
   return (
-    <p className="border rounded-2xl py-1 px-4 text-slate-500 text-sm  hover:scale-105 transition duration-300 ease-in-out">
+    <p className="rounded-2xl border px-4 py-1 text-sm text-muted-foreground transition duration-300 ease-in-out hover:scale-105">
       <b>{count.toLocaleString()}</b> phrases improved so far
     </p>
   )

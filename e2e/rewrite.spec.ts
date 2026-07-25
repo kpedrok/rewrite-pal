@@ -1,5 +1,41 @@
 import { expect, test } from '@playwright/test'
 
+test('follows the system theme and persists a manual choice', async ({
+  page,
+}) => {
+  await page.emulateMedia({ colorScheme: 'dark' })
+  await page.route('**/api/views', async (route) => {
+    await route.fulfill({
+      body: JSON.stringify(42),
+      contentType: 'application/json',
+    })
+  })
+
+  await page.goto('/')
+
+  const root = page.locator('html')
+  const themeToggle = page.getByRole('button', { name: 'Dark mode' })
+
+  await expect(root).toHaveClass(/dark/)
+  await expect(themeToggle).toBeEnabled()
+  await expect(themeToggle).toHaveAttribute('aria-pressed', 'true')
+
+  await themeToggle.press('Space')
+  await expect(root).not.toHaveClass(/dark/)
+  await expect(themeToggle).toHaveAttribute('aria-pressed', 'false')
+  await expect
+    .poll(() => page.evaluate(() => localStorage.getItem('theme')))
+    .toBe('light')
+
+  await page.reload()
+  await expect(root).not.toHaveClass(/dark/)
+  await expect(themeToggle).toHaveAttribute('aria-pressed', 'false')
+
+  await themeToggle.press('Enter')
+  await expect(root).toHaveClass(/dark/)
+  await expect(themeToggle).toHaveAttribute('aria-pressed', 'true')
+})
+
 test('rewrites text with selected preferences, supports copy, and handles errors', async ({
   context,
   page,
