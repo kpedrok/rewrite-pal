@@ -5,9 +5,11 @@ const redisEnvSchema = z.object({
   UPSTASH_REDIS_REST_URL: z.url(),
 })
 
-const rewriteEnvSchema = redisEnvSchema.extend({
+const openAIEnvSchema = z.object({
   OPENAI_API_KEY: z.string().min(1),
 })
+
+const rewriteEnvSchema = redisEnvSchema.extend(openAIEnvSchema.shape)
 
 function parseEnvironment<T>(schema: z.ZodType<T>, name: string): T {
   const parsed = schema.safeParse(process.env)
@@ -24,6 +26,10 @@ function parseEnvironment<T>(schema: z.ZodType<T>, name: string): T {
 
 export function getRedisEnv() {
   return parseEnvironment(redisEnvSchema, 'Redis')
+}
+
+export function getOpenAIEnv() {
+  return parseEnvironment(openAIEnvSchema, 'OpenAI')
 }
 
 export function getRewriteEnv() {

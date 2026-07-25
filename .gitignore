@@ -10,6 +10,7 @@
 /coverage
 /playwright-report
 /test-results
+/eval-results/*.json
 
 # next.js
 /.next/

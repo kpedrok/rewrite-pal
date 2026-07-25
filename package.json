@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit",
     "test": "bun test --isolate --path-ignore-patterns=e2e",
     "test:e2e": "playwright test",
+    "eval": "bun evals/run-rewrite-evals.ts",
     "check": "biome check .",
     "fix": "biome check --write .",
     "ci": "biome ci ."

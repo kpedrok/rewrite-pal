@@ -42,6 +42,7 @@ bun run check       # lint, formatting, and safe static checks
 bun run typecheck   # TypeScript without emitting files
 bun run test        # unit and route contracts, including rate limits and counters
 bun run test:e2e    # mocked browser journey through the rewrite flow
+bun run eval        # paid, manual AI-quality evaluation; writes a local report
 bun run build       # production build
 ```
 
@@ -64,6 +65,9 @@ build on pull requests and pushes to `main`, including the Playwright journey.
   safely when required deployment variables are absent.
 - Playwright mocks provider and counter endpoints, so the core browser journey
   is deterministic and does not spend API credits in CI.
+- The committed rewrite eval set shares production generation settings, then
+  scores real outputs with deterministic checks and a structured LLM rubric.
+  See [the eval guide](docs/evals.md).
 
 ## Project structure
 
