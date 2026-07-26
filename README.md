@@ -31,9 +31,15 @@ Set these variables in `.env.local` (never commit this file):
 
 ```bash
 OPENAI_API_KEY=
+RATE_LIMIT_HASH_SECRET=
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
 ```
+
+Generate a unique rate-limit secret with at least 32 characters for each
+deployment environment. Configure it before deploying this revision; rewrite
+requests fail safely until it exists. Keep it stable because changing it resets
+active rate-limit identities.
 
 ## Quality checks
 
@@ -44,23 +50,23 @@ bun run test        # unit and route contracts, including rate limits and counte
 bun run test:e2e    # mocked browser journey through the rewrite flow
 bun run eval        # paid, manual AI-quality evaluation; writes a local report
 bun run build       # production build
+bun audit --prod    # production dependency advisories
 ```
 
-GitHub Actions runs the same install, static checks, type check, and production
-build on pull requests and pushes to `main`, including the Playwright journey.
+GitHub Actions runs a frozen install, dependency audit, static checks, type
+check, tests, and production build on pull requests and pushes to `master`.
 
 ## Architecture decisions
 
-- The homepage is a Server Component; only `components/rewrite/rewrite-form.tsx`
-  is client-side. This keeps the interactive boundary explicit and small.
+- The homepage and root layout remain Server Components. Client boundaries are
+  limited to the rewrite experience, theme controls, and mobile navigation.
 - A shared Zod contract validates every rewrite request before prompt creation.
   Prompt construction is a pure function with focused unit tests.
 - Form choices use local React state because they belong to one screen. This
   avoids global-state machinery for temporary UI state.
-- The view counter remains visible as a simple client/server metric, but its
-  state is local to the rewrite feature rather than globally persisted. Only a
-  completed rewrite schedules its server-side increment; the browser can only
-  read the displayed count.
+- The completed-rewrite counter remains visible as a non-critical
+  client/server metric. Only a completed generation schedules its server-side
+  increment; the browser can only read the displayed count.
 - Redis and environment configuration are lazy server-only modules; routes fail
   safely when required deployment variables are absent.
 - Playwright mocks provider and counter endpoints, so the core browser journey
@@ -68,24 +74,31 @@ build on pull requests and pushes to `main`, including the Playwright journey.
 - The committed rewrite eval set shares production generation settings, then
   scores real outputs with deterministic checks and a structured LLM rubric.
   See [the eval guide](docs/evals.md).
+- Temporary PostCSS and Sharp overrides patch audited transitive dependencies
+  until a stable Next.js release declares those safe versions directly.
 
 ## Project structure
 
 ```text
-app/                 routes, metadata, and API route handlers
-components/rewrite/  interactive rewrite feature
-components/ui/       reusable UI primitives
-e2e/                 one realistic mocked browser journey
-lib/rewrite/         request contract and prompt construction
-public/              static logos and icons
+app/                  routes, metadata, and API route handlers
+components/rewrite/   interactive rewrite feature
+components/ui/        reusable shadcn/Radix primitives
+docs/                 focused supporting documentation
+e2e/                  realistic mocked browser journeys
+evals/                paid, opt-in rewrite-quality evaluations
+lib/constants/        shared rewrite options
+lib/rewrite/          request contract and prompt construction
+lib/server/           server-only integrations and request handling
+public/               static product assets
 ```
 
 ## Security and privacy
 
-The rewrite endpoint is rate limited through Upstash using Vercel’s trusted
-proxy header. Submitted text is sent to the configured AI provider to generate
-a rewrite. Avoid entering sensitive information unless the provider and
-deployment privacy policies meet your requirements.
+The rewrite endpoint rate limits a keyed digest derived from Vercel’s trusted
+proxy header; the raw address is not used as the Redis key. Submitted text is
+sent to OpenAI to generate a rewrite and is not intentionally written to the
+application database or logs. See the in-product privacy notice for the
+provider and infrastructure boundary.
 
 ## Contributing
 

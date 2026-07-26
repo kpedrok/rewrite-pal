@@ -7,6 +7,10 @@
   "engines": {
     "node": ">=22.0.0"
   },
+  "overrides": {
+    "postcss": "8.5.23",
+    "sharp": "0.35.3"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -37,7 +41,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.26.0",
-    "next": "16.2.11",
+    "next": "16.2.12",
     "next-themes": "^0.4.6",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

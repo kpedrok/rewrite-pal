@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'bun:test'
+import { MAX_CUSTOM_ROLE_LENGTH, MAX_REWRITE_LENGTH, MAX_TONES } from './limits'
 import { buildRewriteSystemPrompt } from './prompt'
 import { rewriteRequestSchema } from './schema'
 
@@ -28,6 +29,35 @@ describe('rewriteRequestSchema', () => {
     expect(
       rewriteRequestSchema.safeParse({
         ...validRequest,
+        role: 'Custom',
+      }).success,
+    ).toBe(false)
+  })
+
+  it('enforces rewrite, tone, and custom-role limits', () => {
+    expect(
+      rewriteRequestSchema.safeParse({
+        ...validRequest,
+        prompt: 'x'.repeat(MAX_REWRITE_LENGTH),
+        tones: ['Professional', 'Friendly', 'Direct'].slice(0, MAX_TONES),
+      }).success,
+    ).toBe(true)
+    expect(
+      rewriteRequestSchema.safeParse({
+        ...validRequest,
+        prompt: 'x'.repeat(MAX_REWRITE_LENGTH + 1),
+      }).success,
+    ).toBe(false)
+    expect(
+      rewriteRequestSchema.safeParse({
+        ...validRequest,
+        tones: ['Professional', 'Friendly', 'Direct', 'Casual'],
+      }).success,
+    ).toBe(false)
+    expect(
+      rewriteRequestSchema.safeParse({
+        ...validRequest,
+        customRole: 'x'.repeat(MAX_CUSTOM_ROLE_LENGTH + 1),
         role: 'Custom',
       }).success,
     ).toBe(false)

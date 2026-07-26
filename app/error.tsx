@@ -10,8 +10,8 @@ type ErrorPageProps = {
 
 export default function ErrorPage({ error, reset }: ErrorPageProps) {
   useEffect(() => {
-    console.error(error)
-  }, [error])
+    console.error('app.render_failed', { digest: error.digest })
+  }, [error.digest])
 
   return (
     <section

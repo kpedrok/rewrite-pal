@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@rewritepal/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -19,7 +21,12 @@ export function NavItem({
   )
 
   return (
-    <Link href={href} {...props} className={linkClasses}>
+    <Link
+      aria-current={pathname === href ? 'page' : undefined}
+      href={href}
+      {...props}
+      className={linkClasses}
+    >
       {children}
     </Link>
   )

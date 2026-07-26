@@ -5,12 +5,14 @@ const mocks = {
   createRewriteStream: mock(),
   createRewriteTextResponse: mock(),
   getRewriteEnv: mock(),
-  getViewCount: mock(),
-  incrementViewCount: mock(),
+  getCompletedRewriteCount: mock(),
+  incrementCompletedRewriteCount: mock(),
   limitRewrite: mock(),
 }
 
-spyOn(console, 'error').mockImplementation(() => undefined)
+const consoleErrorSpy = spyOn(console, 'error').mockImplementation(
+  () => undefined,
+)
 
 mock.module('@rewritepal/lib/server/env', () => ({
   getRewriteEnv: mocks.getRewriteEnv,
@@ -22,9 +24,9 @@ mock.module('@rewritepal/lib/server/rewrite-stream', () => ({
   createRewriteStream: mocks.createRewriteStream,
   createRewriteTextResponse: mocks.createRewriteTextResponse,
 }))
-mock.module('@rewritepal/lib/server/views', () => ({
-  getViewCount: mocks.getViewCount,
-  incrementViewCount: mocks.incrementViewCount,
+mock.module('@rewritepal/lib/server/rewrite-count', () => ({
+  getCompletedRewriteCount: mocks.getCompletedRewriteCount,
+  incrementCompletedRewriteCount: mocks.incrementCompletedRewriteCount,
 }))
 mock.module('next/server', () => ({
   NextResponse: { json: Response.json },
@@ -32,7 +34,7 @@ mock.module('next/server', () => ({
 }))
 
 const { POST: rewritePost } = await import('./rewriter/route')
-const { GET: viewsGet } = await import('./views/route')
+const { GET: rewriteCountGet } = await import('./rewrite-count/route')
 
 const validRequest = {
   language: 'English',
@@ -50,6 +52,8 @@ function createRewriteRequest(body: BodyInit) {
 }
 
 beforeEach(() => {
+  consoleErrorSpy.mockClear()
+
   for (const value of Object.values(mocks)) {
     value.mockReset()
   }
@@ -62,7 +66,7 @@ beforeEach(() => {
     success: true,
   })
   mocks.createRewriteTextResponse.mockReturnValue(new Response('stream'))
-  mocks.incrementViewCount.mockResolvedValue(1)
+  mocks.incrementCompletedRewriteCount.mockResolvedValue(1)
 })
 
 describe('POST /api/rewriter', () => {
@@ -109,6 +113,9 @@ describe('POST /api/rewriter', () => {
     )
 
     expect(response.status).toBe(429)
+    await expect(response.text()).resolves.toBe(
+      'You have reached the rewrite limit. Try again later.',
+    )
     expect(response.headers.get('Retry-After')).toBeTruthy()
     expect(response.headers.get('X-RateLimit-Limit')).toBe('50')
     expect(mocks.createRewriteStream).not.toHaveBeenCalled()
@@ -116,7 +123,7 @@ describe('POST /api/rewriter', () => {
 
   it('returns a safe error when the provider fails', async () => {
     mocks.createRewriteStream.mockImplementation(() => {
-      throw new Error('provider unavailable')
+      throw new Error('provider unavailable for private user text')
     })
 
     const response = await rewritePost(
@@ -126,7 +133,11 @@ describe('POST /api/rewriter', () => {
     expect(response.status).toBe(500)
     await expect(response.text()).resolves.toBe('Internal server error')
     expect(mocks.after).not.toHaveBeenCalled()
-    expect(mocks.incrementViewCount).not.toHaveBeenCalled()
+    expect(mocks.incrementCompletedRewriteCount).not.toHaveBeenCalled()
+    expect(consoleErrorSpy).toHaveBeenCalledWith('rewrite.request_failed')
+    expect(consoleErrorSpy.mock.calls.flat().join(' ')).not.toContain(
+      'private user text',
+    )
   })
 
   it('schedules a counter increment after a successful rewrite completes', async () => {
@@ -135,18 +146,20 @@ describe('POST /api/rewriter', () => {
       text: Promise.resolve('Rewritten text.'),
     })
 
-    const response = await rewritePost(
-      createRewriteRequest(JSON.stringify(validRequest)),
-    )
+    const request = createRewriteRequest(JSON.stringify(validRequest))
+    const response = await rewritePost(request)
 
     expect(response.status).toBe(200)
     expect(mocks.after).toHaveBeenCalledTimes(1)
-    expect(mocks.incrementViewCount).not.toHaveBeenCalled()
+    expect(mocks.incrementCompletedRewriteCount).not.toHaveBeenCalled()
+    expect(mocks.createRewriteStream).toHaveBeenCalledWith(
+      expect.objectContaining({ abortSignal: request.signal }),
+    )
 
     const scheduledWork = mocks.after.mock.calls[0]?.[0] as () => Promise<void>
     await scheduledWork()
 
-    expect(mocks.incrementViewCount).toHaveBeenCalledTimes(1)
+    expect(mocks.incrementCompletedRewriteCount).toHaveBeenCalledTimes(1)
   })
 
   it('does not increment the counter when the streamed rewrite fails', async () => {
@@ -163,28 +176,71 @@ describe('POST /api/rewriter', () => {
     const scheduledWork = mocks.after.mock.calls[0]?.[0] as () => Promise<void>
     await scheduledWork()
 
-    expect(mocks.incrementViewCount).not.toHaveBeenCalled()
+    expect(mocks.incrementCompletedRewriteCount).not.toHaveBeenCalled()
+  })
+
+  it('does not log an expected client cancellation', async () => {
+    const abortError = new Error('request canceled')
+    abortError.name = 'AbortError'
+    mocks.createRewriteStream.mockReturnValue({
+      stream: new ReadableStream(),
+      text: Promise.reject(abortError),
+    })
+
+    await rewritePost(createRewriteRequest(JSON.stringify(validRequest)))
+    const scheduledWork = mocks.after.mock.calls[0]?.[0] as () => Promise<void>
+    await scheduledWork()
+
+    expect(mocks.incrementCompletedRewriteCount).not.toHaveBeenCalled()
+    expect(consoleErrorSpy).not.toHaveBeenCalled()
+  })
+
+  it('keeps a counter failure separate from rewrite completion', async () => {
+    mocks.createRewriteStream.mockReturnValue({
+      stream: new ReadableStream(),
+      text: Promise.resolve('Rewritten text.'),
+    })
+    mocks.incrementCompletedRewriteCount.mockRejectedValue(
+      new Error('Redis unavailable'),
+    )
+
+    const response = await rewritePost(
+      createRewriteRequest(JSON.stringify(validRequest)),
+    )
+    const scheduledWork = mocks.after.mock.calls[0]?.[0] as () => Promise<void>
+    await scheduledWork()
+
+    expect(response.status).toBe(200)
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'rewrite.counter_increment_failed',
+    )
   })
 })
 
-describe('GET /api/views', () => {
+describe('GET /api/rewrite-count', () => {
   it('returns zero when the counter has not been initialized', async () => {
-    mocks.getViewCount.mockResolvedValue(0)
+    mocks.getCompletedRewriteCount.mockResolvedValue(0)
 
-    const response = await viewsGet()
+    const response = await rewriteCountGet()
 
     expect(response.status).toBe(200)
+    expect(response.headers.get('Cache-Control')).toBe(
+      'public, max-age=0, s-maxage=30, stale-while-revalidate=300',
+    )
     await expect(response.json()).resolves.toBe(0)
   })
 
   it('returns a safe response when Redis is unavailable', async () => {
-    mocks.getViewCount.mockRejectedValue(new Error('Redis unavailable'))
+    mocks.getCompletedRewriteCount.mockRejectedValue(
+      new Error('Redis unavailable'),
+    )
 
-    const response = await viewsGet()
+    const response = await rewriteCountGet()
 
     expect(response.status).toBe(503)
+    expect(response.headers.get('Cache-Control')).toBe('no-store')
     await expect(response.json()).resolves.toEqual({
-      error: 'View counter unavailable.',
+      error: 'Rewrite count unavailable.',
     })
   })
 })

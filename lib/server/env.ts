@@ -9,7 +9,11 @@ const openAIEnvSchema = z.object({
   OPENAI_API_KEY: z.string().min(1),
 })
 
-const rewriteEnvSchema = redisEnvSchema.extend(openAIEnvSchema.shape)
+const rateLimitEnvSchema = redisEnvSchema.extend({
+  RATE_LIMIT_HASH_SECRET: z.string().min(32),
+})
+
+const rewriteEnvSchema = rateLimitEnvSchema.extend(openAIEnvSchema.shape)
 
 function parseEnvironment<T>(schema: z.ZodType<T>, name: string): T {
   const parsed = schema.safeParse(process.env)
@@ -30,6 +34,10 @@ export function getRedisEnv() {
 
 export function getOpenAIEnv() {
   return parseEnvironment(openAIEnvSchema, 'OpenAI')
+}
+
+export function getRateLimitEnv() {
+  return parseEnvironment(rateLimitEnvSchema, 'rate limit')
 }
 
 export function getRewriteEnv() {

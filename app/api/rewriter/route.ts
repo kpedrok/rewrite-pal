@@ -6,11 +6,11 @@ import {
   JsonRequestError,
   readJsonRequest,
 } from '@rewritepal/lib/server/request'
+import { incrementCompletedRewriteCount } from '@rewritepal/lib/server/rewrite-count'
 import {
   createRewriteStream,
   createRewriteTextResponse,
 } from '@rewritepal/lib/server/rewrite-stream'
-import { incrementViewCount } from '@rewritepal/lib/server/views'
 import { after } from 'next/server'
 
 const maximumRewriteRequestBytes = 48 * 1024
@@ -51,22 +51,38 @@ export async function POST(req: Request): Promise<Response> {
     const { prompt } = parsedRequest.data
 
     const systemMessage = buildRewriteSystemPrompt(parsedRequest.data)
-    const result = createRewriteStream({ prompt, system: systemMessage })
+    const result = createRewriteStream({
+      abortSignal: req.signal,
+      prompt,
+      system: systemMessage,
+    })
 
     after(async () => {
       try {
         await result.text
-        await incrementViewCount()
       } catch (error) {
-        console.error('Unable to increment the view counter.', error)
+        if (!isAbortError(error)) {
+          console.error('rewrite.generation_failed')
+        }
+        return
+      }
+
+      try {
+        await incrementCompletedRewriteCount()
+      } catch {
+        console.error('rewrite.counter_increment_failed')
       }
     })
 
     return createRewriteTextResponse(result)
-  } catch (error) {
-    console.error('Error processing request:', error)
+  } catch {
+    console.error('rewrite.request_failed')
     return new Response('Internal server error', { status: 500 })
   }
+}
+
+function isAbortError(error: unknown): boolean {
+  return error instanceof Error && error.name === 'AbortError'
 }
 
 function createRateLimitExceededResponse(
@@ -74,7 +90,7 @@ function createRateLimitExceededResponse(
   remaining: number,
   reset: number,
 ): Response {
-  return new Response('You have reached your request limit for the day.', {
+  return new Response('You have reached the rewrite limit. Try again later.', {
     status: 429,
     headers: {
       'X-RateLimit-Limit': limit.toString(),

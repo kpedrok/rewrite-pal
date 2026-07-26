@@ -7,13 +7,8 @@ import {
   NumberThreeIcon,
   NumberTwoIcon,
 } from '@phosphor-icons/react/dist/ssr'
-import { topLanguages } from '@rewritepal/lib/constants/languages'
-import { CUSTOM_ROLE, rolesList } from '@rewritepal/lib/constants/roles'
-import { possibleTones } from '@rewritepal/lib/constants/tones'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
+import { Button } from '@rewritepal/components/ui/button'
+import { Input } from '@rewritepal/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -21,12 +16,42 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select'
-import { Textarea } from '../ui/textarea'
-import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group'
-import ViewsCounter from '../views-counter'
+} from '@rewritepal/components/ui/select'
+import { Textarea } from '@rewritepal/components/ui/textarea'
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from '@rewritepal/components/ui/toggle-group'
+import { topLanguages } from '@rewritepal/lib/constants/languages'
+import { CUSTOM_ROLE, rolesList } from '@rewritepal/lib/constants/roles'
+import { possibleTones } from '@rewritepal/lib/constants/tones'
+import {
+  MAX_CUSTOM_ROLE_LENGTH,
+  MAX_REWRITE_LENGTH,
+  MAX_TONES,
+} from '@rewritepal/lib/rewrite/limits'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import toast from 'react-hot-toast'
+import { RewriteCounter } from './rewrite-counter'
+import { RewriteResult } from './rewrite-result'
+import { useRewriteCount } from './use-rewrite-count'
 
 const stepIconClassName = 'rounded-full bg-primary p-1 text-primary-foreground'
+
+type RewriteStatus = 'idle' | 'working' | 'complete' | 'stopped'
+
+const rewriteStatusMessages: Record<RewriteStatus, string> = {
+  idle: '',
+  working: 'Rewriting your text.',
+  complete: 'Rewrite complete.',
+  stopped: 'Rewrite stopped.',
+}
+
+type ValidationErrors = {
+  customRole?: string
+  text?: string
+}
 
 export default function RewriteForm() {
   const [text, setText] = useState('')
@@ -34,98 +59,111 @@ export default function RewriteForm() {
   const [role, setRole] = useState('Standard')
   const [customRole, setCustomRole] = useState('')
   const [language, setLanguage] = useState('English')
-  const [isRewriting, setIsRewriting] = useState(false)
-  const [viewCount, setViewCount] = useState(0)
-  const resultRef = useRef<HTMLDivElement>(null)
+  const [rewriteStatus, setRewriteStatus] = useState<RewriteStatus>('idle')
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({})
+  const customRoleInputRef = useRef<HTMLInputElement>(null)
+  const resultHeadingRef = useRef<HTMLHeadingElement>(null)
+  const textInputRef = useRef<HTMLTextAreaElement>(null)
+  const { count: rewriteCount, recordCompletedRewrite } = useRewriteCount()
 
-  const loadViewCount = useCallback(async () => {
-    try {
-      const response = await fetch('/api/views')
-      const count: unknown = await response.json()
-
-      if (response.ok && typeof count === 'number') {
-        setViewCount(count)
-      }
-    } catch {
-      // The counter is non-critical; the rewrite flow remains available.
-    }
-  }, [])
-
-  useEffect(() => {
-    void loadViewCount()
-  }, [loadViewCount])
-
-  const refreshViewCount = useCallback(() => {
-    void loadViewCount()
-    window.setTimeout(() => void loadViewCount(), 300)
-  }, [loadViewCount])
-
-  const { completion, complete } = useCompletion({
+  const { completion, complete, isLoading, stop } = useCompletion({
     api: '/api/rewriter',
     streamProtocol: 'text',
     onFinish: () => {
-      resultRef.current?.scrollIntoView({ behavior: 'smooth' })
-      refreshViewCount()
+      setRewriteStatus('complete')
+      recordCompletedRewrite()
     },
-    onError: () =>
-      toast.error('Unable to rewrite your text. Please try again.'),
+    onError: () => {
+      setRewriteStatus('idle')
+      toast.error('Unable to rewrite your text. Please try again.')
+    },
   })
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    if (isRewriting) {
+  useEffect(() => {
+    if (rewriteStatus !== 'complete' || !completion || isLoading) {
       return
     }
 
-    if (!text.trim()) {
-      toast.error('Please enter some text to rewrite.')
+    const frame = window.requestAnimationFrame(() => {
+      const heading = resultHeadingRef.current
+
+      if (!heading) {
+        return
+      }
+
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches
+
+      heading.focus({ preventScroll: true })
+      heading.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start',
+      })
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [completion, isLoading, rewriteStatus])
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    if (isLoading) {
       return
+    }
+
+    const nextErrors: ValidationErrors = {}
+
+    if (!text.trim()) {
+      nextErrors.text = 'Enter some text to rewrite.'
     }
 
     if (role === CUSTOM_ROLE && !customRole.trim()) {
-      toast.error('Please enter a custom role.')
+      nextErrors.customRole = 'Enter a custom role.'
+    }
+
+    setValidationErrors(nextErrors)
+
+    if (nextErrors.text || nextErrors.customRole) {
+      window.requestAnimationFrame(() => {
+        if (nextErrors.text) {
+          textInputRef.current?.focus()
+          return
+        }
+
+        customRoleInputRef.current?.focus()
+      })
       return
     }
 
-    setIsRewriting(true)
-
-    try {
-      await complete(text, {
-        body: { customRole, language, role, tones },
-      })
-    } catch (error) {
-      console.error('An error occurred during rewriting.', error)
-    } finally {
-      setIsRewriting(false)
-    }
-  }
-
-  async function handleCopy() {
-    try {
-      await navigator.clipboard.writeText(completion)
-      toast.success('Copied to clipboard.')
-    } catch {
-      toast.error('Unable to copy the rewritten text.')
-    }
+    setRewriteStatus('working')
+    void complete(text, {
+      body: { customRole, language, role, tones },
+    })
   }
 
   function handleToneChange(nextTones: string[]) {
-    if (nextTones.length > 3) {
-      toast.error('Choose up to three tones.')
+    if (nextTones.length > MAX_TONES) {
+      toast.error(`Choose up to ${MAX_TONES} tones.`)
       return
     }
 
     setTones(nextTones)
   }
 
+  function handleStop() {
+    stop()
+    setRewriteStatus('stopped')
+  }
+
   return (
     <form
       className="max-w-4xl w-full gap-6 flex flex-col"
+      noValidate
       onSubmit={handleSubmit}
     >
       <div className="self-center mt-7 mb-5">
-        <ViewsCounter count={viewCount} />
+        <RewriteCounter count={rewriteCount} />
       </div>
 
       <section aria-labelledby="text-label">
@@ -143,14 +181,29 @@ export default function RewriteForm() {
         </div>
 
         <Textarea
+          ref={textInputRef}
           id="text-input"
+          aria-describedby={
+            validationErrors.text
+              ? 'text-character-count text-error'
+              : 'text-character-count'
+          }
+          aria-invalid={Boolean(validationErrors.text)}
           name="text"
+          maxLength={MAX_REWRITE_LENGTH}
           placeholder="Type or paste your text here."
+          required
           rows={4}
           spellCheck
           className="text-base font-mono"
           value={text}
-          onChange={(event) => setText(event.target.value)}
+          onChange={(event) => {
+            setText(event.target.value)
+            setValidationErrors((current) => ({
+              ...current,
+              text: undefined,
+            }))
+          }}
           onKeyDown={(event) => {
             if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
               event.preventDefault()
@@ -158,6 +211,18 @@ export default function RewriteForm() {
             }
           }}
         />
+        <p
+          id="text-character-count"
+          className="mt-2 text-right text-sm text-muted-foreground"
+        >
+          {text.length.toLocaleString()} / {MAX_REWRITE_LENGTH.toLocaleString()}{' '}
+          characters
+        </p>
+        {validationErrors.text && (
+          <p id="text-error" className="mt-1 text-sm text-destructive">
+            {validationErrors.text}
+          </p>
+        )}
       </section>
 
       <section aria-labelledby="tones-label">
@@ -210,7 +275,19 @@ export default function RewriteForm() {
             </span>
             :
           </label>
-          <Select value={role} onValueChange={setRole}>
+          <Select
+            value={role}
+            onValueChange={(nextRole) => {
+              setRole(nextRole)
+
+              if (nextRole !== CUSTOM_ROLE) {
+                setValidationErrors((current) => ({
+                  ...current,
+                  customRole: undefined,
+                }))
+              }
+            }}
+          >
             <SelectTrigger id="role" className="w-60">
               <SelectValue placeholder="Role" />
             </SelectTrigger>
@@ -228,13 +305,34 @@ export default function RewriteForm() {
 
         {role === CUSTOM_ROLE && (
           <Input
+            ref={customRoleInputRef}
+            id="custom-role"
+            aria-describedby={
+              validationErrors.customRole ? 'custom-role-error' : undefined
+            }
+            aria-invalid={Boolean(validationErrors.customRole)}
             aria-label="Custom role"
             className="md:ml-10 mt-2 w-60"
-            maxLength={30}
+            maxLength={MAX_CUSTOM_ROLE_LENGTH}
             placeholder="Enter custom role"
+            required
             value={customRole}
-            onChange={(event) => setCustomRole(event.target.value)}
+            onChange={(event) => {
+              setCustomRole(event.target.value)
+              setValidationErrors((current) => ({
+                ...current,
+                customRole: undefined,
+              }))
+            }}
           />
+        )}
+        {role === CUSTOM_ROLE && validationErrors.customRole && (
+          <p
+            id="custom-role-error"
+            className="mt-1 text-sm text-destructive md:ml-10"
+          >
+            {validationErrors.customRole}
+          </p>
         )}
       </section>
 
@@ -266,36 +364,37 @@ export default function RewriteForm() {
         </div>
       </section>
 
-      <Button
-        className="self-center mt-4"
-        disabled={isRewriting}
-        size="xl"
-        type="submit"
-        variant="xl"
-      >
-        {isRewriting ? 'Rewriting…' : 'Rewrite →'}
-      </Button>
-
-      <div ref={resultRef} aria-live="polite" className="min-h-0">
-        {completion && (
-          <section className="mt-5" aria-labelledby="rewritten-text-heading">
-            <h2
-              id="rewritten-text-heading"
-              className="mx-auto mb-4 text-3xl font-bold sm:text-xl"
-            >
-              Rewritten text
-            </h2>
-            <button
-              type="button"
-              className="cursor-copy rounded-xl border bg-card p-4 text-card-foreground shadow-2xl transition hover:bg-accent hover:text-accent-foreground"
-              onClick={handleCopy}
-            >
-              <span className="block mb-2">{completion}</span>
-              <span className="text-muted-foreground">Click to copy</span>
-            </button>
-          </section>
+      <div className="mt-4 flex items-center justify-center gap-3">
+        <Button disabled={isLoading} size="xl" type="submit" variant="xl">
+          {isLoading ? 'Rewriting…' : 'Rewrite →'}
+        </Button>
+        {isLoading && (
+          <Button onClick={handleStop} type="button" variant="outline">
+            Stop rewriting
+          </Button>
         )}
       </div>
+      <p className="mx-auto max-w-xl text-sm text-muted-foreground">
+        Your text is sent to OpenAI to generate a rewrite. Do not submit
+        sensitive information.{' '}
+        <Link
+          className="font-medium underline underline-offset-2"
+          href="/privacy"
+        >
+          Privacy details
+        </Link>
+        .
+      </p>
+
+      <p className="sr-only" role="status">
+        {rewriteStatusMessages[rewriteStatus]}
+      </p>
+
+      <RewriteResult
+        completion={completion}
+        headingRef={resultHeadingRef}
+        isStreaming={isLoading}
+      />
     </form>
   )
 }

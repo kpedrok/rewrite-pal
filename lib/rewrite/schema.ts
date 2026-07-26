@@ -1,6 +1,11 @@
 import { topLanguages } from '@rewritepal/lib/constants/languages'
 import { CUSTOM_ROLE, rolesList } from '@rewritepal/lib/constants/roles'
 import { possibleTones } from '@rewritepal/lib/constants/tones'
+import {
+  MAX_CUSTOM_ROLE_LENGTH,
+  MAX_REWRITE_LENGTH,
+  MAX_TONES,
+} from '@rewritepal/lib/rewrite/limits'
 import { z } from 'zod'
 
 const languageValues = topLanguages.map(({ value }) => value) as [
@@ -17,11 +22,11 @@ const toneValues = possibleTones.map(({ value }) => value) as [
 
 export const rewriteRequestSchema = z
   .object({
-    prompt: z.string().trim().min(1).max(10_000),
+    prompt: z.string().trim().min(1).max(MAX_REWRITE_LENGTH),
     language: z.enum(languageValues).default('English'),
-    tones: z.array(z.enum(toneValues)).max(3).default([]),
+    tones: z.array(z.enum(toneValues)).max(MAX_TONES).default([]),
     role: z.enum([...roleValues, CUSTOM_ROLE]),
-    customRole: z.string().trim().max(30).optional(),
+    customRole: z.string().trim().max(MAX_CUSTOM_ROLE_LENGTH).optional(),
   })
   .superRefine(({ customRole, role }, context) => {
     if (role === CUSTOM_ROLE && !customRole) {

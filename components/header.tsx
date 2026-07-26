@@ -4,8 +4,8 @@ import { List } from '@phosphor-icons/react/dist/ssr'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ModeToggle } from './mode-toggle'
+import { NavItem } from './nav-item'
 import { Button } from './ui/button'
-import { NavItem } from './ui/nav-item'
 
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from './ui/sheet'
 
@@ -14,23 +14,27 @@ const navLinks = [
   {
     href: 'https://github.com/kpedrok/rewrite-pal',
     label: 'Open Source',
-    external: true,
+    newTab: true,
   },
   {
     href: 'mailto:hello@rewritepal.com',
     label: 'hello@rewritepal.com',
-    external: true,
   },
 ]
 
 const NavigationLinks = ({ className }: { className: string }) => (
-  <div className={className}>
-    {navLinks.slice(0, 5).map(({ href, label, external }) => (
-      <NavItem key={href} href={href} target={external ? '_blank' : undefined}>
+  <nav aria-label="Primary" className={className}>
+    {navLinks.map(({ href, label, newTab }) => (
+      <NavItem
+        key={href}
+        href={href}
+        rel={newTab ? 'noopener noreferrer' : undefined}
+        target={newTab ? '_blank' : undefined}
+      >
         {label}
       </NavItem>
     ))}
-  </div>
+  </nav>
 )
 
 const MobileMenu = () => (
@@ -48,17 +52,18 @@ const MobileMenu = () => (
       </SheetTrigger>
       <SheetContent side="right">
         <SheetTitle className="sr-only">Navigation</SheetTitle>
-        <div className="grid gap-4 p-4">
-          {navLinks.map(({ href, label, external }) => (
+        <nav aria-label="Mobile" className="grid gap-4 p-4">
+          {navLinks.map(({ href, label, newTab }) => (
             <NavItem
               key={href}
               href={href}
-              target={external ? '_blank' : undefined}
+              rel={newTab ? 'noopener noreferrer' : undefined}
+              target={newTab ? '_blank' : undefined}
             >
               {label}
             </NavItem>
           ))}
-        </div>
+        </nav>
       </SheetContent>
     </Sheet>
   </div>

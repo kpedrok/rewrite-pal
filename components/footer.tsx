@@ -71,6 +71,12 @@ export default function Footer() {
           label="Rewrite Pal on GitHub"
           href="https://github.com/kpedrok/rewrite-pal"
         />
+        <Link
+          href="/privacy"
+          className="rounded-sm text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          Privacy
+        </Link>
         <p className="text-muted-foreground">
           © {currentYear} RewritePal, Inc.
         </p>

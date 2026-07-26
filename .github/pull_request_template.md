@@ -7,8 +7,9 @@ Describe the user-facing change and any environment or API impact.
 - [ ] `bun run check`
 - [ ] `bun run typecheck`
 - [ ] `bun run test`
-- [ ] `bun run test:e2e`
+- [ ] `bun run test:e2e` (when browser behavior or the user journey changes)
 - [ ] `bun run build`
+- [ ] `bun audit --prod`
 
 ## Manual checks
 
