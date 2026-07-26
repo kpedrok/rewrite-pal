@@ -4,7 +4,7 @@ const mocks = {
   after: mock(),
   createRewriteStream: mock(),
   createRewriteTextResponse: mock(),
-  getRewriteEnv: mock(),
+  getOpenAIEnv: mock(),
   getCompletedRewriteCount: mock(),
   incrementCompletedRewriteCount: mock(),
   limitRewrite: mock(),
@@ -15,7 +15,7 @@ const consoleErrorSpy = spyOn(console, 'error').mockImplementation(
 )
 
 mock.module('@rewritepal/lib/server/env', () => ({
-  getRewriteEnv: mocks.getRewriteEnv,
+  getOpenAIEnv: mocks.getOpenAIEnv,
 }))
 mock.module('@rewritepal/lib/server/rate-limit', () => ({
   limitRewrite: mocks.limitRewrite,
@@ -58,7 +58,7 @@ beforeEach(() => {
     value.mockReset()
   }
 
-  mocks.getRewriteEnv.mockReturnValue({})
+  mocks.getOpenAIEnv.mockReturnValue({})
   mocks.limitRewrite.mockResolvedValue({
     limit: 50,
     remaining: 49,

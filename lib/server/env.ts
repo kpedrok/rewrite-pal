@@ -13,10 +13,15 @@ const rateLimitEnvSchema = redisEnvSchema.extend({
   RATE_LIMIT_HASH_SECRET: z.string().min(32),
 })
 
-const rewriteEnvSchema = rateLimitEnvSchema.extend(openAIEnvSchema.shape)
+const developmentRateLimitHashSecret =
+  'rewritepal-development-only-rate-limit-secret'
 
-function parseEnvironment<T>(schema: z.ZodType<T>, name: string): T {
-  const parsed = schema.safeParse(process.env)
+function parseEnvironment<T>(
+  schema: z.ZodType<T>,
+  name: string,
+  environment: unknown = process.env,
+): T {
+  const parsed = schema.safeParse(environment)
 
   if (!parsed.success) {
     const missingVariables = parsed.error.issues
@@ -37,9 +42,15 @@ export function getOpenAIEnv() {
 }
 
 export function getRateLimitEnv() {
-  return parseEnvironment(rateLimitEnvSchema, 'rate limit')
-}
+  const isDeployed =
+    Boolean(process.env.VERCEL_ENV) || process.env.NODE_ENV === 'production'
+  const environment =
+    isDeployed || process.env.RATE_LIMIT_HASH_SECRET
+      ? process.env
+      : {
+          ...process.env,
+          RATE_LIMIT_HASH_SECRET: developmentRateLimitHashSecret,
+        }
 
-export function getRewriteEnv() {
-  return parseEnvironment(rewriteEnvSchema, 'rewrite')
+  return parseEnvironment(rateLimitEnvSchema, 'rate limit', environment)
 }

@@ -1,6 +1,6 @@
 import { buildRewriteSystemPrompt } from '@rewritepal/lib/rewrite/prompt'
 import { rewriteRequestSchema } from '@rewritepal/lib/rewrite/schema'
-import { getRewriteEnv } from '@rewritepal/lib/server/env'
+import { getOpenAIEnv } from '@rewritepal/lib/server/env'
 import { limitRewrite } from '@rewritepal/lib/server/rate-limit'
 import {
   JsonRequestError,
@@ -46,7 +46,7 @@ export async function POST(req: Request): Promise<Response> {
       })
     }
 
-    getRewriteEnv()
+    getOpenAIEnv()
 
     const { prompt } = parsedRequest.data
 

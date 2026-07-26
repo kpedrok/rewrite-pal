@@ -75,9 +75,6 @@ test('rewrites text with selected preferences, supports copy, and handles errors
 
   const textInput = page.locator('#text-input')
   await expect(textInput).toHaveAttribute('maxlength', '10000')
-  await expect(
-    page.getByRole('link', { name: 'Privacy details' }),
-  ).toHaveAttribute('href', '/privacy')
   await page.getByRole('button', { name: 'Rewrite →' }).click()
   await expect(textInput).toBeFocused()
   await expect(page.getByText('Enter some text to rewrite.')).toBeVisible()

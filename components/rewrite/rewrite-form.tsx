@@ -30,7 +30,6 @@ import {
   MAX_REWRITE_LENGTH,
   MAX_TONES,
 } from '@rewritepal/lib/rewrite/limits'
-import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { RewriteCounter } from './rewrite-counter'
@@ -374,18 +373,6 @@ export default function RewriteForm() {
           </Button>
         )}
       </div>
-      <p className="mx-auto max-w-xl text-sm text-muted-foreground">
-        Your text is sent to OpenAI to generate a rewrite. Do not submit
-        sensitive information.{' '}
-        <Link
-          className="font-medium underline underline-offset-2"
-          href="/privacy"
-        >
-          Privacy details
-        </Link>
-        .
-      </p>
-
       <p className="sr-only" role="status">
         {rewriteStatusMessages[rewriteStatus]}
       </p>
