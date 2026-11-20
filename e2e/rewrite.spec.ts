@@ -73,6 +73,10 @@ test('rewrites text with selected preferences, supports copy, and handles errors
 
   await page.goto('/')
 
+  await expect(page.getByText('42 phrases improved so far')).toBeVisible()
+  // Strict Mode can replay the initial counter read in development.
+  const initialCountRequests = countRequestMethods.length
+
   const textInput = page.locator('#text-input')
   await expect(textInput).toHaveAttribute('maxlength', '10000')
   await page.getByRole('button', { name: 'Rewrite →' }).click()
@@ -118,7 +122,8 @@ test('rewrites text with selected preferences, supports copy, and handles errors
     page.getByText('Unable to rewrite your text. Please try again.'),
   ).toBeVisible()
   expect(rewriteRequestCount).toBe(2)
-  expect(countRequestMethods).toEqual(['GET'])
+  expect(countRequestMethods).toHaveLength(initialCountRequests)
+  expect(new Set(countRequestMethods)).toEqual(new Set(['GET']))
 })
 
 test('allows an in-progress rewrite to be stopped without an error', async ({

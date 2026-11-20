@@ -85,8 +85,9 @@ check, tests, and production build on pull requests and pushes to `master`.
 - The committed rewrite eval set shares production generation settings, then
   scores real outputs with deterministic checks and a structured LLM rubric.
   See [the eval guide](docs/evals.md).
-- Temporary PostCSS and Sharp overrides patch audited transitive dependencies
-  until a stable Next.js release declares those safe versions directly.
+- The PostCSS override keeps Next.js and Tailwind on the same patched release.
+  The minimatch override covers shadcn’s development tooling until its ts-morph
+  dependency accepts the patched major version.
 
 ## Project structure
 
